@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>القرآن الكريم</title>
+  <!-- تعريف الخطوط -->
+  <style>
+    @font-face {
+      font-family: 'AyatFont';
+      src: url('Digital Khatt Madina @Am9li9.otf.ttf') format('opentype');
+    }
+    @font-face {
+      font-family: 'SurahFont';
+      src: url('Surah Name Written @Am9li9 (1).ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'RecitersFont';
+      src: url('GF-FAYED Reciters Name.ttf') format('truetype');
+    }
+    
+    /* أنماط عامة */
+    body {
+      font-family: 'AyatFont', serif;
+      background-color: #fff8e1;
+      margin: 0;
+      padding: 10px;
+      text-align: right;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+      border: 2px solid #c7c7c7;
+      border-radius: 15px;
+      background: linear-gradient(to left, #fff1d0, #fff9e6);
+      transition: all 0.3s ease;
+    }
+    .tab-btn.active {
+      background: #fcefd8;
+      color: #14532d;
+      transform: scale(1.05);
+    }
+    .sura-list, .reciters-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+      padding: 10px;
+    }
+    .sura-button {
+      background: linear-gradient(to left, #fff1d0, #fff9e6);
+      color: #2b2b2b;
+      border: 2px solid #c7c7c7;
+      padding: 16px;
+      border-radius: 25px;
+      font-size: 24px;
+      cursor: pointer;
+      font-family: 'SurahFont', serif;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .sura-button:hover {
+      background: #fcefd8;
+      color: #14532d;
+      transform: scale(1.02);
+    }
+    /* أنماط قائمة الشيوخ */
+    .reciter-button {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      border: 2px solid #c7c7c7;
+      border-radius: 15px;
+      background: linear-gradient(to left, #fff1d0, #fff9e6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .reciter-button:hover {
+      background: #fcefd8;
+      color: #14532d;
+      transform: scale(1.02);
+    }
+    .reciter-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .reciter-number {
+      font-size: 22px;
+      font-family: 'RecitersFont', serif;
+    }
+    @media (max-width: 600px) {
+      .sura-button {
+        font-size: 20px;
+        padding: 14px;
+      }
+      .tab-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+      .reciter-img {
+        width: 50px;
+        height: 50px;
+      }
+      .reciter-number {
+        font-size: 18px;
+      }
+    }
+    /* منطقة عرض النص */
+    .ayahs-container {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fffef9;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 26px;
+      line-height: 2.4;
+      max-width: 1000px;
+      margin: 20px auto;
+      text-align: justify;
+    }
+    .ayah-text {
+      font-family: 'AyatFont', serif;
+      font-size: 26px;
+    }
+    .ayah-symbol {
+      font-family: 'AyatFont', serif;
+      font-size: 26px;
+      color: #4a6f28;
+      font-weight: bold;
+      display: inline-block;
+      position: relative;
+    }
+    .ayah-number {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: #2980b9;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+    }
+    .surah-title {
+      text-align: center;
+      font-size: 30px;
+      color: #14532d;
+      margin-bottom: 20px;
+      font-family: 'SurahFont', serif;
+    }
+    .bismillah, .isteaathah {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .bismillah img, .isteaathah img {
+      max-width: 100%;
+      height: auto;
+    }
+    /* منطقة عرض التلاوة الصوتية */
+    .audio-container {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fefefe;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+    .audio-container audio {
+      width: 100%;
+      outline: none;
+    }
+  </style>
+  <!-- مكتبة انميشن -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+
+  <!-- أزرار التبويبات -->
+  <div class="tabs">
+    <button id="textTab" class="tab-btn active" onclick="switchTab('text')">القرآن الكريم (الآيات)</button>
+    <button id="audioTab" class="tab-btn" onclick="switchTab('audio')">القرآن الكريم mp3 (التلاوة)</button>
+  </div>
+
+  <!-- قائمة السور (لتبويب النص) -->
+  <div id="suraList" class="sura-list animate__animated animate__fadeInUp" style="display: none;">
+    جاري تحميل السور...
+  </div>
+
+  <!-- منطقة عرض النص (الآيات) -->
+  <div id="ayahsArea" class="ayahs-container" style="display: none;">
+    <div id="surahTitle" class="surah-title"></div>
+    <div id="bismillahContainer"></div>
+    <div id="ayahsContent"></div>
+  </div>
+
+  <!-- منطقة عرض التلاوة الصوتية (ملف صوتي واحد للسورة) -->
+  <div id="audioArea" class="audio-container" style="display: none;">
+    <div id="surahTitleAudio" class="surah-title"></div>
+    <div id="audioContent"></div>
+  </div>
+
+  <!-- قائمة الشيوخ (تُعرض فقط في تبويب mp3) -->
+  <div id="recitersArea" class="reciters-list animate__animated animate__fadeInUp" style="display: none;">
+    جاري تحميل الشيوخ...
+  </div>
+
+  <script>
+    let currentTab = 'text';
+    let currentReciter = null; // سيحدد معرف القارئ مثل "minsh", "basit", "husr", "ayyub", "a_jbr", "lhdan", "kurdi", "mustafa", "bna", "yasser" أو "tblawi"
+
+    const surahNames = [
+      "الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس",
+      "هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه",
+      "الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم",
+      "لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر",
+      "فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق",
+      "الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة",
+      "الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج",
+      "نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس",
+      "التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد",
+      "الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات",
+      "القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر",
+      "المسد","الإخلاص","الفلق","الناس"
+    ];
+
+    // بيانات الشيوخ في تبويب mp3؛ كل قارئ يظهر برقم معرفه بدلاً من أسمائهم
+    const reciters = [
+      {
+        number: "1",
+        id: "minsh",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s"
+      },
+      {
+        number: "9",
+        id: "basit",
+        image: "data:image/jpeg;base64,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"
+      },
+      // قارئ سابق: محمود خليل الحصري
+      {
+        number: "7",
+        id: "husr",
+        image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg"
+      },
+      // قارئ سابق: محمد أيوب
+      {
+        number: "108",
+        id: "ayyub",
+        image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg"
+      },
+      // قارئ سابق: علي جابر
+      {
+        number: "107",
+        id: "a_jbr",
+        image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg"
+      },
+      // قارئ سابق: محمد اليحدان
+      {
+        number: "12",
+        id: "lhdan",
+        image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg"
+      },
+      // قارئ سابق: رعد الكردي
+      {
+        number: "10",
+        id: "kurdi",
+        image: "https://i.pinimg.com/564x/bf/c4/84/bfc4848ac20523a6c7375eaee00c069d.jpg"
+      },
+      // قارئ سابق: مصطفى اسماعيل
+      {
+        number: "48",
+        id: "mustafa",
+        image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg"
+      },
+      // قارئ سابق: محمود علي البنا
+      {
+        number: "6",
+        id: "bna",
+        image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg"
+      },
+      // قارئ سابق: ياسر الدوسري
+      {
+        number: "109",
+        id: "yasser",
+        image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg"
+      },
+      // إضافة قارئ: محمد محمود الطبلاوي
+      {
+        number: "13",
+        id: "tblawi",
+        image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg"
+      }
+    ];
+
+    // عند تحميل الصفحة، يتم تحميل قائمة السور لقسم القرآن الكريم (النص)
+    loadSuraList();
+
+    // التبديل بين التبويبات
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById('textTab').classList.toggle('active', tab === 'text');
+      document.getElementById('audioTab').classList.toggle('active', tab === 'audio');
+      
+      // إخفاء جميع المناطق
+      document.getElementById('ayahsArea').style.display = 'none';
+      document.getElementById('suraList').style.display = 'none';
+      document.getElementById('audioArea').style.display = 'none';
+      document.getElementById('recitersArea').style.display = 'none';
+      
+      if(tab === 'text'){
+        loadSuraList();
+        document.getElementById('suraList').style.display = 'flex';
+      } else {
+        // تبويب mp3: تحميل قائمة الشيوخ (القرّاء)
+        currentReciter = null;
+        loadRecitersList();
+        document.getElementById('recitersArea').style.display = 'flex';
+      }
+    }
+
+    // تحميل قائمة السور (تستخدم لتبويب النص)
+    function loadSuraList() {
+      const suraListEl = document.getElementById('suraList');
+      suraListEl.innerHTML = '';
+      surahNames.forEach((name, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'sura-button animate__animated animate__fadeInUp';
+        btn.textContent = `سورة ${name}`;
+        btn.onclick = () => {
+          if(currentTab === 'text') {
+            loadSurahText(i + 1, name);
+          } else if(currentReciter) {
+            loadSurahAudio(i + 1, name);
+          }
+        };
+        suraListEl.appendChild(btn);
+      });
+    }
+
+    // تحميل سورة النص (الآيات)
+    function loadSurahText(number, name) {
+      document.getElementById('suraList').style.display = 'none';
+      document.getElementById('ayahsArea').style.display = 'block';
+      document.getElementById('surahTitle').textContent = `سورة ${name}`;
+      const bismillahContainer = document.getElementById('bismillahContainer');
+      if (number === 9) {
+        bismillahContainer.innerHTML = `<div class="isteaathah">
+          <img src="https://i.postimg.cc/ydxnWsKh/iste3athah-removebg-preview.png" alt="أعوذ بالله من الشيطان الرجيم">
+        </div>`;
+      } else {
+        bismillahContainer.innerHTML = `<div class="bismillah">
+          <img src="https://surahquran.com/img/basmalah.png" alt="بسم الله الرحمن الرحيم">
+        </div>`;
+      }
+      document.getElementById('ayahsContent').innerHTML = '';
+      fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById('ayahsContent');
+          data.data.ayahs.forEach((ayah, idx) => {
+            if (idx === 0 && ayah.text.startsWith('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) return;
+            const text = document.createElement('span');
+            text.className = 'ayah-text';
+            text.textContent = ayah.text;
+            const symbol = document.createElement('span');
+            symbol.className = 'ayah-symbol';
+            symbol.innerHTML = '۝';
+            const num = document.createElement('span');
+            num.className = 'ayah-number';
+            num.textContent = toArabicNumber(ayah.numberInSurah);
+            symbol.appendChild(num);
+            container.appendChild(text);
+            container.appendChild(symbol);
+            container.appendChild(document.createTextNode(" "));
+          });
+        });
+    }
+
+    // تحميل التلاوة الصوتية (ملف صوتي واحد للسورة) لقسم mp3
+    function loadSurahAudio(number, name) {
+      document.getElementById('suraList').style.display = 'none';
+      document.getElementById('audioArea').style.display = 'block';
+      document.getElementById('surahTitleAudio').textContent = `سورة ${name}`;
+      document.getElementById('audioContent').innerHTML = '';
+      const formatted = formatNumber(number);
+      let audioUrl = "";
+      if(currentReciter === "minsh") {
+        audioUrl = `https://server10.mp3quran.net/minsh/${formatted}.mp3`;
+      } else if(currentReciter === "basit") {
+        audioUrl = `https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/${formatted}.mp3`;
+      } else if(currentReciter === "husr") {
+        audioUrl = `https://server13.mp3quran.net/husr/${formatted}.mp3`;
+      } else if(currentReciter === "ayyub") {
+        audioUrl = `https://server8.mp3quran.net/ayyub/${formatted}.mp3`;
+      } else if(currentReciter === "a_jbr") {
+        audioUrl = `https://server11.mp3quran.net/a_jbr/${formatted}.mp3`;
+      } else if(currentReciter === "lhdan") {
+        audioUrl = `https://server8.mp3quran.net/lhdan/${formatted}.mp3`;
+      } else if(currentReciter === "kurdi") {
+        audioUrl = `https://server6.mp3quran.net/kurdi/${formatted}.mp3`;
+      } else if(currentReciter === "mustafa") {
+        audioUrl = `https://server8.mp3quran.net/mustafa/${formatted}.mp3`;
+      } else if(currentReciter === "bna") {
+        audioUrl = `https://server8.mp3quran.net/bna/${formatted}.mp3`;
+      } else if(currentReciter === "yasser") {
+        audioUrl = `https://server11.mp3quran.net/yasser/${formatted}.mp3`;
+      } else if(currentReciter === "tblawi") {
+        audioUrl = `https://server12.mp3quran.net/tblawi/${formatted}.mp3`;
+      }
+      let audioEl = document.createElement('audio');
+      audioEl.controls = true;
+      audioEl.style.width = "100%";
+      let sourceEl = document.createElement('source');
+      sourceEl.src = audioUrl;
+      sourceEl.type = "audio/mpeg";
+      audioEl.appendChild(sourceEl);
+      document.getElementById('audioContent').appendChild(audioEl);
+    }
+
+    // تحويل الرقم إلى تنسيق ثلاثي الأرقام (001، 002، ...)
+    function formatNumber(num) {
+      return num.toString().padStart(3, '0');
+    }
+
+    // تحويل الأرقام الإنجليزية إلى العربية
+    function toArabicNumber(num) {
+      return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    }
+
+    // تحميل قائمة الشيوخ لقسم mp3 مع عرض أرقام القراء بدلاً من أسمائهم
+    function loadRecitersList() {
+      const recitersArea = document.getElementById('recitersArea');
+      recitersArea.innerHTML = '';
+      reciters.forEach(reciter => {
+        const btn = document.createElement('div');
+        btn.className = 'reciter-button animate__animated animate__fadeInUp';
+        btn.onclick = () => {
+          currentReciter = reciter.id;
+          recitersArea.style.display = 'none';
+          document.getElementById('suraList').style.display = 'flex';
+          loadSuraList();
+        };
+        const img = document.createElement('img');
+        img.src = reciter.image;
+        img.alt = reciter.number;
+        img.className = 'reciter-img';
+        const numberEl = document.createElement('div');
+        numberEl.className = 'reciter-number';
+        numberEl.textContent = reciter.number;
+        btn.appendChild(img);
+        btn.appendChild(numberEl);
+        recitersArea.appendChild(btn);
+      });
+    }
+
+    // تحميل قائمة الشيوخ عند الضغط على تبويب mp3
+    document.getElementById('audioTab').addEventListener('click', () => {
+      loadRecitersList();
+      document.getElementById('recitersArea').style.display = 'flex';
+    });
+  </script>
+
+</body>
+</html>
