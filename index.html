@@ -24,6 +24,8 @@
       font-family: 'DaysFont';
       src: url('Elgharib-Days Of Week.ttf') format('truetype');
     }
+    /* استخدام خط أميري لأسماء الشهور */
+    @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
     
     /* الأنماط العامة */
     body {
@@ -34,9 +36,7 @@
       text-align: right;
       overflow-x: hidden;
     }
-    .tabs {
-      display: none;
-    }
+    .tabs { display: none; }
     .tab-btn {
       padding: 10px 20px;
       font-size: 20px;
@@ -64,7 +64,7 @@
       border: 2px solid #c7c7c7;
       padding: 16px;
       border-radius: 25px;
-      font-size: 28px;
+      font-size: 32px; /* زيادة حجم الخط */
       cursor: pointer;
       font-family: 'SurahFont', serif;
       text-align: center;
@@ -104,38 +104,31 @@
       font-family: 'RecitersFont', serif;
     }
     @media (max-width: 600px) {
-      .sura-button {
-        font-size: 20px;
-        padding: 14px;
-      }
-      .tab-btn {
-        font-size: 16px;
-        padding: 8px 16px;
-      }
-      .reciter-img {
-        width: 50px;
-        height: 50px;
-      }
-      .reciter-number {
-        font-size: 20px;
-      }
+      .sura-button { font-size: 24px; padding: 14px; } /* زيادة حجم الخط */
+      .tab-btn { font-size: 16px; padding: 8px 16px; }
+      .reciter-img { width: 50px; height: 50px; }
+      .reciter-number { font-size: 20px; }
     }
     /* عرض الآيات */
     .ayahs-container {
-      margin: 0;
-      padding: 15px;
+      margin: 0 auto;
+      padding: 10px;
       background-color: #fffef9;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       font-size: 26px;
-      line-height: 2.4;
-      width: 100vw;
+      line-height: 2.2;
+      width: 95vw;
       height: 100vh;
       overflow-y: auto;
       box-sizing: border-box;
+      direction: rtl;
+      text-align: justify;
     }
     .ayah-text {
       font-family: 'AyatFont', serif;
       font-size: 26px;
+      display: inline;
+      margin-left: 2px;
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
@@ -144,6 +137,7 @@
       font-weight: bold;
       display: inline-block;
       position: relative;
+      margin-left: 2px;
     }
     .ayah-number {
       font-family: Arial, sans-serif;
@@ -162,14 +156,8 @@
       margin-bottom: 20px;
       font-family: 'SurahFont', serif;
     }
-    .bismillah, .isteaathah {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    .bismillah img, .isteaathah img {
-      max-width: 100%;
-      height: auto;
-    }
+    .bismillah, .isteaathah { text-align: center; margin-bottom: 15px; }
+    .bismillah img, .isteaathah img { max-width: 100%; height: auto; }
     /* منطقة التلاوة الصوتية */
     .audio-container {
       margin: 20px auto;
@@ -179,10 +167,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       max-width: 1000px;
     }
-    .audio-container audio {
-      width: 100%;
-      outline: none;
-    }
+    .audio-container audio { width: 100%; outline: none; }
     /* تنسيقات الشريط الجانبي */
     #sidebarToggle {
       position: fixed;
@@ -197,9 +182,7 @@
       color: #14532d;
       transition: transform 0.3s ease;
     }
-    #sidebarToggle:hover {
-      transform: scale(1.1);
-    }
+    #sidebarToggle:hover { transform: scale(1.1); }
     #sidebar {
       position: fixed;
       top: 0;
@@ -234,48 +217,50 @@
       background: #fcefd8;
       color: #14532d;
     }
-    /* زر العودة */
+    /* زر العودة بتنسيق أصغر وبيضاوي الشكل */
     #backButton {
       position: fixed;
       top: 10px;
       right: 10px;
       background: #fcefd8;
       border: 2px solid #c7c7c7;
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-size: 18px;
+      border-radius: 50px;
+      padding: 5px 10px;
+      font-size: 16px;
       color: #14532d;
       cursor: pointer;
       z-index: 1100;
       transition: transform 0.3s ease;
       display: none;
     }
-    #backButton:hover {
-      transform: scale(1.05);
-    }
-    /* عرض اليوم الحالي كخلفية (بدون حاوية مميزة) */
+    #backButton:hover { transform: scale(1.05); }
+    /* عرض اليوم الحالي */
     .weekdays {
       text-align: center;
-      /* إزالة الخلفية والحدود */
       background: none;
       border: none;
       margin: 0;
-      padding: 0;
+      padding: 10px 0;
     }
-    .day {
-      display: inline-block;
-    }
+    .day { display: inline-block; }
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 32px;
+      font-size: 40px; /* زيادة حجم الخط */
       color: #2b2b2b;
       display: block;
     }
     .hijri-date {
       font-family: 'Amiri', serif;
-      font-size: 12px;
-      color: #555;
-      margin-top: 2px;
+      font-size: 14px; /* زيادة حجم الخط */
+      color: #333;
+      margin-top: 5px;
+      background-color: #f5f5f5;
+      padding: 5px 10px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    .month-name {
+      font-family: 'Amiri', serif;
     }
   </style>
 </head>
@@ -298,12 +283,12 @@
     <button onclick="openSection('audio')" class="tab-btn">القرآن MP3</button>
   </div>
 
-  <!-- عرض اليوم الحالي (كنص خلفية) -->
+  <!-- عرض اليوم الحالي -->
   <div id="weekDays" class="weekdays">
     <!-- سيتم التحديث ديناميكياً -->
   </div>
 
-  <!-- باقي المحتويات كما هي -->
+  <!-- باقي المحتويات -->
   <!-- قائمة السور -->
   <div id="suraList" class="sura-list" style="display: none;">
     جاري تحميل السور...
@@ -349,58 +334,47 @@
 
     const reciters = [
       {
-        number: "1",
-        id: "minsh",
+        number: "1", id: "minsh",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s"
       },
       {
-        number: "9",
-        id: "basit",
+        number: "9", id: "basit",
         image: "data:image/jpeg;base64,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"
       },
       {
-        number: "7",
-        id: "husr",
+        number: "7", id: "husr",
         image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg"
       },
       {
-        number: "108",
-        id: "ayyub",
+        number: "108", id: "ayyub",
         image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg"
       },
       {
-        number: "107",
-        id: "a_jbr",
+        number: "107", id: "a_jbr",
         image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg"
       },
       {
-        number: "12",
-        id: "lhdan",
+        number: "12", id: "lhdan",
         image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg"
       },
       {
-        number: "10",
-        id: "kurdi",
+        number: "10", id: "kurdi",
         image: "https://i.pinimg.com/564x/bf/c4/84/bfc4848ac20523a6c7375eaee00c069d.jpg"
       },
       {
-        number: "48",
-        id: "mustafa",
+        number: "48", id: "mustafa",
         image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg"
       },
       {
-        number: "6",
-        id: "bna",
+        number: "6", id: "bna",
         image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg"
       },
       {
-        number: "109",
-        id: "yasser",
+        number: "109", id: "yasser",
         image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg"
       },
       {
-        number: "13",
-        id: "tblawi",
+        number: "13", id: "tblawi",
         image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg"
       }
     ];
@@ -418,7 +392,7 @@
       let islamic = julian - 1948440 + 10632;
       let n = Math.floor((islamic - 1) / 10631);
       islamic = islamic - 10631 * n + 354;
-      let j = (Math.floor((10985 - islamic) / 5316)) 
+      let j = (Math.floor((10985 - islamic) / 5316))
               * (Math.floor((50 * islamic) / 17719))
               + (Math.floor(islamic / 5670))
               * (Math.floor((43 * islamic) / 15238));
@@ -430,18 +404,20 @@
       return { day: hijriDay, month: hijriMonth, year: hijriYear };
     }
     
-    // تحديث عرض اليوم الحالي
+    // تحديث عرض اليوم الحالي مع استبدال شهر 10 باسم "شوال" باستخدام خط أميري
     function updateCurrentDay() {
       let today = new Date();
-      // في JS: الأحد = 0 ... السبت = 6؛ لتحويل بحيث يكون السبت = 0، نقوم بزيادة 1 ثم باقي 7
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
       
-      // الحصول على التاريخ الهجري التقريبي
       let hijri = gregorianToHijri(today);
-      // إذا كان الشهر رقم 10، استبدله بكلمة "شوال"
-      let monthName = hijri.month === 10 ? "شوال" : hijri.month;
-      let hijriStr = hijri.day + " / " + monthName + " / " + hijri.year;
+      let monthHTML;
+      if (hijri.month === 10) {
+        monthHTML = `<span class="month-name">شوال</span>`;
+      } else {
+        monthHTML = `<span class="month-name">${hijri.month}</span>`;
+      }
+      let hijriStr = hijri.day + " / " + monthHTML + " / " + hijri.year;
       
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
@@ -452,13 +428,12 @@
       spanNum.textContent = displayNum;
       let hijriDiv = document.createElement('div');
       hijriDiv.className = "hijri-date";
-      hijriDiv.textContent = hijriStr;
+      hijriDiv.innerHTML = hijriStr;
       dayDiv.appendChild(spanNum);
       dayDiv.appendChild(hijriDiv);
       container.appendChild(dayDiv);
     }
     
-    // تحميل قائمة السور
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
@@ -479,7 +454,6 @@
       updateBackButton();
     }
     
-    // تحميل سورة النص
     function loadSurahText(number, name) {
       document.getElementById('suraList').style.display = 'none';
       document.getElementById('ayahsArea').style.display = 'block';
@@ -512,14 +486,12 @@
             symbol.appendChild(num);
             container.appendChild(text);
             container.appendChild(symbol);
-            container.appendChild(document.createTextNode(" "));
           });
         });
       currentView = "ayahs";
       updateBackButton();
     }
     
-    // تحميل سورة الصوتية
     function loadSurahAudio(number, name) {
       document.getElementById('suraList').style.display = 'none';
       document.getElementById('audioArea').style.display = 'block';
@@ -657,7 +629,6 @@
       updateBackButton();
     }
     
-    // عند تحميل الصفحة: تحديث عرض اليوم الحالي واختيار تبويب الآيات
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
