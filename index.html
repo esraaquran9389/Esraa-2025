@@ -2,32 +2,42 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>القرآن الكريم</title>
+
   <!-- تحميل مكتبة Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
+    /* ----------------------------------- */
     /* الخطوط */
+    /* ----------------------------------- */
     @font-face {
       font-family: 'AyatFont';
       src: url('Digital Khatt Madina @Am9li9.otf.ttf') format('opentype');
     }
+
     @font-face {
       font-family: 'SurahFont';
       src: url('Surah Name Written @Am9li9 (1).ttf') format('truetype');
     }
+
     @font-face {
       font-family: 'RecitersFont';
       src: url('GF-FAYED Reciters Name.ttf') format('truetype');
     }
+
     @font-face {
       font-family: 'DaysFont';
       src: url('Elgharib-Days Of Week.ttf') format('truetype');
     }
+
     /* استخدام خط أميري لأسماء الشهور */
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
-    
+
+    /* ----------------------------------- */
     /* الأنماط العامة */
+    /* ----------------------------------- */
     body {
       font-family: 'AyatFont', serif;
       background-color: #fff8e1;
@@ -36,139 +46,12 @@
       text-align: right;
       overflow-x: hidden;
     }
+
     .tabs { display: none; }
-    .tab-btn {
-      padding: 10px 20px;
-      font-size: 20px;
-      cursor: pointer;
-      border: 2px solid #c7c7c7;
-      border-radius: 15px;
-      background: linear-gradient(to left, #fff1d0, #fff9e6);
-      transition: all 0.3s ease;
-    }
-    .tab-btn.active {
-      background: #fcefd8;
-      color: #14532d;
-      transform: scale(1.05);
-    }
-    .sura-list, .reciters-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 15px;
-      padding: 10px;
-    }
-    .sura-button {
-      background: linear-gradient(to left, #fff1d0, #fff9e6);
-      color: #2b2b2b;
-      border: 2px solid #c7c7c7;
-      padding: 16px;
-      border-radius: 25px;
-      font-size: 32px;
-      cursor: pointer;
-      font-family: 'SurahFont', serif;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    }
-    .sura-button:hover {
-      background: #fcefd8;
-      color: #14532d;
-      transform: scale(1.02);
-    }
-    /* قائمة الشيوخ */
-    .reciter-button {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 10px;
-      border: 2px solid #c7c7c7;
-      border-radius: 15px;
-      background: linear-gradient(to left, #fff1d0, #fff9e6);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .reciter-button:hover {
-      background: #fcefd8;
-      color: #14532d;
-      transform: scale(1.02);
-    }
-    .reciter-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .reciter-number {
-      font-size: 28px;
-      font-family: 'RecitersFont', serif;
-    }
-    @media (max-width: 600px) {
-      .sura-button { font-size: 24px; padding: 14px; }
-      .tab-btn { font-size: 16px; padding: 8px 16px; }
-      .reciter-img { width: 50px; height: 50px; }
-      .reciter-number { font-size: 20px; }
-    }
-    /* عرض الآيات */
-    .ayahs-container {
-      margin: 0 auto;
-      padding: 10px;
-      background-color: #fffef9;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-size: 26px;
-      line-height: 2.2;
-      width: 95vw;
-      height: 100vh;
-      overflow-y: auto;
-      box-sizing: border-box;
-      direction: rtl;
-      text-align: justify;
-    }
-    .ayah-text {
-      font-family: 'AyatFont', serif;
-      font-size: 26px;
-      display: inline;
-      margin-left: 2px;
-    }
-    .ayah-symbol {
-      font-family: 'AyatFont', serif;
-      font-size: 26px;
-      color: #4a6f28;
-      font-weight: bold;
-      display: inline-block;
-      position: relative;
-      margin-left: 2px;
-    }
-    .ayah-number {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      color: #2980b9;
-      position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-weight: bold;
-    }
-    .surah-title {
-      text-align: center;
-      font-size: 30px;
-      color: #14532d;
-      margin-bottom: 20px;
-      font-family: 'SurahFont', serif;
-    }
-    .bismillah, .isteaathah { text-align: center; margin-bottom: 15px; }
-    .bismillah img, .isteaathah img { max-width: 100%; height: auto; }
-    /* منطقة التلاوة الصوتية */
-    .audio-container {
-      margin: 20px auto;
-      padding: 15px;
-      background-color: #fefefe;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 1000px;
-    }
-    .audio-container audio { width: 100%; outline: none; }
+
+    /* ----------------------------------- */
     /* تنسيقات الشريط الجانبي */
+    /* ----------------------------------- */
     #sidebarToggle {
       position: fixed;
       top: 5px;
@@ -182,7 +65,11 @@
       color: #14532d;
       transition: transform 0.3s ease;
     }
-    #sidebarToggle:hover { transform: scale(1.1); }
+
+    #sidebarToggle:hover {
+      transform: scale(1.1);
+    }
+
     #sidebar {
       position: fixed;
       top: 0;
@@ -190,18 +77,20 @@
       width: 280px;
       height: 100%;
       background: #fff8e1;
-      box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
       z-index: 999;
       padding: 20px;
       transform: translateX(-100%);
       transition: transform 0.4s ease;
       overflow-y: auto;
     }
+
     #sidebar h2 {
       font-family: 'SurahFont';
       font-size: 26px;
       margin-bottom: 20px;
     }
+
     #sidebar .tab-btn {
       font-size: 20px;
       padding: 10px;
@@ -213,11 +102,13 @@
       transition: all 0.3s ease;
       width: 100%;
     }
+
     #sidebar .tab-btn:hover {
       background: #fcefd8;
       color: #14532d;
     }
-    /* زر العودة بتنسيق أصغر وبيضاوي الشكل */
+
+    /* زر العودة */
     #backButton {
       position: fixed;
       top: 10px;
@@ -233,8 +124,14 @@
       transition: transform 0.3s ease;
       display: none;
     }
-    #backButton:hover { transform: scale(1.05); }
+
+    #backButton:hover {
+      transform: scale(1.05);
+    }
+
+    /* ----------------------------------- */
     /* عرض اليوم الحالي */
+    /* ----------------------------------- */
     .weekdays {
       text-align: center;
       background: none;
@@ -242,13 +139,18 @@
       margin: 0;
       padding: 10px 0;
     }
-    .day { display: inline-block; }
+
+    .day {
+      display: inline-block;
+    }
+
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 35px; /* تعديل حجم الخط إلى 35px */
+      font-size: 50px; /* تكبير أرقام الأسبوع إلى 50px */
       color: #2b2b2b;
       display: block;
     }
+
     .hijri-date {
       font-family: 'Amiri', serif;
       font-size: 14px;
@@ -256,13 +158,277 @@
       margin-top: 5px;
       display: inline-block;
     }
+
     .month-name {
       font-family: 'Amiri', serif;
+    }
+
+    /* ----------------------------------- */
+    /* قوائم السور والشيوخ */
+    /* ----------------------------------- */
+    .sura-list,
+    .reciters-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+      padding: 10px;
+    }
+
+    .sura-button {
+      background: linear-gradient(to left, #fff1d0, #fff9e6);
+      color: #2b2b2b;
+      border: 2px solid #c7c7c7;
+      padding: 16px;
+      border-radius: 25px;
+      font-size: 32px;
+      cursor: pointer;
+      font-family: 'SurahFont', serif;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .sura-button:hover {
+      background: #fcefd8;
+      color: #14532d;
+      transform: scale(1.02);
+    }
+
+    .reciter-button {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      border: 2px solid #c7c7c7;
+      border-radius: 15px;
+      background: linear-gradient(to left, #fff1d0, #fff9e6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .reciter-button:hover {
+      background: #fcefd8;
+      color: #14532d;
+      transform: scale(1.02);
+    }
+
+    .reciter-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .reciter-number {
+      font-size: 28px;
+      font-family: 'RecitersFont', serif;
+    }
+
+    /* ----------------------------------- */
+    /* عرض الآيات */
+    /* ----------------------------------- */
+    .ayahs-container {
+      margin: 0 auto;
+      padding: 10px;
+      background-color: #fffef9;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-size: 26px;
+      line-height: 2.2;
+      width: 95vw;
+      height: 100vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+      direction: rtl;
+      text-align: justify;
+    }
+
+    .ayah-text {
+      font-family: 'AyatFont', serif;
+      font-size: 26px;
+      display: inline;
+      margin-left: 2px;
+    }
+
+    .ayah-symbol {
+      font-family: 'AyatFont', serif;
+      font-size: 26px;
+      color: #4a6f28;
+      font-weight: bold;
+      display: inline-block;
+      position: relative;
+      margin-left: 2px;
+    }
+
+    .ayah-number {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: #2980b9;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+    }
+
+    .surah-title {
+      text-align: center;
+      font-size: 30px;
+      color: #14532d;
+      margin-bottom: 20px;
+      font-family: 'SurahFont', serif;
+    }
+
+    .bismillah,
+    .isteaathah {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .bismillah img,
+    .isteaathah img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ----------------------------------- */
+    /* مشغل التلاوة العصري */
+    /* ----------------------------------- */
+    .audio-container {
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #fefefe;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      font-family: 'Amiri', serif;
+    }
+
+    .custom-audio-player {
+      background: linear-gradient(to right, #f5f5f5, #ececec);
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .player-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .player-controls button {
+      background: #14532d;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .player-controls button:hover {
+      background: #1a6b3e;
+    }
+
+    .play-pause-btn i {
+      font-size: 18px;
+    }
+
+    .seek-btn i {
+      font-size: 14px;
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 5px;
+      background: #d3d3d3;
+      border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress {
+      height: 100%;
+      background: #14532d;
+      border-radius: 5px;
+      width: 0%;
+    }
+
+    .time-display {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .volume-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .volume-btn {
+      background: none;
+      border: none;
+      color: #14532d;
+      cursor: pointer;
+    }
+
+    .volume-btn i {
+      font-size: 20px;
+    }
+
+    .volume-bar {
+      width: 100px;
+      height: 5px;
+      background: #d3d3d3;
+      border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .volume-level {
+      height: 100%;
+      background: #14532d;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    /* ----------------------------------- */
+    /* الاستجابة للشاشات الصغيرة */
+    /* ----------------------------------- */
+    @media (max-width: 600px) {
+      .sura-button {
+        font-size: 24px;
+        padding: 14px;
+      }
+
+      .tab-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .reciter-img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .reciter-number {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
-
   <!-- أيقونة القائمة -->
   <div id="sidebarToggle" onclick="toggleSidebar()">
     <i class="fa-solid fa-bars"></i>
@@ -285,7 +451,6 @@
     <!-- سيتم التحديث ديناميكياً -->
   </div>
 
-  <!-- باقي المحتويات -->
   <!-- قائمة السور -->
   <div id="suraList" class="sura-list" style="display: none;">
     جاري تحميل السور...
@@ -310,73 +475,45 @@
   </div>
 
   <script>
+    // -----------------------------------
+    // المتغيرات العامة
+    // -----------------------------------
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
 
     const surahNames = [
-      "الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس",
-      "هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه",
-      "الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم",
-      "لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر",
-      "فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق",
-      "الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة",
-      "الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج",
-      "نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس",
-      "التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد",
-      "الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات",
-      "القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر",
-      "المسد","الإخلاص","الفلق","الناس"
+      "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
+      "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
+      "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
+      "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+      "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق",
+      "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة",
+      "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج",
+      "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+      "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
+      "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
+      "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
+      "المسد", "الإخلاص", "الفلق", "الناس"
     ];
 
     const reciters = [
-      {
-        number: "1", id: "minsh",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s"
-      },
-      {
-        number: "9", id: "basit",
-        image: "data:image/jpeg;base64,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"
-      },
-      {
-        number: "7", id: "husr",
-        image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg"
-      },
-      {
-        number: "108", id: "ayyub",
-        image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg"
-      },
-      {
-        number: "107", id: "a_jbr",
-        image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg"
-      },
-      {
-        number: "12", id: "lhdan",
-        image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg"
-      },
-      {
-        number: "10", id: "kurdi",
-        image: "https://i.pinimg.com/564x/bf/c4/84/bfc4848ac20523a6c7375eaee00c069d.jpg"
-      },
-      {
-        number: "48", id: "mustafa",
-        image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg"
-      },
-      {
-        number: "6", id: "bna",
-        image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg"
-      },
-      {
-        number: "109", id: "yasser",
-        image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg"
-      },
-      {
-        number: "13", id: "tblawi",
-        image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg"
-      }
+      { number: "1", id: "minsh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
+      { number: "9", id: "basit", image: "data:image/jpeg;base64,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" },
+      { number: "7", id: "husr", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
+      { number: "108", id: "ayyub", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg" },
+      { number: "107", id: "a_jbr", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg" },
+      { number: "12", id: "lhdan", image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg" },
+      { number: "10", id: "kurdi", image: "https://i.pinimg.com/564x/bf/c4/84/bfc4848ac20523a6c7375eaee00c069d.jpg" },
+      { number: "48", id: "mustafa", image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg" },
+      { number: "6", id: "bna", image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg" },
+      { number: "109", id: "yasser", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
+      { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
     ];
 
-    // دالة تحويل التاريخ الميلادي إلى هجري (تقريبية)
+    // -----------------------------------
+    // دوال تحويل التاريخ
+    // -----------------------------------
     function gregorianToHijri(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -385,7 +522,7 @@
       let y = year + 4800 - a;
       let m = month + 12 * a - 3;
       let julian = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4)
-                   - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+                  - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
       let islamic = julian - 1948440 + 10632;
       let n = Math.floor((islamic - 1) / 10631);
       islamic = islamic - 10631 * n + 354;
@@ -400,13 +537,12 @@
       let hijriYear = 30 * n + j - 30;
       return { day: hijriDay, month: hijriMonth, year: hijriYear };
     }
-    
-    // تحديث عرض اليوم الحالي مع استبدال شهر 10 باسم "شوال" باستخدام خط أميري
+
     function updateCurrentDay() {
       let today = new Date();
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
-      
+
       let hijri = gregorianToHijri(today);
       let monthHTML;
       if (hijri.month === 10) {
@@ -415,7 +551,7 @@
         monthHTML = `<span class="month-name">${hijri.month}</span>`;
       }
       let hijriStr = hijri.day + " / " + monthHTML + " / " + hijri.year;
-      
+
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
@@ -430,7 +566,74 @@
       dayDiv.appendChild(hijriDiv);
       container.appendChild(dayDiv);
     }
-    
+
+    // -----------------------------------
+    // دوال التنقل بين الأقسام
+    // -----------------------------------
+    function toggleSidebar() {
+      let sidebar = document.getElementById('sidebar');
+      if (sidebar.style.transform === 'translateX(0%)') {
+        sidebar.style.transform = 'translateX(-100%)';
+      } else {
+        sidebar.style.transform = 'translateX(0%)';
+      }
+    }
+
+    function openSection(section) {
+      switchTab(section);
+      let sidebar = document.getElementById('sidebar');
+      sidebar.style.transform = 'translateX(-100%)'; // إخفاء الشريط الجانبي
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById('ayahsArea').style.display = 'none';
+      document.getElementById('suraList').style.display = 'none';
+      document.getElementById('audioArea').style.display = 'none';
+      document.getElementById('recitersArea').style.display = 'none';
+
+      if (tab === 'text') {
+        loadSuraList();
+        document.getElementById('suraList').style.display = 'flex';
+        currentView = "suraList";
+      } else {
+        currentReciter = null;
+        loadRecitersList();
+        document.getElementById('recitersArea').style.display = 'flex';
+        currentView = "reciters";
+      }
+      updateBackButton();
+    }
+
+    function goBack() {
+      if (currentView === "ayahs") {
+        document.getElementById('ayahsArea').style.display = "none";
+        document.getElementById('suraList').style.display = "flex";
+        currentView = "suraList";
+      } else if (currentView === "suraList" && currentTab === "audio") {
+        document.getElementById('suraList').style.display = "none";
+        document.getElementById('recitersArea').style.display = "flex";
+        currentView = "reciters";
+      } else if (currentView === "audio") {
+        document.getElementById('audioArea').style.display = "none";
+        document.getElementById('suraList').style.display = "flex";
+        currentView = "suraList";
+      }
+      updateBackButton();
+    }
+
+    function updateBackButton() {
+      let btn = document.getElementById('backButton');
+      if (currentView === "ayahs" || (currentView === "suraList" && currentTab === "audio") || currentView === "audio") {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    }
+
+    // -----------------------------------
+    // دوال عرض السور والآيات
+    // -----------------------------------
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
@@ -450,7 +653,7 @@
       currentView = "suraList";
       updateBackButton();
     }
-    
+
     function loadSurahText(number, name) {
       document.getElementById('suraList').style.display = 'none';
       document.getElementById('ayahsArea').style.display = 'block';
@@ -488,12 +691,16 @@
       currentView = "ayahs";
       updateBackButton();
     }
-    
+
+    // -----------------------------------
+    // دوال التلاوة الصوتية
+    // -----------------------------------
     function loadSurahAudio(number, name) {
       document.getElementById('suraList').style.display = 'none';
       document.getElementById('audioArea').style.display = 'block';
       document.getElementById('surahTitleAudio').textContent = `سورة ${name}`;
       document.getElementById('audioContent').innerHTML = '';
+
       let formatted = formatNumber(number);
       let audioUrl = "";
       if (currentReciter === "minsh") {
@@ -519,26 +726,135 @@
       } else if (currentReciter === "tblawi") {
         audioUrl = `https://server12.mp3quran.net/tblawi/${formatted}.mp3`;
       }
+
+      // إنشاء عنصر audio مخفي
       let audioEl = document.createElement('audio');
-      audioEl.controls = true;
-      audioEl.style.width = "100%";
+      audioEl.id = 'audioPlayer';
       let sourceEl = document.createElement('source');
       sourceEl.src = audioUrl;
       sourceEl.type = "audio/mpeg";
       audioEl.appendChild(sourceEl);
+
+      // إنشاء المشغل المخصص
+      let playerContainer = document.createElement('div');
+      playerContainer.className = 'custom-audio-player';
+      playerContainer.innerHTML = `
+        <div class="player-controls">
+          <button class="seek-btn" onclick="seekBackward()"><i class="fas fa-backward"></i></button>
+          <button class="play-pause-btn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+          <button class="seek-btn" onclick="seekForward()"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="progress-container">
+          <span class="time-display" id="currentTime">00:00</span>
+          <div class="progress-bar" id="progressBar">
+            <div class="progress" id="progress"></div>
+          </div>
+          <span class="time-display" id="duration">00:00</span>
+        </div>
+        <div class="volume-container">
+          <button class="volume-btn" onclick="toggleMute()"><i class="fas fa-volume-up"></i></button>
+          <div class="volume-bar" id="volumeBar">
+            <div class="volume-level" id="volumeLevel"></div>
+          </div>
+        </div>
+      `;
+
       document.getElementById('audioContent').appendChild(audioEl);
+      document.getElementById('audioContent').appendChild(playerContainer);
+
+      // إعداد المشغل
+      const audio = document.getElementById('audioPlayer');
+      const playPauseBtn = document.querySelector('.play-pause-btn i');
+      const progressBar = document.getElementById('progressBar');
+      const progress = document.getElementById('progress');
+      const currentTimeEl = document.getElementById('currentTime');
+      const durationEl = document.getElementById('duration');
+      const volumeBar = document.getElementById('volumeBar');
+      const volumeLevel = document.getElementById('volumeLevel');
+      const volumeBtn = document.querySelector('.volume-btn i');
+
+      // تحديث الوقت والتقدم
+      audio.addEventListener('timeupdate', () => {
+        const currentTime = audio.currentTime;
+        const duration = audio.duration;
+        const progressPercent = (currentTime / duration) * 100;
+        progress.style.width = `${progressPercent}%`;
+
+        currentTimeEl.textContent = formatTime(currentTime);
+        durationEl.textContent = formatTime(duration);
+      });
+
+      // التحكم في شريط التقدم
+      progressBar.addEventListener('click', (e) => {
+        const width = progressBar.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        audio.currentTime = (clickX / width) * duration;
+      });
+
+      // تحديث مستوى الصوت
+      volumeBar.addEventListener('click', (e) => {
+        const width = volumeBar.clientWidth;
+        const clickX = e.offsetX;
+        const volume = clickX / width;
+        audio.volume = volume;
+        volumeLevel.style.width = `${volume * 100}%`;
+      });
+
+      // تحديث أيقونة الصوت عند الكتم
+      audio.addEventListener('volumechange', () => {
+        if (audio.muted || audio.volume === 0) {
+          volumeBtn.className = 'fas fa-volume-mute';
+        } else {
+          volumeBtn.className = 'fas fa-volume-up';
+        }
+      });
+
+      // تحميل المدة عند تحميل البيانات
+      audio.addEventListener('loadedmetadata', () => {
+        durationEl.textContent = formatTime(audio.duration);
+      });
+
       currentView = "audio";
       updateBackButton();
     }
-    
-    function formatNumber(num) {
-      return num.toString().padStart(3, '0');
+
+    function togglePlay() {
+      const audio = document.getElementById('audioPlayer');
+      const playPauseBtn = document.querySelector('.play-pause-btn i');
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.className = 'fas fa-pause';
+      } else {
+        audio.pause();
+        playPauseBtn.className = 'fas fa-play';
+      }
     }
-    
-    function toArabicNumber(num) {
-      return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+    function seekForward() {
+      const audio = document.getElementById('audioPlayer');
+      audio.currentTime += 10;
     }
-    
+
+    function seekBackward() {
+      const audio = document.getElementById('audioPlayer');
+      audio.currentTime -= 10;
+    }
+
+    function toggleMute() {
+      const audio = document.getElementById('audioPlayer');
+      audio.muted = !audio.muted;
+    }
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // -----------------------------------
+    // دوال عرض الشيوخ
+    // -----------------------------------
     function loadRecitersList() {
       const recitersArea = document.getElementById('recitersArea');
       recitersArea.innerHTML = '';
@@ -566,71 +882,25 @@
       currentView = "reciters";
       updateBackButton();
     }
-    
-    function goBack() {
-      if (currentView === "ayahs") {
-        document.getElementById('ayahsArea').style.display = "none";
-        document.getElementById('suraList').style.display = "flex";
-        currentView = "suraList";
-      } else if (currentView === "suraList" && currentTab === "audio") {
-        document.getElementById('suraList').style.display = "none";
-        document.getElementById('recitersArea').style.display = "flex";
-        currentView = "reciters";
-      } else if (currentView === "audio") {
-        document.getElementById('audioArea').style.display = "none";
-        document.getElementById('suraList').style.display = "flex";
-        currentView = "suraList";
-      }
-      updateBackButton();
+
+    // -----------------------------------
+    // دوال مساعدة
+    // -----------------------------------
+    function formatNumber(num) {
+      return num.toString().padStart(3, '0');
     }
-    
-    function updateBackButton() {
-      let btn = document.getElementById('backButton');
-      if (currentView === "ayahs" || (currentView === "suraList" && currentTab === "audio") || currentView === "audio") {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
+
+    function toArabicNumber(num) {
+      return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
-    
-    function openSection(section) {
-      switchTab(section);
-    }
-    
-    function toggleSidebar() {
-      let sidebar = document.getElementById('sidebar');
-      if (sidebar.style.transform === 'translateX(0%)') {
-        sidebar.style.transform = 'translateX(-100%)';
-      } else {
-        sidebar.style.transform = 'translateX(0%)';
-      }
-    }
-    
-    function switchTab(tab) {
-      currentTab = tab;
-      document.getElementById('ayahsArea').style.display = 'none';
-      document.getElementById('suraList').style.display = 'none';
-      document.getElementById('audioArea').style.display = 'none';
-      document.getElementById('recitersArea').style.display = 'none';
-      
-      if (tab === 'text') {
-        loadSuraList();
-        document.getElementById('suraList').style.display = 'flex';
-        currentView = "suraList";
-      } else {
-        currentReciter = null;
-        loadRecitersList();
-        document.getElementById('recitersArea').style.display = 'flex';
-        currentView = "reciters";
-      }
-      updateBackButton();
-    }
-    
+
+    // -----------------------------------
+    // تهيئة الصفحة عند التحميل
+    // -----------------------------------
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
     });
   </script>
-
 </body>
 </html>
