@@ -32,7 +32,6 @@
       src: url('Elgharib-Days Of Week.ttf') format('truetype');
     }
 
-    /* استخدام خط أميري لأسماء الشهور */
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
     /* ----------------------------------- */
@@ -81,7 +80,7 @@
       z-index: 999;
       padding: 20px;
       transform: translateX(-100%);
-      transition: transform 0.4s ease;
+      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       overflow-y: auto;
     }
 
@@ -101,32 +100,44 @@
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .tab-btn i {
+      margin-left: 10px;
+      font-size: 18px;
     }
 
     #sidebar .tab-btn:hover {
       background: #fcefd8;
       color: #14532d;
+      transform: translateX(10px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* زر العودة */
+    /* زر العودة (تم نقله إلى مكان ثابت أعلى الصفحة) */
     #backButton {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 20px;
       background: #fcefd8;
       border: 2px solid #c7c7c7;
       border-radius: 50px;
-      padding: 5px 10px;
+      padding: 8px 16px;
       font-size: 16px;
       color: #14532d;
       cursor: pointer;
       z-index: 1100;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       display: none;
     }
 
     #backButton:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
+      background: #14532d;
+      color: #fff;
+      border-color: #14532d;
     }
 
     /* ----------------------------------- */
@@ -138,6 +149,7 @@
       border: none;
       margin: 0;
       padding: 10px 0;
+      transition: opacity 0.3s ease;
     }
 
     .day {
@@ -146,7 +158,7 @@
 
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 50px; /* تكبير أرقام الأسبوع إلى 50px */
+      font-size: 50px;
       color: #2b2b2b;
       display: block;
     }
@@ -173,6 +185,8 @@
       gap: 12px;
       margin-top: 15px;
       padding: 10px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
     }
 
     .sura-button {
@@ -230,7 +244,7 @@
     /* ----------------------------------- */
     .ayahs-container {
       margin: 0 auto;
-      padding: 10px;
+      padding: 20px;
       background-color: #fffef9;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       font-size: 26px;
@@ -241,6 +255,14 @@
       box-sizing: border-box;
       direction: rtl;
       text-align: justify;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .ayah-text {
@@ -302,6 +324,8 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       max-width: 1000px;
       font-family: 'Amiri', serif;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
     }
 
     .custom-audio-player {
@@ -328,11 +352,12 @@
       width: 40px;
       height: 40px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .player-controls button:hover {
       background: #1a6b3e;
+      transform: scale(1.1);
     }
 
     .play-pause-btn i {
@@ -356,6 +381,11 @@
       border-radius: 5px;
       position: relative;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .progress-bar:hover {
+      background: #b0b0b0;
     }
 
     .progress {
@@ -363,6 +393,7 @@
       background: #14532d;
       border-radius: 5px;
       width: 0%;
+      transition: width 0.1s linear;
     }
 
     .time-display {
@@ -381,6 +412,11 @@
       border: none;
       color: #14532d;
       cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .volume-btn:hover {
+      color: #1a6b3e;
     }
 
     .volume-btn i {
@@ -394,6 +430,11 @@
       border-radius: 5px;
       position: relative;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .volume-bar:hover {
+      background: #b0b0b0;
     }
 
     .volume-level {
@@ -401,6 +442,7 @@
       background: #14532d;
       border-radius: 5px;
       width: 100%;
+      transition: width 0.3s ease;
     }
 
     /* ----------------------------------- */
@@ -425,6 +467,11 @@
       .reciter-number {
         font-size: 20px;
       }
+
+      #backButton {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -434,16 +481,15 @@
     <i class="fa-solid fa-bars"></i>
   </div>
 
-  <!-- زر العودة -->
-  <button id="backButton" onclick="goBack()">
-    <i class="fa-solid fa-arrow-right"></i> عودة
-  </button>
-
   <!-- الشريط الجانبي -->
   <div id="sidebar">
     <h2>القائمة</h2>
-    <button onclick="openSection('text')" class="tab-btn">القرآن (الآيات)</button>
-    <button onclick="openSection('audio')" class="tab-btn">القرآن MP3</button>
+    <button onclick="openSection('text')" class="tab-btn">
+      <i class="fas fa-book"></i> القرآن الكريم
+    </button>
+    <button onclick="openSection('audio')" class="tab-btn">
+      <i class="fas fa-headphones"></i> القرآن الكريم MP3
+    </button>
   </div>
 
   <!-- عرض اليوم الحالي -->
@@ -468,6 +514,11 @@
     <div id="surahTitleAudio" class="surah-title"></div>
     <div id="audioContent"></div>
   </div>
+
+  <!-- زر العودة -->
+  <button id="backButton" onclick="goBack()">
+    <i class="fa-solid fa-arrow-right"></i> عودة
+  </button>
 
   <!-- قائمة الشيوخ (لقسم MP3) -->
   <div id="recitersArea" class="reciters-list" style="display: none;">
@@ -582,7 +633,7 @@
     function openSection(section) {
       switchTab(section);
       let sidebar = document.getElementById('sidebar');
-      sidebar.style.transform = 'translateX(-100%)'; // إخفاء الشريط الجانبي
+      sidebar.style.transform = 'translateX(-100%)';
     }
 
     function switchTab(tab) {
@@ -591,6 +642,7 @@
       document.getElementById('suraList').style.display = 'none';
       document.getElementById('audioArea').style.display = 'none';
       document.getElementById('recitersArea').style.display = 'none';
+      document.getElementById('weekDays').style.display = 'block';
 
       if (tab === 'text') {
         loadSuraList();
@@ -609,14 +661,17 @@
       if (currentView === "ayahs") {
         document.getElementById('ayahsArea').style.display = "none";
         document.getElementById('suraList').style.display = "flex";
+        document.getElementById('weekDays').style.display = 'block';
         currentView = "suraList";
       } else if (currentView === "suraList" && currentTab === "audio") {
         document.getElementById('suraList').style.display = "none";
         document.getElementById('recitersArea').style.display = "flex";
+        document.getElementById('weekDays').style.display = 'block';
         currentView = "reciters";
       } else if (currentView === "audio") {
         document.getElementById('audioArea').style.display = "none";
         document.getElementById('suraList').style.display = "flex";
+        document.getElementById('weekDays').style.display = 'block';
         currentView = "suraList";
       }
       updateBackButton();
@@ -658,6 +713,9 @@
       document.getElementById('suraList').style.display = 'none';
       document.getElementById('ayahsArea').style.display = 'block';
       document.getElementById('surahTitle').textContent = `سورة ${name}`;
+      document.getElementById('sidebar').style.transform = 'translateX(-100%)';
+      document.getElementById('weekDays').style.display = 'none';
+
       let bismillahContainer = document.getElementById('bismillahContainer');
       if (number === 9) {
         bismillahContainer.innerHTML = `<div class="isteaathah">
@@ -703,6 +761,8 @@
 
       let formatted = formatNumber(number);
       let audioUrl = "";
+
+      // تحديد الرابط بناءً على القارئ
       if (currentReciter === "minsh") {
         audioUrl = `https://server10.mp3quran.net/minsh/${formatted}.mp3`;
       } else if (currentReciter === "basit") {
@@ -716,6 +776,7 @@
       } else if (currentReciter === "lhdan") {
         audioUrl = `https://server8.mp3quran.net/lhdan/${formatted}.mp3`;
       } else if (currentReciter === "kurdi") {
+        // رابط موحد لتلاوات رعد الكردي لجميع السور
         audioUrl = `https://server6.mp3quran.net/kurdi/${formatted}.mp3`;
       } else if (currentReciter === "mustafa") {
         audioUrl = `https://server8.mp3quran.net/mustafa/${formatted}.mp3`;
@@ -813,6 +874,11 @@
       // تحميل المدة عند تحميل البيانات
       audio.addEventListener('loadedmetadata', () => {
         durationEl.textContent = formatTime(audio.duration);
+      });
+
+      // معالجة أخطاء تحميل التلاوة
+      audio.addEventListener('error', () => {
+        document.getElementById('audioContent').innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل التلاوة. الرجاء المحاولة لاحقاً.</p>';
       });
 
       currentView = "audio";
