@@ -1071,11 +1071,11 @@
       const prayerTimesContent = document.getElementById('prayerTimesContent');
       prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
 
-      // استخدام Aladhan API لجلب مواقيت الصلاة لمدينة المنصورة
+      // تحديث الرابط ليستخدم https
       const city = 'Mansoura';
       const country = 'Egypt';
-      const method = 5; // طريقة الحساب (الهيئة المصرية العامة للمساحة)
-      const url = `http://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}`;
+      const method = 5;
+      const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}`;
 
       fetch(url)
         .then(response => response.json())
@@ -1103,7 +1103,7 @@
               prayerTimesContent.appendChild(prayerItem);
             });
           } else {
-            prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة.</p>';
+            prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.</p>';
           }
         })
         .catch(error => {
