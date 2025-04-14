@@ -11,7 +11,7 @@
 
   <style>
     /* ----------------------------------- */
-    /* الخطوط */
+    /* تعريف الخطوط */
     /* ----------------------------------- */
     @font-face {
       font-family: 'AyatFont';
@@ -34,42 +34,49 @@
       font-family: 'PrayersFont';
       src: url('Elgharib-Omar_5.Prayers.ttf') format('truetype');
     }
-
+    /* الخط الجديد لاستخدامه في عرض الرقم للبسملة */
+    @font-face {
+      font-family: 'QCF_BSML';
+      src: url('QCF_BSML.ttf') format('truetype');
+    }
+    
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
     /* ----------------------------------- */
-    /* الأنماط العامة والهواتف */
+    /* الأنماط العامة */
     /* ----------------------------------- */
     body {
       font-family: 'AyatFont', serif;
       background-color: #ffffff;
       margin: 0;
-      padding: 10px;
+      padding-top: 60px; /* مسافة للشريط العلوي */
       text-align: right;
       overflow-x: hidden;
     }
     .tabs { display: none; }
 
-    /* تكبير العناصر لتناسب شاشات الهاتف */
-    @media (max-width: 600px) {
-      body {
-        padding: 15px;
-        font-size: 18px;
-      }
-    }
-
     /* ----------------------------------- */
-    /* تنسيقات الشريط الجانبي */
+    /* الشريط العلوي (التوب بار) */
     /* ----------------------------------- */
-    #sidebarToggle {
+    #topBar {
       position: fixed;
-      top: 5px;
-      left: 15px;
-      z-index: 1000;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #f8f8f8;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      z-index: 1100;
+      transition: top 0.3s;
+    }
+    /* زر القائمة الجانبية داخل التوب بار */
+    #sidebarToggle {
       font-size: 20px;
       cursor: pointer;
       background: none;
-      padding: 0;
       border: none;
       color: #14532d;
       transition: transform 0.3s ease;
@@ -77,13 +84,17 @@
     #sidebarToggle:hover {
       transform: scale(1.1);
     }
+
+    /* ----------------------------------- */
+    /* تنسيقات الشريط الجانبي */
+    /* ----------------------------------- */
     #sidebar {
       position: fixed;
       top: 0;
       left: 0;
       width: 280px;
       height: 100%;
-      background: transparent;
+      background: #f8f8f8; /* خلفية ثابتة */
       box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
       z-index: 999;
       padding: 20px;
@@ -123,7 +134,7 @@
     /* زر العودة */
     #backButton {
       position: fixed;
-      top: 20px;
+      top: 70px;
       right: 20px;
       background: #fcefd8;
       border: 2px solid #c7c7c7;
@@ -234,17 +245,18 @@
     }
 
     /* ----------------------------------- */
-    /* عرض الآيات */
+    /* عرض الآيات بتنسيق محدث */
     /* ----------------------------------- */
     .ayahs-container {
-      margin: 0 auto;
-      padding: 20px;
-      background-color: transparent;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      border: 1px solid #eee;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      font-size: 26px;
-      line-height: 1.4;
-      width: 95vw;
-      height: 100vh;
+      border-radius: 8px;
+      font-size: 28px;
+      line-height: 1.8;
+      max-width: 800px;
       overflow-y: auto;
       box-sizing: border-box;
       direction: rtl;
@@ -259,45 +271,39 @@
     }
     .ayah-text {
       font-family: 'AyatFont', serif;
-      font-size: 26px;
-      display: inline;
-      margin-left: 2px;
+      color: #333;
+      margin: 0 2px;
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
-      font-size: 26px;
       color: #4a6f28;
       font-weight: bold;
-      display: inline-block;
+      margin: 0 2px;
       position: relative;
-      margin-left: 2px;
     }
     .ayah-number {
       font-family: Arial, sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       color: #2980b9;
       position: absolute;
-      top: 55%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-weight: bold;
     }
     .surah-title {
       text-align: center;
-      font-size: 30px;
+      font-size: 32px;
       color: #14532d;
       margin-bottom: 20px;
       font-family: 'SurahFont', serif;
     }
-    .bismillah,
-    .isteaathah {
+    /* القسم الذي يعرض "البسملة" أصبح الآن نص يظهر الرقم "654" */
+    .bismillah-text {
+      font-family: 'QCF_BSML', serif;
+      font-size: 96px; /* حجم خط كبير */
       text-align: center;
-      margin-bottom: 15px;
-    }
-    .bismillah img,
-    .isteaathah img {
-      max-width: 100%;
-      height: auto;
+      margin-bottom: 20px;
     }
 
     /* ----------------------------------- */
@@ -420,13 +426,18 @@
     .prayer-times-container {
       margin: 20px auto;
       padding: 20px;
-      background-color: transparent;
+      background-color: #fff;
+      border: 1px solid #ddd;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       max-width: 1000px;
       font-family: 'Amiri', serif;
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
+      transition: transform 0.3s ease;
+    }
+    .prayer-times-container:hover {
+      transform: scale(1.02);
     }
     .prayer-times-title {
       text-align: center;
@@ -444,18 +455,17 @@
       display: flex;
       align-items: center;
       padding: 15px;
-      background: transparent;
+      background: #fafafa;
       border: 2px solid #c7c7c7;
       border-radius: 15px;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       opacity: 0;
       animation: slideIn 0.5s ease forwards;
       animation-delay: calc(0.1s * var(--i));
     }
     .prayer-item:hover {
-      background: transparent;
-      transform: scale(1.02);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transform: scale(1.04);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
     .prayer-item i {
       font-size: 24px;
@@ -540,9 +550,12 @@
   </style>
 </head>
 <body>
-  <!-- أيقونة القائمة -->
-  <div id="sidebarToggle" onclick="toggleSidebar()">
-    <i class="fa-solid fa-bars"></i>
+  <!-- الشريط العلوي -->
+  <div id="topBar">
+    <!-- أيقونة القائمة الجانبية داخل التوب بار -->
+    <button id="sidebarToggle" onclick="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </div>
 
   <!-- الشريط الجانبي -->
@@ -575,6 +588,7 @@
   <!-- منطقة عرض الآيات -->
   <div id="ayahsArea" class="ayahs-container" style="display: none;">
     <div id="surahTitle" class="surah-title"></div>
+    <!-- هنا تم استبدال صورة البسملة بعرض الرقم "654" باستخدام الخط الجديد -->
     <div id="bismillahContainer"></div>
     <div id="ayahsContent"></div>
   </div>
@@ -617,6 +631,7 @@
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
+    let prevScroll = window.pageYOffset || document.documentElement.scrollTop;
 
     const surahNames = [
       "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
@@ -635,7 +650,7 @@
 
     const reciters = [
       { number: "1", id: "minsh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
-      { number: "9", id: "basit", image: "data:image/jpeg;base64,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" },
+      { number: "9", id: "basit", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
       { number: "7", id: "husr", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
       { number: "108", id: "ayyub", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg" },
       { number: "107", id: "a_jbr", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg" },
@@ -803,16 +818,10 @@
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
 
+      // بدلاً من عرض صورة البسملة، يتم عرض الرقم "654" باستخدام الخط الجديد بحجم كبير.
       let bismillahContainer = document.getElementById('bismillahContainer');
-      if (number === 9) {
-        bismillahContainer.innerHTML = `<div class="isteaathah">
-          <img src="https://i.postimg.cc/ydxnWsKh/iste3athah-removebg-preview.png" alt="أعوذ بالله من الشيطان الرجيم">
-        </div>`;
-      } else {
-        bismillahContainer.innerHTML = `<div class="bismillah">
-          <img src="https://surahquran.com/img/basmalah.png" alt="بسم الله الرحمن الرحيم">
-        </div>`;
-      }
+      bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
+
       document.getElementById('ayahsContent').innerHTML = '';
       fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
         .then(res => res.json())
@@ -1070,6 +1079,20 @@
     function toArabicNumber(num) {
       return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
+
+    // -----------------------------------
+    // تغيير سلوك الشريط العلوي عند التمرير
+    // -----------------------------------
+    window.addEventListener('scroll', () => {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > prevScroll) {
+        document.getElementById('topBar').style.top = "0";
+      } else {
+        document.getElementById('topBar').style.top = "-70px";
+      }
+      prevScroll = currentScroll;
+    });
+
     // -----------------------------------
     // تهيئة الصفحة عند التحميل
     // -----------------------------------
