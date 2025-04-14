@@ -8,7 +8,6 @@
   <link rel="icon" type="image/jpeg" href="https://i.ibb.co/JWwKMn4X/In-Shot.jpg">
   <!-- تحميل مكتبة Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     /* ----------------------------------- */
     /* تعريف الخطوط */
@@ -29,17 +28,14 @@
       font-family: 'DaysFont';
       src: url('Elgharib-Days Of Week.ttf') format('truetype');
     }
-    /* الخط الخاص بأرقام الصلوات */
     @font-face {
       font-family: 'PrayersFont';
       src: url('Elgharib-Omar_5.Prayers.ttf') format('truetype');
     }
-    /* الخط الجديد لاستخدامه في عرض الرقم للبسملة */
     @font-face {
       font-family: 'QCF_BSML';
       src: url('QCF_BSML.ttf') format('truetype');
     }
-    
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
     /* ----------------------------------- */
@@ -49,21 +45,21 @@
       font-family: 'AyatFont', serif;
       background-color: #ffffff;
       margin: 0;
-      padding-top: 60px; /* مسافة للشريط العلوي */
+      padding-top: 50px; /* مساحة مخصصة للتوب بلاير */
       text-align: right;
       overflow-x: hidden;
     }
     .tabs { display: none; }
 
     /* ----------------------------------- */
-    /* الشريط العلوي (التوب بار) */
+    /* التوب بلاير */
     /* ----------------------------------- */
     #topBar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 60px;
+      height: 50px;  
       background: #f8f8f8;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: flex;
@@ -72,21 +68,42 @@
       z-index: 1100;
       transition: top 0.3s;
     }
-    /* زر القائمة الجانبية داخل التوب بار */
     #sidebarToggle {
       font-size: 20px;
       cursor: pointer;
-      background: none;
+      background-color: #14532d;
+      color: #fff;
       border: none;
-      color: #14532d;
-      transition: transform 0.3s ease;
+      border-radius: 50px; /* شكل بيضاوي */
+      padding: 6px 10px;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
     #sidebarToggle:hover {
-      transform: scale(1.1);
+      background-color: #1a6b3e;
+      transform: scale(1.05);
     }
 
     /* ----------------------------------- */
-    /* تنسيقات الشريط الجانبي */
+    /* تصميم مشترك للأزرار (بيضاوي مع انميشن) */
+    /* ----------------------------------- */
+    button, .reciter-button {
+      background-color: #14532d;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      outline: none;
+    }
+    button:hover, .reciter-button:hover {
+      background-color: #1a6b3e;
+      transform: scale(1.03);
+    }
+
+    /* ----------------------------------- */
+    /* الشريط الجانبي */
     /* ----------------------------------- */
     #sidebar {
       position: fixed;
@@ -106,63 +123,54 @@
       font-family: 'SurahFont';
       font-size: 26px;
       margin-bottom: 20px;
+      color: #14532d;
     }
     #sidebar .tab-btn {
-      font-size: 20px;
-      padding: 10px;
-      border-radius: 12px;
-      background: transparent;
-      border: 2px solid #c7c7c7;
+      background-color: #14532d;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
       margin-bottom: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
       width: 100%;
       display: flex;
       align-items: center;
-    }
-    .tab-btn i {
-      margin-left: 10px;
-      font-size: 18px;
+      justify-content: center;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
     #sidebar .tab-btn:hover {
-      background: transparent;
-      color: #14532d;
-      transform: translateX(10px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: #1a6b3e;
+      transform: translateX(5px);
     }
 
+    /* ----------------------------------- */
     /* زر العودة */
+    /* ----------------------------------- */
     #backButton {
       position: fixed;
-      top: 70px;
+      top: 60px;
       right: 20px;
-      background: #fcefd8;
-      border: 2px solid #c7c7c7;
+      background: #14532d;
+      color: #fff;
+      border: none;
       border-radius: 50px;
       padding: 8px 16px;
       font-size: 16px;
-      color: #14532d;
       cursor: pointer;
       z-index: 1100;
-      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
       display: none;
     }
     #backButton:hover {
-      transform: scale(1.1);
-      background: #14532d;
-      color: #fff;
-      border-color: #14532d;
+      background: #1a6b3e;
+      transform: scale(1.03);
     }
 
     /* ----------------------------------- */
-    /* عرض اليوم الحالي */
+    /* عرض اليوم الحالي (التاريخ الهجري وأيام الأسبوع) */
     /* ----------------------------------- */
     .weekdays {
       text-align: center;
-      background: none;
-      border: none;
-      margin: 0;
-      padding: 10px 0;
+      padding: 25px 0 5px; /* زيادة البادينج العلوي لإنزال العنصر قليلاً */
       transition: opacity 0.3s ease;
     }
     .day {
@@ -170,67 +178,88 @@
     }
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 50px;
+      font-size: 48px;
       color: #2b2b2b;
       display: block;
+      margin-bottom: 5px; /* مسافة بسيطة بين الرقم وأيام الأسبوع */
     }
     .hijri-date {
       font-family: 'Amiri', serif;
-      font-size: 14px;
-      color: #333;
-      margin-top: 5px;
+      font-size: 16px;
+      color: #14532d;
+      margin-top: 0;
       display: inline-block;
+      background-color: #f1f1f1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .month-name {
       font-family: 'Amiri', serif;
     }
 
     /* ----------------------------------- */
-    /* قوائم السور والشيوخ والأقسام الأخرى */
+    /* الحاويات الرئيسية (تجعل شفافة تماماً) */
     /* ----------------------------------- */
-    .sura-list,
+    #suraList, #ayahsArea, #audioArea, #prayerTimesArea, #aboutSection, .reciters-list {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+
+    /* قائمة السور */
+    .sura-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+      padding: 10px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .sura-button {
+      background-color: #14532d;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      font-family: 'SurahFont', serif;
+      text-align: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .sura-button:hover {
+      background-color: #1a6b3e;
+      transform: scale(1.02);
+    }
+
+    /* قائمة الشيوخ */
     .reciters-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-top: 15px;
       padding: 10px;
-      background-color: transparent;
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
     }
-    .sura-button {
-      background: transparent;
-      color: #2b2b2b;
-      border: 2px solid #c7c7c7;
-      padding: 16px;
-      border-radius: 25px;
-      font-size: 32px;
-      cursor: pointer;
-      font-family: 'SurahFont', serif;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    }
-    .sura-button:hover {
-      background: transparent;
-      color: #14532d;
-      transform: scale(1.02);
-    }
     .reciter-button {
+      background-color: #14532d;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
       display: flex;
       align-items: center;
       gap: 15px;
-      padding: 10px;
-      border: 2px solid #c7c7c7;
-      border-radius: 15px;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
     }
     .reciter-button:hover {
-      background: transparent;
-      color: #14532d;
+      background-color: #1a6b3e;
       transform: scale(1.02);
     }
     .reciter-img {
@@ -240,20 +269,17 @@
       object-fit: cover;
     }
     .reciter-number {
-      font-size: 28px;
       font-family: 'RecitersFont', serif;
+      font-size: 20px;
     }
 
-    /* ----------------------------------- */
-    /* عرض الآيات بتنسيق محدث */
-    /* ----------------------------------- */
-    .ayahs-container {
+    /* منطقة عرض الآيات */
+    #ayahsArea {
       margin: 20px auto;
       padding: 30px;
-      background-color: #fff;
-      border: 1px solid #eee;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
       font-size: 28px;
       line-height: 1.8;
       max-width: 800px;
@@ -262,6 +288,7 @@
       direction: rtl;
       text-align: justify;
       position: relative;
+      display: none;
       opacity: 0;
       animation: fadeIn 1s ease forwards;
     }
@@ -292,43 +319,43 @@
       font-weight: bold;
     }
     .surah-title {
-      text-align: center;
+      font-family: 'SurahFont', serif;
       font-size: 32px;
       color: #14532d;
-      margin-bottom: 20px;
-      font-family: 'SurahFont', serif;
-    }
-    /* عرض الرقم "654" بدل البسملة باستخدام الخط الجديد،
-       حجم الخط تم تخفيضه لجعله "عادي" */
-    .bismillah-text {
-      font-family: 'QCF_BSML', serif;
-      font-size: 36px;
       text-align: center;
       margin-bottom: 20px;
     }
+    /* رقم البسملة باستخدام الخط الجديد وحجمه 34px */
+    .bismillah-text {
+      font-family: 'QCF_BSML', serif;
+      font-size: 34px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #14532d;
+    }
 
-    /* ----------------------------------- */
-    /* مشغل التلاوة */
-    /* ----------------------------------- */
-    .audio-container {
+    /* منطقة التلاوة الصوتية */
+    #audioArea {
       margin: 20px auto;
       padding: 15px;
       background-color: transparent;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: none;
+      box-shadow: none;
       max-width: 1000px;
       font-family: 'Amiri', serif;
+      display: none;
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
     }
     .custom-audio-player {
       background: transparent;
       padding: 15px;
-      border-radius: 10px;
+      border: none;
+      border-radius: 0;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: none;
     }
     .player-controls {
       display: flex;
@@ -344,6 +371,7 @@
       height: 40px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s ease;
+      outline: none;
     }
     .player-controls button:hover {
       background: #1a6b3e;
@@ -422,30 +450,30 @@
     }
 
     /* ----------------------------------- */
-    /* مواقيت الصلاة */
+    /* منطقة مواقيت الصلاة */
     /* ----------------------------------- */
-    .prayer-times-container {
+    #prayerTimesArea {
       margin: 20px auto;
       padding: 20px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
       max-width: 1000px;
       font-family: 'Amiri', serif;
+      display: none;
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
       transition: transform 0.3s ease;
     }
-    .prayer-times-container:hover {
+    #prayerTimesArea:hover {
       transform: scale(1.02);
     }
     .prayer-times-title {
-      text-align: center;
+      font-family: 'SurahFont', serif;
       font-size: 30px;
       color: #14532d;
+      text-align: center;
       margin-bottom: 20px;
-      font-family: 'SurahFont', serif;
     }
     .prayer-times-list {
       display: flex;
@@ -456,17 +484,14 @@
       display: flex;
       align-items: center;
       padding: 15px;
-      background: #fafafa;
-      border: 2px solid #c7c7c7;
-      border-radius: 15px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: transparent;
+      transition: transform 0.3s ease;
       opacity: 0;
       animation: slideIn 0.5s ease forwards;
       animation-delay: calc(0.1s * var(--i));
     }
     .prayer-item:hover {
       transform: scale(1.04);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
     .prayer-item i {
       font-size: 24px;
@@ -474,14 +499,14 @@
       margin-left: 15px;
     }
     .prayer-name {
-      font-size: 22px;
       font-family: 'PrayersFont', sans-serif;
+      font-size: 22px;
       flex: 1;
     }
     .prayer-time {
+      font-family: 'Amiri', serif;
       font-size: 20px;
       color: #2b2b2b;
-      font-family: 'Amiri', serif;
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(20px); }
@@ -495,10 +520,10 @@
       display: none;
       margin: 20px auto;
       padding: 20px;
-      max-width: 1000px;
       background-color: transparent;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: none;
+      box-shadow: none;
+      max-width: 1000px;
       font-family: 'Amiri', serif;
       text-align: center;
       animation: fadeIn 0.5s ease forwards;
@@ -514,24 +539,21 @@
       margin: 5px 0;
     }
 
-    /* ----------------------------------- */
-    /* الاستجابة للشاشات الصغيرة */
-    /* ----------------------------------- */
     @media (max-width: 600px) {
       .sura-button {
-        font-size: 24px;
-        padding: 14px;
+        font-size: 20px;
+        padding: 10px 16px;
       }
       .tab-btn {
-        font-size: 16px;
-        padding: 8px 16px;
+        font-size: 14px;
+        padding: 6px 12px;
       }
       .reciter-img {
         width: 50px;
         height: 50px;
       }
       .reciter-number {
-        font-size: 20px;
+        font-size: 16px;
       }
       #backButton {
         padding: 6px 12px;
@@ -540,9 +562,8 @@
       .prayer-item {
         padding: 10px;
       }
-      .prayer-name,
-      .prayer-time {
-        font-size: 18px;
+      .prayer-name, .prayer-time {
+        font-size: 16px;
       }
       .prayer-item i {
         font-size: 20px;
@@ -551,9 +572,8 @@
   </style>
 </head>
 <body>
-  <!-- الشريط العلوي -->
+  <!-- التوب بلاير -->
   <div id="topBar">
-    <!-- أيقونة القائمة الجانبية داخل التوب بار -->
     <button id="sidebarToggle" onclick="toggleSidebar()">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -562,24 +582,22 @@
   <!-- الشريط الجانبي -->
   <div id="sidebar">
     <h2>القائمة</h2>
-    <button onclick="openSection('text')" class="tab-btn">
+    <button class="tab-btn" onclick="openSection('text')">
       <i class="fas fa-book"></i> القرآن الكريم
     </button>
-    <button onclick="openSection('audio')" class="tab-btn">
+    <button class="tab-btn" onclick="openSection('audio')">
       <i class="fas fa-headphones"></i> القرآن الكريم MP3
     </button>
-    <button onclick="openSection('prayer')" class="tab-btn">
+    <button class="tab-btn" onclick="openSection('prayer')">
       <i class="fas fa-pray"></i> مواقيت الصلاة
     </button>
-    <button onclick="openSection('about')" class="tab-btn">
+    <button class="tab-btn" onclick="openSection('about')">
       <i class="fas fa-info-circle"></i> عن التطبيق
     </button>
   </div>
 
-  <!-- عرض اليوم الحالي -->
-  <div id="weekDays" class="weekdays">
-    <!-- سيتم التحديث ديناميكياً -->
-  </div>
+  <!-- عرض اليوم الحالي (أيام الأسبوع والتاريخ الهجري) -->
+  <div id="weekDays" class="weekdays"></div>
 
   <!-- قائمة السور -->
   <div id="suraList" class="sura-list" style="display: none;">
@@ -587,21 +605,23 @@
   </div>
 
   <!-- منطقة عرض الآيات -->
-  <div id="ayahsArea" class="ayahs-container" style="display: none;">
+  <div id="ayahsArea">
     <div id="surahTitle" class="surah-title"></div>
-    <!-- عرض الرقم "654" بدل البسملة بخط QCF_BSML وبحجم طبيعي -->
-    <div id="bismillahContainer"></div>
+    <!-- عرض رقم البسملة باستخدام الخط المخصص -->
+    <div id="bismillahContainer">
+      <div class="bismillah-text">654</div>
+    </div>
     <div id="ayahsContent"></div>
   </div>
 
   <!-- منطقة عرض التلاوة الصوتية -->
-  <div id="audioArea" class="audio-container" style="display: none;">
+  <div id="audioArea">
     <div id="surahTitleAudio" class="surah-title"></div>
     <div id="audioContent"></div>
   </div>
 
   <!-- منطقة عرض مواقيت الصلاة -->
-  <div id="prayerTimesArea" class="prayer-times-container" style="display: none;">
+  <div id="prayerTimesArea">
     <div class="prayer-times-title">مواقيت الصلاة</div>
     <div id="prayerTimesContent" class="prayer-times-list">
       جاري تحميل مواقيت الصلاة...
@@ -620,15 +640,17 @@
     <i class="fa-solid fa-arrow-right"></i> عودة
   </button>
 
-  <!-- قائمة الشيوخ (لقسم MP3) -->
+  <!-- قائمة الشيوخ -->
   <div id="recitersArea" class="reciters-list" style="display: none;">
     جاري تحميل الشيوخ...
   </div>
 
   <script>
-    // -----------------------------------
-    // المتغيرات العامة
-    // -----------------------------------
+    // تعريف دالة لتنسيق رقم السورة بصيغة ثلاثية، مثل "001" أو "002"
+    function formatNumber(num) {
+      return num.toString().padStart(3, "0");
+    }
+
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
@@ -662,9 +684,6 @@
       { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
     ];
 
-    // -----------------------------------
-    // دوال تحويل التاريخ
-    // -----------------------------------
     function gregorianToHijri(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -712,9 +731,6 @@
       container.appendChild(dayDiv);
     }
 
-    // -----------------------------------
-    // دوال التنقل بين الأقسام
-    // -----------------------------------
     function toggleSidebar() {
       let sidebar = document.getElementById('sidebar');
       sidebar.style.transform = (sidebar.style.transform === 'translateX(0%)')
@@ -782,17 +798,18 @@
     }
     function updateBackButton() {
       let btn = document.getElementById('backButton');
-      if (currentView === "ayahs" || (currentView === "suraList" && currentTab === "audio") ||
-          currentView === "audio" || currentView === "about") {
+      if (
+        currentView === "ayahs" ||
+        (currentView === "suraList" && currentTab === "audio") ||
+        currentView === "audio" ||
+        currentView === "about"
+      ) {
         btn.style.display = "block";
       } else {
         btn.style.display = "none";
       }
     }
 
-    // -----------------------------------
-    // دوال عرض السور والآيات
-    // -----------------------------------
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
@@ -814,12 +831,12 @@
     }
     function loadSurahText(number, name) {
       document.getElementById('suraList').style.display = 'none';
-      document.getElementById('ayahsArea').style.display = 'block';
+      let ayahsArea = document.getElementById('ayahsArea');
+      ayahsArea.style.display = 'block';
       document.getElementById('surahTitle').textContent = `سورة ${name}`;
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
 
-      // عرض الرقم "654" باستخدام الخط الجديد وبحجم أصغر (36px) بدل صورة البسملة
       let bismillahContainer = document.getElementById('bismillahContainer');
       bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
 
@@ -846,13 +863,10 @@
       currentView = "ayahs";
       updateBackButton();
     }
-
-    // -----------------------------------
-    // دوال التلاوة الصوتية
-    // -----------------------------------
     function loadSurahAudio(number, name) {
       document.getElementById('suraList').style.display = 'none';
-      document.getElementById('audioArea').style.display = 'block';
+      let audioArea = document.getElementById('audioArea');
+      audioArea.style.display = 'block';
       document.getElementById('surahTitleAudio').textContent = `سورة ${name}`;
       document.getElementById('audioContent').innerHTML = '';
 
@@ -925,8 +939,10 @@
       audio.addEventListener('timeupdate', () => {
         const currentTime = audio.currentTime;
         const duration = audio.duration;
-        const progressPercent = (currentTime / duration) * 100;
-        progress.style.width = `${progressPercent}%`;
+        if (!isNaN(duration)) {
+          const progressPercent = (currentTime / duration) * 100;
+          progress.style.width = `${progressPercent}%`;
+        }
         currentTimeEl.textContent = formatTime(currentTime);
         durationEl.textContent = formatTime(duration);
       });
@@ -948,7 +964,9 @@
           : 'fas fa-volume-up';
       });
       audio.addEventListener('loadedmetadata', () => {
-        durationEl.textContent = formatTime(audio.duration);
+        if (!isNaN(audio.duration)) {
+          durationEl.textContent = formatTime(audio.duration);
+        }
       });
       audio.addEventListener('error', () => {
         document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة سورة ${name}. الرجاء المحاولة لاحقاً.</p>`;
@@ -986,9 +1004,6 @@
       return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
-    // -----------------------------------
-    // دوال عرض الشيوخ
-    // -----------------------------------
     function loadRecitersList() {
       const recitersArea = document.getElementById('recitersArea');
       recitersArea.innerHTML = '';
@@ -1017,9 +1032,6 @@
       updateBackButton();
     }
 
-    // -----------------------------------
-    // دالة تحويل الوقت إلى تنسيق 12 ساعة
-    // -----------------------------------
     function convertTo12Hour(time) {
       let [hours, minutes] = time.split(':').map(Number);
       let period = hours >= 12 ? 'مساءً' : 'صباحًا';
@@ -1027,9 +1039,6 @@
       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
 
-    // -----------------------------------
-    // دالة عرض مواقيت الصلاة
-    // -----------------------------------
     function loadPrayerTimes() {
       const prayerTimesContent = document.getElementById('prayerTimesContent');
       prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
@@ -1071,35 +1080,16 @@
         });
     }
 
-    // -----------------------------------
-    // دوال مساعدة
-    // -----------------------------------
-    function formatNumber(num) {
-      return num.toString().padStart(3, '0');
-    }
-    function toArabicNumber(num) {
-      return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-    }
-
-    // -----------------------------------
-    // تغيير سلوك التوب بار (Top Player) عند التمرير:
-    // إخفاؤه عند التمرير للأسفل وظهوره عند التمرير للأعلى
-    // -----------------------------------
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
-        // عند التمرير للأسفل، إخفاء التوب بار
         document.getElementById('topBar').style.top = "-70px";
       } else {
-        // عند التمرير للأعلى، إظهار التوب بار
         document.getElementById('topBar').style.top = "0";
       }
       prevScroll = currentScroll;
     });
 
-    // -----------------------------------
-    // تهيئة الصفحة عند التحميل
-    // -----------------------------------
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
