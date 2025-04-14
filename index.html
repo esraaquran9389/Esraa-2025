@@ -9,9 +9,7 @@
   <!-- تحميل مكتبة Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ----------------------------------- */
-    /* تعريف الخطوط الخاصة (للآيات، أسماء السور...) */
-    /* ----------------------------------- */
+    /* ---------- الخطوط الخاصة ---------- */
     @font-face {
       font-family: 'AyatFont';
       src: url('Digital Khatt Madina @Am9li9.otf.ttf') format('opentype');
@@ -36,32 +34,28 @@
       font-family: 'QCF_BSML';
       src: url('QCF_BSML.ttf') format('truetype');
     }
-    /* تحميل خط أميري لاستخدامه كنص افتراضي */
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
-    /* ----------------------------------- */
-    /* الأنماط العامة للموقع - يتم استخدام خط أميري هنا لكل النصوص بدون إعداد خط مخصص */
-    /* ----------------------------------- */
+    /* ---------- الأنماط العامة ---------- */
     body {
       font-family: 'Amiri', serif;
-      background-color: #ffffff;
+      background: #f0f2f5;
       margin: 0;
-      padding-top: 50px; /* مساحة مخصصة للتوب بلاير */
+      padding-top: 50px;
       text-align: right;
       overflow-x: hidden;
     }
     .tabs { display: none; }
 
-    /* ----------------------------------- */
-    /* التوب بلاير */
-    /* ----------------------------------- */
+    /* ---------- التوب بلاير ---------- */
     #topBar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 50px;  
-      background: #f8f8f8;
+      height: 50px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(5px);
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: flex;
       align-items: center;
@@ -84,9 +78,7 @@
       transform: scale(1.05);
     }
 
-    /* ----------------------------------- */
-    /* تصميم مشترك للأزرار (بيضاوي مع انميشن) */
-    /* ----------------------------------- */
+    /* ---------- أزرار عامة ---------- */
     button, .reciter-button {
       background-color: #14532d;
       color: #fff;
@@ -103,16 +95,14 @@
       transform: scale(1.03);
     }
 
-    /* ----------------------------------- */
-    /* الشريط الجانبي - استخدام خط أميري لعناصره */
-    /* ----------------------------------- */
+    /* ---------- الشريط الجانبي ---------- */
     #sidebar {
       position: fixed;
       top: 0;
       left: 0;
       width: 280px;
       height: 100%;
-      background: #f8f8f8;
+      background: rgba(248,248,248,0.95);
       box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
       z-index: 999;
       padding: 20px;
@@ -143,9 +133,7 @@
       transform: translateX(5px);
     }
 
-    /* ----------------------------------- */
-    /* زر العودة */
-    /* ----------------------------------- */
+    /* ---------- زر العودة ---------- */
     #backButton {
       position: fixed;
       top: 60px;
@@ -166,12 +154,10 @@
       transform: scale(1.03);
     }
 
-    /* ----------------------------------- */
-    /* عرض اليوم الحالي (التاريخ الهجري وأيام الأسبوع) */
-    /* ----------------------------------- */
+    /* ---------- عرض اليوم الحالي ---------- */
     .weekdays {
       text-align: center;
-      padding: 25px 0 5px; /* زيادة البادينج العلوي لإنزال العنصر قليلاً */
+      padding: 25px 0 5px;
       transition: opacity 0.3s ease;
     }
     .day {
@@ -184,32 +170,28 @@
       display: block;
       margin-bottom: 5px;
     }
-    /* تعديل حجم التاريخ الهجري */
     .hijri-date {
       font-family: 'Amiri', serif;
-      font-size: 14px;  /* تصغير حجم النص قليلاً */
+      font-size: 16px;
       color: #14532d;
       margin-top: 0;
-      display: inline-block;
-      background-color: #f1f1f1;
+      background-color: #fff;
       padding: 6px 12px;
       border-radius: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: inline-block;
     }
     .month-name {
       font-family: 'Amiri', serif;
     }
 
-    /* ----------------------------------- */
-    /* الحاويات الرئيسية (بدون خلفيات أو حدود) */
-    /* ----------------------------------- */
+    /* ---------- الحاويات الرئيسية ---------- */
     #suraList, #ayahsArea, #audioArea, #prayerTimesArea, #aboutSection, .reciters-list {
       background-color: transparent !important;
       border: none !important;
       box-shadow: none !important;
       border-radius: 0 !important;
     }
-
     /* قائمة السور */
     .sura-list {
       display: flex;
@@ -236,7 +218,6 @@
       background-color: #1a6b3e;
       transform: scale(1.02);
     }
-
     /* قائمة الشيوخ */
     .reciters-list {
       display: flex;
@@ -275,15 +256,12 @@
       font-size: 20px;
     }
 
-    /* منطقة عرض الآيات */
+    /* ---------- منطقة عرض الآيات ---------- */
     #ayahsArea {
       margin: 20px auto;
       padding: 30px;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
       font-size: 28px;
-      line-height: 1.4; /* تقليل المسافة العمودية بين الأسطر */
+      line-height: 1.8;
       max-width: 800px;
       overflow-y: auto;
       box-sizing: border-box;
@@ -301,26 +279,21 @@
     .ayah-text {
       font-family: 'AyatFont', serif;
       color: #333;
-      margin: 0;
-      padding: 0;
-      display: inline-block;
+      margin: 0 2px;
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
-      color: #f5f5dc; /* تغيير لون الرمز إلى بيج فاتح */
+      color: #4a6f28;
       font-weight: bold;
-      margin: 0;
-      padding: 0;
+      margin: 0 2px;
       position: relative;
-      display: inline-block;
     }
-    /* تعديل موقع رقم الآية: خفضنا قليلاً من 50% إلى 60% */
     .ayah-number {
       font-family: Arial, sans-serif;
       font-size: 12px;
       color: #2980b9;
       position: absolute;
-      top: 60%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-weight: bold;
@@ -340,13 +313,10 @@
       color: #14532d;
     }
 
-    /* منطقة التلاوة الصوتية */
+    /* ---------- منطقة التلاوة الصوتية المتقدمة ---------- */
     #audioArea {
       margin: 20px auto;
       padding: 15px;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
       max-width: 1000px;
       font-family: 'Amiri', serif;
       display: none;
@@ -354,40 +324,41 @@
       animation: fadeIn 0.5s ease forwards;
     }
     .custom-audio-player {
-      background: transparent;
-      padding: 15px;
-      border: none;
-      border-radius: 0;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      box-shadow: none;
+      gap: 15px;
+      border: 1px solid rgba(255,255,255,0.4);
     }
     .player-controls {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 20px;
     }
     .player-controls button {
-      background: #14532d;
-      color: white;
+      background: linear-gradient(145deg, #14532d, #0e3e1f);
+      color: #fff;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
       outline: none;
     }
     .player-controls button:hover {
-      background: #1a6b3e;
       transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-    .play-pause-btn i {
-      font-size: 18px;
+    .player-controls button:active {
+      transform: scale(1);
     }
-    .seek-btn i {
-      font-size: 14px;
+    .play-pause-btn i, .download-btn i, .seek-btn i {
+      font-size: 22px;
     }
     .progress-container {
       display: flex;
@@ -396,7 +367,7 @@
     }
     .progress-bar {
       flex: 1;
-      height: 5px;
+      height: 6px;
       background: #d3d3d3;
       border-radius: 5px;
       position: relative;
@@ -416,11 +387,14 @@
     .time-display {
       font-size: 14px;
       color: #333;
+      min-width: 50px;
+      text-align: center;
     }
     .volume-container {
       display: flex;
       align-items: center;
       gap: 10px;
+      justify-content: center;
     }
     .volume-btn {
       background: none;
@@ -433,11 +407,11 @@
       color: #1a6b3e;
     }
     .volume-btn i {
-      font-size: 20px;
+      font-size: 24px;
     }
     .volume-bar {
-      width: 100px;
-      height: 5px;
+      width: 120px;
+      height: 6px;
       background: #d3d3d3;
       border-radius: 5px;
       position: relative;
@@ -455,13 +429,10 @@
       transition: width 0.3s ease;
     }
 
-    /* منطقة مواقيت الصلاة */
+    /* ---------- مواقيت الصلاة ---------- */
     #prayerTimesArea {
       margin: 20px auto;
       padding: 20px;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
       max-width: 1000px;
       font-family: 'Amiri', serif;
       display: none;
@@ -517,14 +488,11 @@
       to { opacity: 1; transform: translateX(0); }
     }
 
-    /* قسم عن التطبيق - استخدام أميري لعناوينه */
+    /* ---------- قسم عن التطبيق ---------- */
     #aboutSection {
       display: none;
       margin: 20px auto;
       padding: 20px;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
       max-width: 1000px;
       font-family: 'Amiri', serif;
       text-align: center;
@@ -570,6 +538,12 @@
       .prayer-item i {
         font-size: 20px;
       }
+      .progress-container, .volume-container {
+        flex-direction: column;
+      }
+      .volume-bar {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -598,7 +572,7 @@
     </button>
   </div>
 
-  <!-- عرض اليوم الحالي (أيام الأسبوع والتاريخ الهجري) -->
+  <!-- عرض اليوم الحالي -->
   <div id="weekDays" class="weekdays"></div>
 
   <!-- قائمة السور -->
@@ -609,20 +583,19 @@
   <!-- منطقة عرض الآيات -->
   <div id="ayahsArea">
     <div id="surahTitle" class="surah-title"></div>
-    <!-- عرض رقم البسملة باستخدام الخط المخصص -->
     <div id="bismillahContainer">
       <div class="bismillah-text">654</div>
     </div>
     <div id="ayahsContent"></div>
   </div>
 
-  <!-- منطقة عرض التلاوة الصوتية -->
+  <!-- منطقة التلاوة الصوتية المتطورة -->
   <div id="audioArea">
     <div id="surahTitleAudio" class="surah-title"></div>
     <div id="audioContent"></div>
   </div>
 
-  <!-- منطقة عرض مواقيت الصلاة -->
+  <!-- منطقة مواقيت الصلاة -->
   <div id="prayerTimesArea">
     <div class="prayer-times-title">مواقيت الصلاة</div>
     <div id="prayerTimesContent" class="prayer-times-list">
@@ -648,15 +621,18 @@
   </div>
 
   <script>
-    // تعريف دالة لتنسيق رقم السورة بصيغة ثلاثية، مثل "001" أو "002"
+    // دوال مساعدة
     function formatNumber(num) {
       return num.toString().padStart(3, "0");
     }
-
-    // تعريف دالة لتحويل الأرقام الإنجليزية إلى أرقام عربية
     function toArabicNumber(num) {
       const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
       return num.toString().split('').map(digit => arabicDigits[digit]).join('');
+    }
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
     let currentTab = 'text';
@@ -692,6 +668,7 @@
       { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
     ];
 
+    // تحويل التاريخ الميلادي إلى هجري
     function gregorianToHijri(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -871,6 +848,7 @@
       currentView = "ayahs";
       updateBackButton();
     }
+    // مشغل التلاوة بتصميم متقدّم
     function loadSurahAudio(number, name) {
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
@@ -902,6 +880,7 @@
         audioUrl = `https://server12.mp3quran.net/tblawi/${formatted}.mp3`;
       }
 
+      // إنشاء عنصر الصوت
       let audioEl = document.createElement('audio');
       audioEl.id = 'audioPlayer';
       let sourceEl = document.createElement('source');
@@ -909,6 +888,7 @@
       sourceEl.type = "audio/mpeg";
       audioEl.appendChild(sourceEl);
 
+      // إنشاء واجهة المشغل المتطورة مع تأثيرات وتنظيم عصري
       let playerContainer = document.createElement('div');
       playerContainer.className = 'custom-audio-player';
       playerContainer.innerHTML = `
@@ -916,6 +896,7 @@
           <button class="seek-btn" onclick="seekBackward()"><i class="fas fa-backward"></i></button>
           <button class="play-pause-btn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
           <button class="seek-btn" onclick="seekForward()"><i class="fas fa-forward"></i></button>
+          <button class="download-btn" onclick="downloadAudio('${audioUrl}')"><i class="fas fa-download"></i></button>
         </div>
         <div class="progress-container">
           <span class="time-display" id="currentTime">00:00</span>
@@ -934,52 +915,45 @@
       document.getElementById('audioContent').appendChild(audioEl);
       document.getElementById('audioContent').appendChild(playerContainer);
 
-      const audio = document.getElementById('audioPlayer');
-      const playPauseBtn = document.querySelector('.play-pause-btn i');
-      const progressBar = document.getElementById('progressBar');
-      const progress = document.getElementById('progress');
-      const currentTimeEl = document.getElementById('currentTime');
-      const durationEl = document.getElementById('duration');
-      const volumeBar = document.getElementById('volumeBar');
-      const volumeLevel = document.getElementById('volumeLevel');
-      const volumeBtn = document.querySelector('.volume-btn i');
-
-      audio.addEventListener('timeupdate', () => {
-        const currentTime = audio.currentTime;
-        const duration = audio.duration;
+      // تحديث شريط التقدم والوقت
+      audioEl.addEventListener('timeupdate', () => {
+        const currentTime = audioEl.currentTime;
+        const duration = audioEl.duration;
         if (!isNaN(duration)) {
           const progressPercent = (currentTime / duration) * 100;
-          progress.style.width = `${progressPercent}%`;
+          document.getElementById('progress').style.width = `${progressPercent}%`;
         }
-        currentTimeEl.textContent = formatTime(currentTime);
-        durationEl.textContent = formatTime(duration);
+        document.getElementById('currentTime').textContent = formatTime(currentTime);
+        document.getElementById('duration').textContent = formatTime(duration);
       });
-      progressBar.addEventListener('click', (e) => {
-        const width = progressBar.clientWidth;
+      document.getElementById('progressBar').addEventListener('click', (e) => {
+        const width = document.getElementById('progressBar').clientWidth;
         const clickX = e.offsetX;
-        audio.currentTime = (clickX / width) * audio.duration;
+        audioEl.currentTime = (clickX / width) * audioEl.duration;
       });
-      volumeBar.addEventListener('click', (e) => {
-        const width = volumeBar.clientWidth;
+      document.getElementById('volumeBar').addEventListener('click', (e) => {
+        const width = document.getElementById('volumeBar').clientWidth;
         const clickX = e.offsetX;
         const volume = clickX / width;
-        audio.volume = volume;
-        volumeLevel.style.width = `${volume * 100}%`;
+        audioEl.volume = volume;
+        document.getElementById('volumeLevel').style.width = `${volume * 100}%`;
       });
-      audio.addEventListener('volumechange', () => {
-        volumeBtn.className = (audio.muted || audio.volume === 0)
+      audioEl.addEventListener('volumechange', () => {
+        const volumeBtn = document.querySelector('.volume-btn i');
+        volumeBtn.className = (audioEl.muted || audioEl.volume === 0)
           ? 'fas fa-volume-mute'
           : 'fas fa-volume-up';
       });
-      audio.addEventListener('loadedmetadata', () => {
-        if (!isNaN(audio.duration)) {
-          durationEl.textContent = formatTime(audio.duration);
+      audioEl.addEventListener('loadedmetadata', () => {
+        if (!isNaN(audioEl.duration)) {
+          document.getElementById('duration').textContent = formatTime(audioEl.duration);
         }
       });
-      audio.addEventListener('error', () => {
+      audioEl.addEventListener('error', () => {
         document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة سورة ${name}. الرجاء المحاولة لاحقاً.</p>`;
         console.error(`فشل تحميل التلاوة: ${audioUrl}`);
       });
+
       currentView = "audio";
       updateBackButton();
     }
@@ -1006,12 +980,9 @@
       const audio = document.getElementById('audioPlayer');
       audio.muted = !audio.muted;
     }
-    function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    function downloadAudio(url) {
+      window.open(url, '_blank');
     }
-
     function loadRecitersList() {
       const recitersArea = document.getElementById('recitersArea');
       recitersArea.innerHTML = '';
@@ -1039,14 +1010,12 @@
       currentView = "reciters";
       updateBackButton();
     }
-
     function convertTo12Hour(time) {
       let [hours, minutes] = time.split(':').map(Number);
       let period = hours >= 12 ? 'مساءً' : 'صباحًا';
       hours = hours % 12 || 12;
       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
-
     function loadPrayerTimes() {
       const prayerTimesContent = document.getElementById('prayerTimesContent');
       prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
@@ -1097,7 +1066,12 @@
       }
       prevScroll = currentScroll;
     });
-
+    window.addEventListener('keydown', function(e) {
+      if (e.key === " " && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        togglePlay();
+      }
+    });
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
