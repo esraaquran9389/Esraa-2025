@@ -651,6 +651,12 @@
       return num.toString().padStart(3, "0");
     }
 
+    // تعريف دالة لتحويل الأرقام الإنجليزية إلى أرقام عربية
+    function toArabicNumber(num) {
+      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+      return num.toString().split('').map(digit => arabicDigits[digit]).join('');
+    }
+
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
