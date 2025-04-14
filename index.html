@@ -94,7 +94,7 @@
       left: 0;
       width: 280px;
       height: 100%;
-      background: #f8f8f8; /* خلفية ثابتة */
+      background: #f8f8f8;
       box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
       z-index: 999;
       padding: 20px;
@@ -298,10 +298,11 @@
       margin-bottom: 20px;
       font-family: 'SurahFont', serif;
     }
-    /* القسم الذي يعرض "البسملة" أصبح الآن نص يظهر الرقم "654" */
+    /* عرض الرقم "654" بدل البسملة باستخدام الخط الجديد،
+       حجم الخط تم تخفيضه لجعله "عادي" */
     .bismillah-text {
       font-family: 'QCF_BSML', serif;
-      font-size: 96px; /* حجم خط كبير */
+      font-size: 36px;
       text-align: center;
       margin-bottom: 20px;
     }
@@ -588,7 +589,7 @@
   <!-- منطقة عرض الآيات -->
   <div id="ayahsArea" class="ayahs-container" style="display: none;">
     <div id="surahTitle" class="surah-title"></div>
-    <!-- هنا تم استبدال صورة البسملة بعرض الرقم "654" باستخدام الخط الجديد -->
+    <!-- عرض الرقم "654" بدل البسملة بخط QCF_BSML وبحجم طبيعي -->
     <div id="bismillahContainer"></div>
     <div id="ayahsContent"></div>
   </div>
@@ -818,7 +819,7 @@
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
 
-      // بدلاً من عرض صورة البسملة، يتم عرض الرقم "654" باستخدام الخط الجديد بحجم كبير.
+      // عرض الرقم "654" باستخدام الخط الجديد وبحجم أصغر (36px) بدل صورة البسملة
       let bismillahContainer = document.getElementById('bismillahContainer');
       bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
 
@@ -1081,14 +1082,17 @@
     }
 
     // -----------------------------------
-    // تغيير سلوك الشريط العلوي عند التمرير
+    // تغيير سلوك التوب بار (Top Player) عند التمرير:
+    // إخفاؤه عند التمرير للأسفل وظهوره عند التمرير للأعلى
     // -----------------------------------
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
-        document.getElementById('topBar').style.top = "0";
-      } else {
+        // عند التمرير للأسفل، إخفاء التوب بار
         document.getElementById('topBar').style.top = "-70px";
+      } else {
+        // عند التمرير للأعلى، إظهار التوب بار
+        document.getElementById('topBar').style.top = "0";
       }
       prevScroll = currentScroll;
     });
