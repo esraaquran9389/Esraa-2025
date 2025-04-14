@@ -40,7 +40,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
     /* ----------------------------------- */
-    /* الأنماط العامة للموقع - سيتم استخدام خط أميري هنا لكل النصوص بدون خط مخصص */
+    /* الأنماط العامة للموقع - يتم استخدام خط أميري هنا لكل النصوص بدون إعداد خط مخصص */
     /* ----------------------------------- */
     body {
       font-family: 'Amiri', serif;
@@ -75,7 +75,7 @@
       background-color: #14532d;
       color: #fff;
       border: none;
-      border-radius: 50px; /* شكل بيضاوي */
+      border-radius: 50px;
       padding: 6px 10px;
       transition: background 0.3s ease, transform 0.3s ease;
     }
@@ -104,7 +104,7 @@
     }
 
     /* ----------------------------------- */
-    /* الشريط الجانبي - تغيير الخط لعناصر الشريط لاستخدام أميري */
+    /* الشريط الجانبي - استخدام خط أميري لعناصره */
     /* ----------------------------------- */
     #sidebar {
       position: fixed;
@@ -182,11 +182,12 @@
       font-size: 48px;
       color: #2b2b2b;
       display: block;
-      margin-bottom: 5px; /* مسافة بسيطة بين الرقم وأيام الأسبوع */
+      margin-bottom: 5px;
     }
+    /* تعديل حجم التاريخ الهجري */
     .hijri-date {
       font-family: 'Amiri', serif;
-      font-size: 16px;
+      font-size: 14px;  /* تصغير حجم النص قليلاً */
       color: #14532d;
       margin-top: 0;
       display: inline-block;
@@ -200,7 +201,7 @@
     }
 
     /* ----------------------------------- */
-    /* الحاويات الرئيسية (تجعل شفافة تماماً) */
+    /* الحاويات الرئيسية (بدون خلفيات أو حدود) */
     /* ----------------------------------- */
     #suraList, #ayahsArea, #audioArea, #prayerTimesArea, #aboutSection, .reciters-list {
       background-color: transparent !important;
@@ -282,7 +283,7 @@
       border: none;
       box-shadow: none;
       font-size: 28px;
-      line-height: 1.8;
+      line-height: 1.4; /* تقليل المسافة العمودية بين الأسطر */
       max-width: 800px;
       overflow-y: auto;
       box-sizing: border-box;
@@ -300,21 +301,26 @@
     .ayah-text {
       font-family: 'AyatFont', serif;
       color: #333;
-      margin: 0 2px;
+      margin: 0;
+      padding: 0;
+      display: inline-block;
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
-      color: #4a6f28;
+      color: #f5f5dc; /* تغيير لون الرمز إلى بيج فاتح */
       font-weight: bold;
-      margin: 0 2px;
+      margin: 0;
+      padding: 0;
       position: relative;
+      display: inline-block;
     }
+    /* تعديل موقع رقم الآية: خفضنا قليلاً من 50% إلى 60% */
     .ayah-number {
       font-family: Arial, sans-serif;
       font-size: 12px;
       color: #2980b9;
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-weight: bold;
@@ -326,7 +332,6 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    /* رقم البسملة باستخدام الخط الجديد وحجمه 34px */
     .bismillah-text {
       font-family: 'QCF_BSML', serif;
       font-size: 34px;
@@ -450,9 +455,7 @@
       transition: width 0.3s ease;
     }
 
-    /* ----------------------------------- */
     /* منطقة مواقيت الصلاة */
-    /* ----------------------------------- */
     #prayerTimesArea {
       margin: 20px auto;
       padding: 20px;
@@ -514,9 +517,7 @@
       to { opacity: 1; transform: translateX(0); }
     }
 
-    /* ----------------------------------- */
-    /* قسم عن التطبيق - استخدام أميري لعنواينه النصية */
-    /* ----------------------------------- */
+    /* قسم عن التطبيق - استخدام أميري لعناوينه */
     #aboutSection {
       display: none;
       margin: 20px auto;
