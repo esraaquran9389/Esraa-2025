@@ -9,7 +9,6 @@
   <link rel="icon" type="image/jpeg" href="https://i.ibb.co/JWwKMn4X/In-Shot.jpg">
   <!-- تحميل مكتبة Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     /* ---------- الخطوط الخاصة ---------- */
     @font-face {
@@ -244,7 +243,6 @@
       background-color: #1a6b3e;
       transform: scale(1.02);
     }
-
     /* قائمة الشيوخ */
     .reciters-list {
       display: flex;
@@ -286,50 +284,42 @@
     /* ---------- منطقة عرض الآيات ---------- */
     #ayahsArea {
       margin: 20px auto;
-      padding: 15px 15px;
-      font-size: 24px;     /* حجم النص */
-      line-height: 2.2;    /* تباعد الأسطر */
-      width: 95%;          /* يستغل عرض الشاشة */
+      padding: 30px;
+      font-size: 28px;
+      line-height: 1.8;
+      width: 95%;
       max-width: 100%;
       overflow-y: auto;
       box-sizing: border-box;
       direction: rtl;
+      text-align: justify;
       position: relative;
       display: none;
       opacity: 0;
       animation: fadeIn 1s ease forwards;
-      text-align: justify;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    /* جعل كل آية في سطر مستقل تقريبًا */
-    .ayah-container {
-      display: block;
-      margin-bottom: 1.5rem;
-      text-align: justify;
-      word-spacing: 4px; /* زيادة طفيفة في المسافة بين الكلمات */
-    }
-
     .ayah-text {
       font-family: 'AyatFont', serif;
       color: #333;
+      margin: 0 2px;
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
       color: #4a6f28;
       font-weight: bold;
+      margin: 0 2px;
       position: relative;
-      margin: 0 3px;
     }
     .ayah-number {
       font-family: Arial, sans-serif;
       font-size: 12px;
       color: #2980b9;
       position: absolute;
-      top: 48%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-weight: bold;
@@ -586,10 +576,6 @@
       .ayah-text,
       .ayah-symbol {
         margin: 0 !important;
-      }
-      #ayahsArea {
-        font-size: 22px;   /* حجم أصغر قليلاً في الهاتف */
-        line-height: 2.4;  /* تباعد أكبر قليلاً في الهاتف */
       }
     }
   </style>
@@ -886,26 +872,18 @@
         .then(data => {
           let container = document.getElementById('ayahsContent');
           data.data.ayahs.forEach((ayah) => {
-            // بدلاً من إضافة الآية في سطر واحد، نجمعها في div مستقل
-            let ayahDiv = document.createElement('div');
-            ayahDiv.className = 'ayah-container';
-
-            let textSpan = document.createElement('span');
-            textSpan.className = 'ayah-text';
-            textSpan.textContent = ayah.text;
-
-            let symbolSpan = document.createElement('span');
-            symbolSpan.className = 'ayah-symbol';
-            symbolSpan.innerHTML = '۝';
-
-            let numSpan = document.createElement('span');
-            numSpan.className = 'ayah-number';
-            numSpan.textContent = toArabicNumber(ayah.numberInSurah);
-
-            symbolSpan.appendChild(numSpan);
-            ayahDiv.appendChild(textSpan);
-            ayahDiv.appendChild(symbolSpan);
-            container.appendChild(ayahDiv);
+            let text = document.createElement('span');
+            text.className = 'ayah-text';
+            text.textContent = ayah.text;
+            let symbol = document.createElement('span');
+            symbol.className = 'ayah-symbol';
+            symbol.innerHTML = '۝';
+            let num = document.createElement('span');
+            num.className = 'ayah-number';
+            num.textContent = toArabicNumber(ayah.numberInSurah);
+            symbol.appendChild(num);
+            container.appendChild(text);
+            container.appendChild(symbol);
           });
         });
       currentView = "ayahs";
