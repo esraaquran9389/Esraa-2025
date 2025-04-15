@@ -56,6 +56,15 @@
     body.dark * {
       color: #f5deb3 !important;
     }
+    /* تخصيص رقم الآية والرمز في الوضع الداكن */
+    body.dark .ayah-number {
+      color: #000 !important;
+      transform: translateY(3px); /* تعديل بسيط لإسقاط الرقم */
+    }
+    body.dark .ayah-symbol {
+      color: #fff !important;
+    }
+    
     .tabs { display: none; }
 
     /* ---------- التوب بلاير ---------- */
@@ -278,7 +287,8 @@
       padding: 30px;
       font-size: 28px;
       line-height: 1.8;
-      max-width: 800px;
+      width: 95%;
+      max-width: 100%;
       overflow-y: auto;
       box-sizing: border-box;
       direction: rtl;
@@ -321,6 +331,7 @@
       text-align: center;
       margin-bottom: 20px;
     }
+    /* نص رقم البسملة مع الخط المخصص */
     .bismillah-text {
       font-family: 'QCF_BSML', serif;
       font-size: 34px;
@@ -561,7 +572,7 @@
       .volume-bar {
         width: 100%;
       }
-      /* إزالة الهوامش بين الآيات في عرض الهاتف */
+      /* إزالة الهوامش بين عناصر الآيات في عرض الهاتف */
       .ayah-text,
       .ayah-symbol {
         margin: 0 !important;
@@ -609,7 +620,8 @@
   <section id="ayahsArea" aria-label="آيات السورة">
     <div id="surahTitle" class="surah-title"></div>
     <div id="bismillahContainer">
-      <div class="bismillah-text">بسم الله الرحمن الرحيم</div>
+      <!-- عرض رقم البسملة باستخدام الخط المخصص -->
+      <div class="bismillah-text">654</div>
     </div>
     <div id="ayahsContent"></div>
   </section>
@@ -850,8 +862,9 @@
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
 
+      // تعديل عرض رقم البسملة ليظهر "654" مع الخط المخصص
       let bismillahContainer = document.getElementById('bismillahContainer');
-      bismillahContainer.innerHTML = `<div class="bismillah-text">بسم الله الرحمن الرحيم</div>`;
+      bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
 
       document.getElementById('ayahsContent').innerHTML = '';
       fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
