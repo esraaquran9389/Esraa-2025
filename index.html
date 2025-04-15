@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="القرآن الكريم - إهداء إلى روح فقيده الشباب إسراء السيد السعيد">
+  <meta name="theme-color" content="#14532d">
   <title>القرآن الكريم</title>
   <link rel="icon" type="image/jpeg" href="https://i.ibb.co/JWwKMn4X/In-Shot.jpg">
   <!-- تحميل مكتبة Font Awesome -->
@@ -44,6 +45,12 @@
       padding-top: 50px;
       text-align: right;
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    /* الوضع الداكن: خلفية سوداء ونصوص بيج فاتح */
+    body.dark {
+      background: #000;
+      color: #f5deb3;
     }
     .tabs { display: none; }
 
@@ -59,11 +66,16 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 0 15px;
       z-index: 1100;
-      transition: top 0.3s;
+      transition: top 0.3s, background 0.3s;
     }
-    #sidebarToggle {
+    /* تعديل الـ TopBar في الوضع الداكن */
+    #topBar.dark {
+      background: rgba(0, 0, 0, 0.9);
+    }
+    #sidebarToggle, #darkModeToggle {
       font-size: 20px;
       cursor: pointer;
       background-color: #14532d;
@@ -73,7 +85,7 @@
       padding: 6px 10px;
       transition: background 0.3s ease, transform 0.3s ease;
     }
-    #sidebarToggle:hover {
+    #sidebarToggle:hover, #darkModeToggle:hover {
       background-color: #1a6b3e;
       transform: scale(1.05);
     }
@@ -313,7 +325,7 @@
       color: #14532d;
     }
 
-    /* ---------- منطقة التلاوة الصوتية المتقدمة ---------- */
+    /* ---------- منطقة التلاوة الصوتية المتطورة ---------- */
     #audioArea {
       margin: 20px auto;
       padding: 15px;
@@ -509,6 +521,7 @@
       margin: 5px 0;
     }
 
+    /* ---------- استعلامات الاستجابة ---------- */
     @media (max-width: 600px) {
       .sura-button {
         font-size: 20px;
@@ -548,80 +561,84 @@
   </style>
 </head>
 <body>
-  <!-- التوب بلاير -->
-  <div id="topBar">
-    <button id="sidebarToggle" onclick="toggleSidebar()">
+  <!-- التوب بلاير مع زر تبديل الوضع الليلي -->
+  <div id="topBar" role="banner">
+    <button id="sidebarToggle" aria-label="فتح القائمة" onclick="toggleSidebar()">
       <i class="fa-solid fa-bars"></i>
+    </button>
+    <button id="darkModeToggle" aria-label="تبديل الوضع الليلي" onclick="toggleDarkMode()">
+      <i class="fa-solid fa-moon"></i>
     </button>
   </div>
 
   <!-- الشريط الجانبي -->
-  <div id="sidebar">
+  <nav id="sidebar" aria-label="القائمة">
     <h2>القائمة</h2>
-    <button class="tab-btn" onclick="openSection('text')">
+    <button class="tab-btn" onclick="openSection('text')" aria-label="القرآن الكريم">
       <i class="fas fa-book"></i> القرآن الكريم
     </button>
-    <button class="tab-btn" onclick="openSection('audio')">
+    <button class="tab-btn" onclick="openSection('audio')" aria-label="القرآن الكريم MP3">
       <i class="fas fa-headphones"></i> القرآن الكريم MP3
     </button>
-    <button class="tab-btn" onclick="openSection('prayer')">
+    <button class="tab-btn" onclick="openSection('prayer')" aria-label="مواقيت الصلاة">
       <i class="fas fa-pray"></i> مواقيت الصلاة
     </button>
-    <button class="tab-btn" onclick="openSection('about')">
+    <button class="tab-btn" onclick="openSection('about')" aria-label="عن التطبيق">
       <i class="fas fa-info-circle"></i> عن التطبيق
     </button>
-  </div>
+  </nav>
 
   <!-- عرض اليوم الحالي -->
   <div id="weekDays" class="weekdays"></div>
 
   <!-- قائمة السور -->
-  <div id="suraList" class="sura-list" style="display: none;">
+  <section id="suraList" class="sura-list" style="display: none;" aria-label="سور القرآن">
     جاري تحميل السور...
-  </div>
+  </section>
 
   <!-- منطقة عرض الآيات -->
-  <div id="ayahsArea">
+  <section id="ayahsArea" aria-label="آيات السورة">
     <div id="surahTitle" class="surah-title"></div>
     <div id="bismillahContainer">
-      <div class="bismillah-text">654</div>
+      <div class="bismillah-text">بسم الله الرحمن الرحيم</div>
     </div>
     <div id="ayahsContent"></div>
-  </div>
+  </section>
 
   <!-- منطقة التلاوة الصوتية المتطورة -->
-  <div id="audioArea">
+  <section id="audioArea" aria-label="تلاوة السورة الصوتية">
     <div id="surahTitleAudio" class="surah-title"></div>
     <div id="audioContent"></div>
-  </div>
+  </section>
 
   <!-- منطقة مواقيت الصلاة -->
-  <div id="prayerTimesArea">
+  <section id="prayerTimesArea" aria-label="مواقيت الصلاة">
     <div class="prayer-times-title">مواقيت الصلاة</div>
     <div id="prayerTimesContent" class="prayer-times-list">
       جاري تحميل مواقيت الصلاة...
     </div>
-  </div>
-  
+  </section>
+
   <!-- قسم عن التطبيق -->
-  <div id="aboutSection">
+  <section id="aboutSection" aria-label="عن التطبيق">
     <h2>عن التطبيق</h2>
     <p>القرآن الكريم</p>
     <p>إهداء إلى روح فقيده الشباب إسراء السيد السعيد</p>
-  </div>
+  </section>
 
   <!-- زر العودة -->
-  <button id="backButton" onclick="goBack()">
+  <button id="backButton" onclick="goBack()" aria-label="عودة">
     <i class="fa-solid fa-arrow-right"></i> عودة
   </button>
 
   <!-- قائمة الشيوخ -->
-  <div id="recitersArea" class="reciters-list" style="display: none;">
+  <section id="recitersArea" class="reciters-list" style="display: none;" aria-label="الشيوخ">
     جاري تحميل الشيوخ...
-  </div>
+  </section>
 
+  <!-- جافاسكريبت: دوال التحكم الرئيسية -->
   <script>
-    // دوال مساعدة
+    /* دوال المساعدة */
     function formatNumber(num) {
       return num.toString().padStart(3, "0");
     }
@@ -640,6 +657,7 @@
     let currentView = "";
     let prevScroll = window.pageYOffset || document.documentElement.scrollTop;
 
+    // أسماء السور
     const surahNames = [
       "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
       "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
@@ -655,6 +673,7 @@
       "المسد", "الإخلاص", "الفلق", "الناس"
     ];
 
+    // بيانات الشيوخ
     const reciters = [
       { number: "1", id: "minsh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
       { number: "9", id: "basit", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
@@ -823,7 +842,7 @@
       document.getElementById('weekDays').style.display = 'none';
 
       let bismillahContainer = document.getElementById('bismillahContainer');
-      bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
+      bismillahContainer.innerHTML = `<div class="bismillah-text">بسم الله الرحمن الرحيم</div>`;
 
       document.getElementById('ayahsContent').innerHTML = '';
       fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
@@ -848,7 +867,6 @@
       currentView = "ayahs";
       updateBackButton();
     }
-    // مشغل التلاوة بتصميم متقدّم
     function loadSurahAudio(number, name) {
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
@@ -888,15 +906,15 @@
       sourceEl.type = "audio/mpeg";
       audioEl.appendChild(sourceEl);
 
-      // إنشاء واجهة المشغل المتطورة مع تأثيرات وتنظيم عصري
+      // إنشاء واجهة المشغل المتطورة
       let playerContainer = document.createElement('div');
       playerContainer.className = 'custom-audio-player';
       playerContainer.innerHTML = `
         <div class="player-controls">
-          <button class="seek-btn" onclick="seekBackward()"><i class="fas fa-backward"></i></button>
-          <button class="play-pause-btn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
-          <button class="seek-btn" onclick="seekForward()"><i class="fas fa-forward"></i></button>
-          <button class="download-btn" onclick="downloadAudio('${audioUrl}')"><i class="fas fa-download"></i></button>
+          <button class="seek-btn" onclick="seekBackward()" aria-label="رجوع 10 ثواني"><i class="fas fa-backward"></i></button>
+          <button class="play-pause-btn" onclick="togglePlay()" aria-label="تشغيل / إيقاف"><i class="fas fa-play"></i></button>
+          <button class="seek-btn" onclick="seekForward()" aria-label="تقديم 10 ثواني"><i class="fas fa-forward"></i></button>
+          <button class="download-btn" onclick="downloadAudio('${audioUrl}')" aria-label="تحميل التلاوة"><i class="fas fa-download"></i></button>
         </div>
         <div class="progress-container">
           <span class="time-display" id="currentTime">00:00</span>
@@ -906,7 +924,7 @@
           <span class="time-display" id="duration">00:00</span>
         </div>
         <div class="volume-container">
-          <button class="volume-btn" onclick="toggleMute()"><i class="fas fa-volume-up"></i></button>
+          <button class="volume-btn" onclick="toggleMute()" aria-label="كتم الصوت/إلغاء الكتم"><i class="fas fa-volume-up"></i></button>
           <div class="volume-bar" id="volumeBar">
             <div class="volume-level" id="volumeLevel"></div>
           </div>
@@ -915,7 +933,6 @@
       document.getElementById('audioContent').appendChild(audioEl);
       document.getElementById('audioContent').appendChild(playerContainer);
 
-      // تحديث شريط التقدم والوقت
       audioEl.addEventListener('timeupdate', () => {
         const currentTime = audioEl.currentTime;
         const duration = audioEl.duration;
@@ -1029,11 +1046,11 @@
           if (data.code === 200) {
             const timings = data.data.timings;
             const prayers = [
-              { name: '3', time: convertTo12Hour(timings.Fajr), icon: 'fas fa-sun' },
-              { name: '4', time: convertTo12Hour(timings.Dhuhr), icon: 'fas fa-cloud-sun' },
-              { name: '5', time: convertTo12Hour(timings.Asr), icon: 'fas fa-cloud' },
-              { name: '6', time: convertTo12Hour(timings.Maghrib), icon: 'fas fa-cloud-sun-rain' },
-              { name: '7', time: convertTo12Hour(timings.Isha), icon: 'fas fa-moon' }
+              { name: 'الفجر', time: convertTo12Hour(timings.Fajr), icon: 'fas fa-sun' },
+              { name: 'الظهر', time: convertTo12Hour(timings.Dhuhr), icon: 'fas fa-cloud-sun' },
+              { name: 'العصر', time: convertTo12Hour(timings.Asr), icon: 'fas fa-cloud' },
+              { name: 'المغرب', time: convertTo12Hour(timings.Maghrib), icon: 'fas fa-cloud-sun-rain' },
+              { name: 'العشاء', time: convertTo12Hour(timings.Isha), icon: 'fas fa-moon' }
             ];
             prayerTimesContent.innerHTML = '';
             prayers.forEach((prayer, index) => {
@@ -1057,6 +1074,19 @@
         });
     }
 
+    /* التبديل بين الوضعين الطبيعي والليلي */
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      document.getElementById('topBar').classList.toggle('dark');
+      let icon = document.querySelector('#darkModeToggle i');
+      if (document.body.classList.contains('dark')) {
+        icon.className = 'fa-solid fa-sun';
+      } else {
+        icon.className = 'fa-solid fa-moon';
+      }
+    }
+
+    // التحكم بالـ TopBar أثناء التمرير
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
@@ -1066,12 +1096,16 @@
       }
       prevScroll = currentScroll;
     });
+    
+    // تشغيل/إيقاف التلاوة باستخدام مفتاح الفراغ
     window.addEventListener('keydown', function(e) {
       if (e.key === " " && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
         e.preventDefault();
         togglePlay();
       }
     });
+    
+    // تهيئة الصفحة بعد تحميل المحتوى
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
