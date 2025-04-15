@@ -283,12 +283,12 @@
 
     /* ---------- منطقة عرض الآيات ---------- */
     #ayahsArea {
-      margin: 20px auto;
+      margin: 20px 0; /* إزالة الهوامش الجانبية حتى يتم شغل العرض بالكامل */
       padding: 30px;
-      /* زيادة حجم الخط لخط الآيات */
-      font-size: 32px;
+      /* تقليل حجم الخط إلى 28px */
+      font-size: 28px;
       line-height: 1.8;
-      width: 100%;  /* تغيير العرض إلى 100% */
+      width: 100%;  /* عرض المنطقة يتناسب مع الشاشة بالكامل */
       max-width: 100%;
       overflow-y: auto;
       box-sizing: border-box;
@@ -303,16 +303,17 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    /* تقليل الهوامش بين النصوص لتقليل المسافات الزائدة */
     .ayah-text {
       font-family: 'AyatFont', serif;
       color: #333;
-      margin: 0 2px;
+      margin: 0;
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
       color: #4a6f28;
       font-weight: bold;
-      margin: 0 2px;
+      margin: 0;
       position: relative;
     }
     .ayah-number {
