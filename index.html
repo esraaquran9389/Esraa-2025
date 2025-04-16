@@ -13,11 +13,11 @@
     /* ---------- الخطوط الخاصة ---------- */
     @font-face {
       font-family: 'AyatFont';
-      src: url('Digital Khatt Madina @Am9li9.otf.ttf') format('opentype');
+      src: url('KFGQPC-HAFS Uthmanic-V22.ttf') format('truetype');
     }
     @font-face {
       font-family: 'SurahFont';
-      src: url('Surah Name Written @Am9li9 (1).ttf') format('truetype');
+      src: url('Elgharib Surah Name Madina.ttf') format('truetype');
     }
     @font-face {
       font-family: 'RecitersFont';
@@ -59,10 +59,10 @@
     /* تخصيص رقم الآية والرمز في الوضع الداكن */
     body.dark .ayah-number {
       color: #000 !important;
-      transform: translateY(3px); /* تعديل بسيط لإسقاط الرقم */
+      transform: translateY(3px);
     }
     body.dark .ayah-symbol {
-      color: #fff !important;
+      color: #000 !important;
     }
     
     .tabs { display: none; }
@@ -84,7 +84,6 @@
       z-index: 1100;
       transition: top 0.3s, background 0.3s;
     }
-    /* تعديل الـ TopBar في الوضع الداكن */
     #topBar.dark {
       background: rgba(0, 0, 0, 0.9);
     }
@@ -282,48 +281,53 @@
     }
 
     /* ---------- منطقة عرض الآيات ---------- */
-    
-#ayahsArea {
-  padding: 30px 10px;
-  font-size: 28px;
-  line-height: 1.8;
-  width: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
-  direction: rtl;
-  text-align: justify;
-  position: relative;
-  display: none;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-}
-
+    /* تم تعديل خصائص الآيات بحيث تُعرض بدون هوامش إضافية */
+    #ayahsArea {
+      padding: 30px 10px;
+      font-size: 28px;
+      line-height: 1.8;
+      width: 100%;
+      overflow-y: auto;
+      box-sizing: border-box;
+      direction: rtl;
+      text-align: justify;
+      position: relative;
+      display: none;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* تقليل الهوامش بين النصوص لتقليل المسافات الزائدة */
+    /* إزالة الهوامش وفصل الأسطر بين الآيات */
     .ayah-text {
+      display: inline;
       font-family: 'AyatFont', serif;
       color: #333;
       margin: 0;
+      padding: 0;
     }
     .ayah-symbol {
+      display: inline;
       font-family: 'AyatFont', serif;
-      color: #4a6f28;
+      color: #000;
       font-weight: bold;
       margin: 0;
+      padding: 0;
       position: relative;
     }
     .ayah-number {
       font-family: Arial, sans-serif;
       font-size: 12px;
-      color: #2980b9;
+      color: #000;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-weight: bold;
+      margin: 0;
+      padding: 0;
     }
     .surah-title {
       font-family: 'SurahFont', serif;
@@ -332,7 +336,6 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    /* نص رقم البسملة مع الخط المخصص */
     .bismillah-text {
       font-family: 'QCF_BSML', serif;
       font-size: 34px;
@@ -573,10 +576,10 @@
       .volume-bar {
         width: 100%;
       }
-      /* إزالة الهوامش بين عناصر الآيات في عرض الهاتف */
       .ayah-text,
       .ayah-symbol {
         margin: 0 !important;
+        padding: 0 !important;
       }
     }
   </style>
@@ -617,11 +620,10 @@
     جاري تحميل السور...
   </section>
 
-  <!-- منطقة عرض الآيات -->
+  <!-- منطقة عرض الآيات (تمتد بكامل العرض بدون حاوية محددة) -->
   <section id="ayahsArea" aria-label="آيات السورة">
     <div id="surahTitle" class="surah-title"></div>
     <div id="bismillahContainer">
-      <!-- عرض رقم البسملة باستخدام الخط المخصص -->
       <div class="bismillah-text">654</div>
     </div>
     <div id="ayahsContent"></div>
@@ -660,7 +662,6 @@
 
   <!-- جافاسكريبت: دوال التحكم الرئيسية -->
   <script>
-    /* دوال المساعدة */
     function formatNumber(num) {
       return num.toString().padStart(3, "0");
     }
@@ -673,13 +674,10 @@
       const secs = Math.floor(seconds % 60);
       return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
     let prevScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    // أسماء السور
     const surahNames = [
       "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
       "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
@@ -694,8 +692,6 @@
       "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
       "المسد", "الإخلاص", "الفلق", "الناس"
     ];
-
-    // بيانات الشيوخ
     const reciters = [
       { number: "1", id: "minsh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
       { number: "9", id: "basit", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
@@ -708,8 +704,6 @@
       { number: "109", id: "yasser", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
       { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
     ];
-
-    // تحويل التاريخ الميلادي إلى هجري
     function gregorianToHijri(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -756,7 +750,6 @@
       dayDiv.appendChild(hijriDiv);
       container.appendChild(dayDiv);
     }
-
     function toggleSidebar() {
       let sidebar = document.getElementById('sidebar');
       sidebar.style.transform = (sidebar.style.transform === 'translateX(0%)')
@@ -776,7 +769,6 @@
       document.getElementById('prayerTimesArea').style.display = 'none';
       document.getElementById('aboutSection').style.display = 'none';
       document.getElementById('weekDays').style.display = 'block';
-
       if (tab === 'text') {
         loadSuraList();
         document.getElementById('suraList').style.display = 'flex';
@@ -835,14 +827,13 @@
         btn.style.display = "none";
       }
     }
-
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
       surahNames.forEach((name, i) => {
         let btn = document.createElement('button');
         btn.className = 'sura-button';
-        btn.textContent = `سورة ${name}`;
+        btn.textContent = name;
         btn.onclick = () => {
           if (currentTab === 'text') {
             loadSurahText(i + 1, name);
@@ -859,14 +850,11 @@
       document.getElementById('suraList').style.display = 'none';
       let ayahsArea = document.getElementById('ayahsArea');
       ayahsArea.style.display = 'block';
-      document.getElementById('surahTitle').textContent = `سورة ${name}`;
+      document.getElementById('surahTitle').textContent = name;
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
-
-      // تعديل عرض رقم البسملة ليظهر "654" مع الخط المخصص
       let bismillahContainer = document.getElementById('bismillahContainer');
       bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
-
       document.getElementById('ayahsContent').innerHTML = '';
       fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
         .then(res => res.json())
@@ -894,9 +882,8 @@
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
       audioArea.style.display = 'block';
-      document.getElementById('surahTitleAudio').textContent = `سورة ${name}`;
+      document.getElementById('surahTitleAudio').textContent = name;
       document.getElementById('audioContent').innerHTML = '';
-
       let formatted = formatNumber(number);
       let audioUrl = "";
       if (currentReciter === "minsh") {
@@ -920,16 +907,12 @@
       } else if (currentReciter === "tblawi") {
         audioUrl = `https://server12.mp3quran.net/tblawi/${formatted}.mp3`;
       }
-
-      // إنشاء عنصر الصوت
       let audioEl = document.createElement('audio');
       audioEl.id = 'audioPlayer';
       let sourceEl = document.createElement('source');
       sourceEl.src = audioUrl;
       sourceEl.type = "audio/mpeg";
       audioEl.appendChild(sourceEl);
-
-      // إنشاء واجهة المشغل المتطورة
       let playerContainer = document.createElement('div');
       playerContainer.className = 'custom-audio-player';
       playerContainer.innerHTML = `
@@ -955,7 +938,6 @@
       `;
       document.getElementById('audioContent').appendChild(audioEl);
       document.getElementById('audioContent').appendChild(playerContainer);
-
       audioEl.addEventListener('timeupdate', () => {
         const currentTime = audioEl.currentTime;
         const duration = audioEl.duration;
@@ -990,10 +972,9 @@
         }
       });
       audioEl.addEventListener('error', () => {
-        document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة سورة ${name}. الرجاء المحاولة لاحقاً.</p>`;
+        document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة ${name}. الرجاء المحاولة لاحقاً.</p>`;
         console.error(`فشل تحميل التلاوة: ${audioUrl}`);
       });
-
       currentView = "audio";
       updateBackButton();
     }
@@ -1096,8 +1077,6 @@
           console.error('خطأ في جلب مواقيت الصلاة:', error);
         });
     }
-
-    /* التبديل بين الوضعين الطبيعي والليلي */
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
       document.getElementById('topBar').classList.toggle('dark');
@@ -1108,8 +1087,6 @@
         icon.className = 'fa-solid fa-moon';
       }
     }
-
-    // التحكم بالـ TopBar أثناء التمرير
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
@@ -1119,16 +1096,12 @@
       }
       prevScroll = currentScroll;
     });
-    
-    // تشغيل/إيقاف التلاوة باستخدام مفتاح الفراغ
     window.addEventListener('keydown', function(e) {
       if (e.key === " " && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
         e.preventDefault();
         togglePlay();
       }
     });
-    
-    // تهيئة الصفحة بعد تحميل المحتوى
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
