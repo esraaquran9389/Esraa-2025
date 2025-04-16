@@ -9,6 +9,7 @@
   <link rel="icon" type="image/jpeg" href="https://i.ibb.co/JWwKMn4X/In-Shot.jpg">
   <!-- تحميل مكتبة Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     /* ---------- الخطوط الخاصة ---------- */
     @font-face {
@@ -34,6 +35,11 @@
     @font-face {
       font-family: 'QCF_BSML';
       src: url('QCF_BSML.ttf') format('truetype');
+    }
+    /* الخط الخاص بالأشهر الهجرية */
+    @font-face {
+      font-family: 'HijriMonths';
+      src: url('Elgharib-Hijri Months.ttf') format('truetype');
     }
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
@@ -205,8 +211,9 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: inline-block;
     }
+    /* تغيير الخط الخاص بالأشهر الهجرية */
     .month-name {
-      font-family: 'Amiri', serif;
+      font-family: 'HijriMonths', serif;
     }
 
     /* ---------- الحاويات الرئيسية ---------- */
@@ -281,7 +288,6 @@
     }
 
     /* ---------- منطقة عرض الآيات ---------- */
-    /* تم تعديل خصائص الآيات بحيث تُعرض بدون هوامش إضافية */
     #ayahsArea {
       padding: 30px 10px;
       font-size: 28px;
