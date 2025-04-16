@@ -13,11 +13,11 @@
     /* ---------- الخطوط الخاصة ---------- */
     @font-face {
       font-family: 'AyatFont';
-      src: url('Digital Khatt Madina @Am9li9.otf.ttf') format('opentype');
+      src: url('KFGQPC-HAFS Uthmanic-V22.ttf') format('truetype');
     }
     @font-face {
       font-family: 'SurahFont';
-      src: url('Surah Name Written @Am9li9 (1).ttf') format('truetype');
+      src: url('Elgharib Surah Name Madina.ttf') format('truetype');
     }
     @font-face {
       font-family: 'RecitersFont';
@@ -843,7 +843,8 @@
       surahNames.forEach((name, i) => {
         let btn = document.createElement('button');
         btn.className = 'sura-button';
-        btn.textContent = `سورة ${name}`;
+        // حذف كلمة "سورة" من بداية الاسم
+        btn.textContent = name;
         btn.onclick = () => {
           if (currentTab === 'text') {
             loadSurahText(i + 1, name);
@@ -860,7 +861,8 @@
       document.getElementById('suraList').style.display = 'none';
       let ayahsArea = document.getElementById('ayahsArea');
       ayahsArea.style.display = 'block';
-      document.getElementById('surahTitle').textContent = `سورة ${name}`;
+      // عرض اسم السورة بدون كلمة "سورة"
+      document.getElementById('surahTitle').textContent = name;
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
 
@@ -895,7 +897,7 @@
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
       audioArea.style.display = 'block';
-      document.getElementById('surahTitleAudio').textContent = `سورة ${name}`;
+      document.getElementById('surahTitleAudio').textContent = name;
       document.getElementById('audioContent').innerHTML = '';
 
       let formatted = formatNumber(number);
@@ -991,7 +993,7 @@
         }
       });
       audioEl.addEventListener('error', () => {
-        document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة سورة ${name}. الرجاء المحاولة لاحقاً.</p>`;
+        document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة ${name}. الرجاء المحاولة لاحقاً.</p>`;
         console.error(`فشل تحميل التلاوة: ${audioUrl}`);
       });
 
