@@ -724,20 +724,18 @@
       return { day: hijriDay, month: hijriMonth, year: hijriYear };
     }
     
-    // تعديل دالة updateCurrentDay بحيث تعرض التاريخ كـ [اليوم] / [رقم الشهر] فقط
+    // تعديل دالة updateCurrentDay بحيث تعرض التاريخ كـ [اليوم] [رقم الشهر] فقط دون الشرطة
     function updateCurrentDay() {
       let today = new Date();
-      // يمكن تعديل الرقم المعروض لليوم بناءً على متطلبك (هنا يعرض قيمة اليوم من التقويم الهجري)
       let hijri = gregorianToHijri(today);
-      // عرض التاريخ بالشكل: [اليوم] / [رقم الشهر]
-      let hijriStr = `${hijri.day} / ${hijri.month}`;
+      // عرض التاريخ بالشكل: [اليوم] [رقم الشهر] بدون فاصلة أو شرطة
+      let hijriStr = `${hijri.day} ${hijri.month}`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
       dayDiv.className = "day";
       let spanNum = document.createElement('span');
       spanNum.className = "day-num";
-      // يمكن استخدام رقم اليوم من التقويم الميلادي أو تغييره حسب الحاجة
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
       spanNum.textContent = displayNum;
