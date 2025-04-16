@@ -62,7 +62,7 @@
       transform: translateY(3px); /* تعديل بسيط لإسقاط الرقم */
     }
     body.dark .ayah-symbol {
-      color: #fff !important;
+      color: #000 !important;
     }
     
     .tabs { display: none; }
@@ -283,13 +283,13 @@
 
     /* ---------- منطقة عرض الآيات ---------- */
     #ayahsArea {
-      margin: 20px 0; /* إزالة الهوامش الجانبية حتى يتم شغل العرض بالكامل */
+      margin: 20px auto; /* تغيير الهوامش لتوسيط الحاوية */
       padding: 30px;
       /* تقليل حجم الخط إلى 28px */
       font-size: 28px;
       line-height: 1.8;
-      width: 100%;  /* عرض المنطقة يتناسب مع الشاشة بالكامل */
-      max-width: 100%;
+      width: 100%;
+      max-width: 1200px; /* توسيع عرض الحاوية */
       overflow-y: auto;
       box-sizing: border-box;
       direction: rtl;
@@ -311,7 +311,7 @@
     }
     .ayah-symbol {
       font-family: 'AyatFont', serif;
-      color: #4a6f28;
+      color: #000; /* تغيير لون الرمز إلى الأسود */
       font-weight: bold;
       margin: 0;
       position: relative;
@@ -319,7 +319,7 @@
     .ayah-number {
       font-family: Arial, sans-serif;
       font-size: 12px;
-      color: #2980b9;
+      color: #000; /* تغيير لون الرقم إلى الأسود */
       position: absolute;
       top: 50%;
       left: 50%;
