@@ -9,6 +9,7 @@
   <link rel="icon" type="image/jpeg" href="https://i.ibb.co/JWwKMn4X/In-Shot.jpg">
   <!-- تحميل مكتبة Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     /* ---------- الخطوط الخاصة ---------- */
     @font-face {
@@ -35,7 +36,7 @@
       font-family: 'QCF_BSML';
       src: url('QCF_BSML.ttf') format('truetype');
     }
-    /* تحميل الخط الخاص بالأشهر الهجرية */
+    /* الخط الخاص بالأشهر الهجرية */
     @font-face {
       font-family: 'HijriMonths';
       src: url('Elgharib-Hijri Months.ttf') format('truetype');
@@ -625,7 +626,7 @@
     جاري تحميل السور...
   </section>
 
-  <!-- منطقة عرض الآيات -->
+  <!-- منطقة عرض الآيات (تمتد بكامل العرض بدون حاوية محددة) -->
   <section id="ayahsArea" aria-label="آيات السورة">
     <div id="surahTitle" class="surah-title"></div>
     <div id="bismillahContainer">
@@ -683,7 +684,6 @@
     let currentReciter = null;
     let currentView = "";
     let prevScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
     const surahNames = [
       "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
       "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
@@ -698,8 +698,18 @@
       "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
       "المسد", "الإخلاص", "الفلق", "الناس"
     ];
-    
-    // دالة تحويل التاريخ الميلادي إلى هجري
+    const reciters = [
+      { number: "1", id: "minsh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
+      { number: "9", id: "basit", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
+      { number: "7", id: "husr", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
+      { number: "108", id: "ayyub", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg" },
+      { number: "107", id: "a_jbr", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg" },
+      { number: "12", id: "lhdan", image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg" },
+      { number: "48", id: "mustafa", image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg" },
+      { number: "6", id: "bna", image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg" },
+      { number: "109", id: "yasser", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
+      { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
+    ];
     function gregorianToHijri(date) {
       let day = date.getDate();
       let month = date.getMonth() + 1;
@@ -723,21 +733,21 @@
       let hijriYear = 30 * n + j - 30;
       return { day: hijriDay, month: hijriMonth, year: hijriYear };
     }
-    
-    // تعديل دالة updateCurrentDay بحيث تعرض التاريخ كـ [اليوم] [رقم الشهر] فقط دون الشرطة
     function updateCurrentDay() {
       let today = new Date();
+      let jsDay = today.getDay();
+      let displayNum = (jsDay + 1) % 7;
       let hijri = gregorianToHijri(today);
-      // عرض التاريخ بالشكل: [اليوم] [رقم الشهر] بدون فاصلة أو شرطة
-      let hijriStr = `${hijri.day} ${hijri.month}`;
+      let monthHTML = (hijri.month === 10)
+        ? `<span class="month-name">شوال</span>`
+        : `<span class="month-name">${hijri.month}</span>`;
+      let hijriStr = hijri.day + " / " + monthHTML + " / " + hijri.year;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
       dayDiv.className = "day";
       let spanNum = document.createElement('span');
       spanNum.className = "day-num";
-      let jsDay = today.getDay();
-      let displayNum = (jsDay + 1) % 7;
       spanNum.textContent = displayNum;
       let hijriDiv = document.createElement('div');
       hijriDiv.className = "hijri-date";
@@ -746,19 +756,16 @@
       dayDiv.appendChild(hijriDiv);
       container.appendChild(dayDiv);
     }
-    
     function toggleSidebar() {
       let sidebar = document.getElementById('sidebar');
       sidebar.style.transform = (sidebar.style.transform === 'translateX(0%)')
         ? 'translateX(-100%)'
         : 'translateX(0%)';
     }
-    
     function openSection(section) {
       switchTab(section);
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
     }
-    
     function switchTab(tab) {
       currentTab = tab;
       document.getElementById('ayahsArea').style.display = 'none';
@@ -788,7 +795,6 @@
       }
       updateBackButton();
     }
-    
     function goBack() {
       if (currentView === "ayahs") {
         document.getElementById('ayahsArea').style.display = "none";
@@ -814,7 +820,6 @@
       }
       updateBackButton();
     }
-    
     function updateBackButton() {
       let btn = document.getElementById('backButton');
       if (
@@ -828,7 +833,6 @@
         btn.style.display = "none";
       }
     }
-    
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
@@ -848,7 +852,6 @@
       currentView = "suraList";
       updateBackButton();
     }
-    
     function loadSurahText(number, name) {
       document.getElementById('suraList').style.display = 'none';
       let ayahsArea = document.getElementById('ayahsArea');
@@ -881,7 +884,6 @@
       currentView = "ayahs";
       updateBackButton();
     }
-    
     function loadSurahAudio(number, name) {
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
@@ -982,7 +984,6 @@
       currentView = "audio";
       updateBackButton();
     }
-    
     function togglePlay() {
       const audio = document.getElementById('audioPlayer');
       const playPauseBtn = document.querySelector('.play-pause-btn i');
@@ -994,26 +995,21 @@
         playPauseBtn.className = 'fas fa-play';
       }
     }
-    
     function seekForward() {
       const audio = document.getElementById('audioPlayer');
       audio.currentTime += 10;
     }
-    
     function seekBackward() {
       const audio = document.getElementById('audioPlayer');
       audio.currentTime -= 10;
     }
-    
     function toggleMute() {
       const audio = document.getElementById('audioPlayer');
       audio.muted = !audio.muted;
     }
-    
     function downloadAudio(url) {
       window.open(url, '_blank');
     }
-    
     function loadRecitersList() {
       const recitersArea = document.getElementById('recitersArea');
       recitersArea.innerHTML = '';
@@ -1041,14 +1037,12 @@
       currentView = "reciters";
       updateBackButton();
     }
-    
     function convertTo12Hour(time) {
       let [hours, minutes] = time.split(':').map(Number);
       let period = hours >= 12 ? 'مساءً' : 'صباحًا';
       hours = hours % 12 || 12;
       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
-    
     function loadPrayerTimes() {
       const prayerTimesContent = document.getElementById('prayerTimesContent');
       prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
@@ -1089,7 +1083,6 @@
           console.error('خطأ في جلب مواقيت الصلاة:', error);
         });
     }
-    
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
       document.getElementById('topBar').classList.toggle('dark');
@@ -1100,7 +1093,6 @@
         icon.className = 'fa-solid fa-moon';
       }
     }
-    
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
@@ -1110,14 +1102,12 @@
       }
       prevScroll = currentScroll;
     });
-    
     window.addEventListener('keydown', function(e) {
       if (e.key === " " && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
         e.preventDefault();
         togglePlay();
       }
     });
-    
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
