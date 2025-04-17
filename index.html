@@ -36,7 +36,6 @@
       font-family: 'QCF_BSML';
       src: url('QCF_BSML.ttf') format('truetype');
     }
-    /* الخط الخاص بالأشهر الهجرية */
     @font-face {
       font-family: 'HijriMonths';
       src: url('Elgharib-Hijri Months.ttf') format('truetype');
@@ -53,16 +52,13 @@
       overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
     }
-    /* الوضع الداكن: خلفية سوداء ونصوص بيج فاتح */
     body.dark {
       background: #000;
       color: #f5deb3;
     }
-    /* قاعدة شاملة لتطبيق اللون البيج على جميع النصوص في الوضع الداكن */
     body.dark * {
       color: #f5deb3 !important;
     }
-    /* تخصيص رقم الآية والرمز في الوضع الداكن */
     body.dark .ayah-number {
       color: #000 !important;
       transform: translateY(3px);
@@ -211,8 +207,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: inline-block;
     }
-    /* تغيير الخط الخاص بالأشهر الهجرية */
-    .month-name {
+    .month-num {
       font-family: 'HijriMonths', serif;
     }
 
@@ -223,7 +218,6 @@
       box-shadow: none !important;
       border-radius: 0 !important;
     }
-    /* قائمة السور */
     .sura-list {
       display: flex;
       flex-direction: column;
@@ -249,7 +243,6 @@
       background-color: #1a6b3e;
       transform: scale(1.02);
     }
-    /* قائمة الشيوخ */
     .reciters-list {
       display: flex;
       flex-direction: column;
@@ -306,7 +299,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* إزالة الهوامش وفصل الأسطر بين الآيات */
     .ayah-text {
       display: inline;
       font-family: 'AyatFont', serif;
@@ -385,7 +377,6 @@
       height: 50px;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      outline: none;
     }
     .player-controls button:hover {
       transform: scale(1.1);
@@ -626,7 +617,7 @@
     جاري تحميل السور...
   </section>
 
-  <!-- منطقة عرض الآيات (تمتد بكامل العرض بدون حاوية محددة) -->
+  <!-- منطقة عرض الآيات -->
   <section id="ayahsArea" aria-label="آيات السورة">
     <div id="surahTitle" class="surah-title"></div>
     <div id="bismillahContainer">
@@ -738,10 +729,11 @@
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
       let hijri = gregorianToHijri(today);
-      let monthHTML = (hijri.month === 10)
-        ? `<span class="month-name">شوال</span>`
-        : `<span class="month-name">${hijri.month}</span>`;
-      let hijriStr = hijri.day + " / " + monthHTML + " / " + hijri.year;
+      let dayArabic = toArabicNumber(hijri.day); // اليوم بالأرقام العربية
+      let monthNum = hijri.month; // الشهر بالأرقام الإنجليزية
+      let yearArabic = toArabicNumber(hijri.year); // السنة بالأرقام العربية
+      let monthHTML = `<span class="month-num">${monthNum}</span>`;
+      let hijriStr = `${dayArabic} / ${monthHTML} / ${yearArabic}`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
