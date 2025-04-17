@@ -206,9 +206,11 @@
       border-radius: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: inline-block;
+      direction: rtl; /* لضمان الترتيب الصحيح */
     }
     .month-num {
       font-family: 'HijriMonths', serif;
+      font-size: 24px; /* تكبير حجم رقم الشهر */
     }
 
     /* ---------- الحاويات الرئيسية ---------- */
@@ -729,11 +731,11 @@
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
       let hijri = gregorianToHijri(today);
-      let dayArabic = toArabicNumber(hijri.day); // اليوم بالأرقام العربية
-      let monthNum = hijri.month; // الشهر بالأرقام الإنجليزية
-      let yearArabic = toArabicNumber(hijri.year); // السنة بالأرقام العربية
+      let dayArabic = toArabicNumber(hijri.day);
+      let monthNum = hijri.month;
+      let yearArabic = toArabicNumber(hijri.year);
       let monthHTML = `<span class="month-num">${monthNum}</span>`;
-      let hijriStr = `${dayArabic} / ${monthHTML} / ${yearArabic}`;
+      let hijriStr = `${dayArabic}/${monthHTML}/${yearArabic}`; // بدون مسافات
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
