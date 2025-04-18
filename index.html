@@ -87,6 +87,7 @@
       transition: top 0.3s, background 0.3s;
     }
     #topBar.dark {
+      background: rgbainvestigator.com/islamicfinder.org/hijri-date-converter
       background: rgba(0, 0, 0, 0.9);
     }
     #sidebarToggle, #darkModeToggle {
@@ -129,7 +130,7 @@
       width: 280px;
       height: 100%;
       background: rgba(248,248,248,0.95);
-      box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
       z-index: 999;
       padding: 20px;
       transform: translateX(-100%);
@@ -183,30 +184,37 @@
     /* ---------- عرض اليوم الحالي ---------- */
     .weekdays {
       text-align: center;
-      padding: 30px 0 10px; /* زيادة الـ padding لمساحة أكبر */
-      transition: opacity 0.3s ease, color 0.3s ease;
+      padding: 20px 0;
+      transition: opacity 0.3s ease;
     }
     .day {
       display: inline-block;
     }
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 42px; /* تقليل الحجم قليلاً للتناسق */
+      font-size: 48px;
       color: #2b2b2b;
       display: block;
-      margin-bottom: 8px; /* مسافة سفلية للفصل */
+      margin-bottom: 8px;
     }
     .hijri-date {
       font-family: 'Amiri', serif;
-      font-size: 18px; /* حجم أكبر قليلاً للتاريخ بدون حاوية */
+      font-size: 18px;
       color: #14532d;
+      display: inline-block;
       direction: rtl;
       white-space: nowrap;
     }
     .month-num {
       font-family: 'HijriMonths', serif;
-      font-size: 24px; /* حجم أكبر لرقم الشهر */
-      font-weight: normal;
+      font-size: 35px;
+      color: #1a6b3e;
+      margin-right: 4px;
+    }
+    body.dark .day-num,
+    body.dark .hijri-date,
+    body.dark .month-num {
+      color: #f5deb3 !important;
     }
 
     /* ---------- الحاويات الرئيسية ---------- */
@@ -576,15 +584,6 @@
         margin: 0 !important;
         padding: 0 !important;
       }
-      .day-num {
-        font-size: 36px; /* تقليل الحجم على الشاشات الصغيرة */
-      }
-      .hijri-date {
-        font-size: 16px;
-      }
-      .month-num {
-        font-size: 20px; /* تقليل حجم رقم الشهر على الشاشات الصغيرة */
-      }
     }
   </style>
 </head>
@@ -737,7 +736,7 @@
       let displayNum = (jsDay + 1) % 7;
       let hijri = gregorianToHijri(today);
       let dayArabic = toArabicNumber(hijri.day);
-      let monthEnglish = hijri.month; // رقم الشهر بالإنجليزية
+      let monthEnglish = hijri.month;
       let hijriStr = `<span style="white-space: nowrap;">${dayArabic}<span class="month-num">${monthEnglish}</span></span>`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
