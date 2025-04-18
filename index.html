@@ -209,6 +209,10 @@
       direction: rtl;
       white-space: nowrap;
     }
+    .month-num {
+      font-family: 'HijriMonths', serif;
+      font-size: 16px;
+    }
 
     /* ---------- الحاويات الرئيسية ---------- */
     #suraList, #ayahsArea, #audioArea, #prayerTimesArea, #aboutSection, .reciters-list {
@@ -363,7 +367,7 @@
       border: 1px solid rgba(255,255,255,0.4);
     }
     .player-controls {
-      display:CRYPTIVE flex;
+      display: flex;
       justify-content: center;
       gap: 20px;
     }
@@ -730,7 +734,7 @@
       let hijri = gregorianToHijri(today);
       let dayArabic = toArabicNumber(hijri.day);
       let monthEnglish = hijri.month; // رقم الشهر بالإنجليزية
-      let hijriStr = `<span style="white-space: nowrap;">${dayArabic}${monthEnglish}</span>`;
+      let hijriStr = `<span style="white-space: nowrap;">${dayArabic}<span class="month-num">${monthEnglish}</span></span>`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
