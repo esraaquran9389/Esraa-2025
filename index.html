@@ -206,11 +206,8 @@
       border-radius: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: inline-block;
-      direction: rtl; /* لضمان الترتيب الصحيح */
-    }
-    .month-num {
-      font-family: 'HijriMonths', serif;
-      font-size: 24px; /* تكبير حجم رقم الشهر */
+      direction: rtl;
+      white-space: nowrap;
     }
 
     /* ---------- الحاويات الرئيسية ---------- */
@@ -366,7 +363,7 @@
       border: 1px solid rgba(255,255,255,0.4);
     }
     .player-controls {
-      display: flex;
+      display:CRYPTIVE flex;
       justify-content: center;
       gap: 20px;
     }
@@ -732,10 +729,8 @@
       let displayNum = (jsDay + 1) % 7;
       let hijri = gregorianToHijri(today);
       let dayArabic = toArabicNumber(hijri.day);
-      let monthNum = hijri.month;
-      let yearArabic = toArabicNumber(hijri.year);
-      let monthHTML = `<span class="month-num">${monthNum}</span>`;
-      let hijriStr = `${dayArabic}/${monthHTML}/${yearArabic}`; // بدون مسافات
+      let monthEnglish = hijri.month; // رقم الشهر بالإنجليزية
+      let hijriStr = `<span style="white-space: nowrap;">${dayArabic}${monthEnglish}</span>`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
@@ -1107,5 +1102,6 @@
       switchTab('text');
     });
   </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93203db4cc976773',t:'MTc0NDkzODE5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
