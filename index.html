@@ -595,23 +595,23 @@
         font-size: 16px; /* تقليل حجم الشهر */
       }
     }
-    /* 1. إخفاء التاريخ الهجري بالكامل */
+     /* إخفاء التاريخ الهجري نهائيًا */
 .hijri-date,
 .month-num {
   display: none !important;
 }
 
-/* 2. تكبير رقم اليوم (أسبوع) قليلاً */
+/* تكبير رقم اليوم (أسبوع) قليلًا */
 .day-num {
-  font-size: 32px !important;  /* كان 24px */
+  font-size: 32px !important;
 }
 
-/* 3. تكبير أرقام الشيوخ بشكل كبير جداً */
+/* تكبير رقم الشيخ بشكل كبير لكن أصغر من السابق */
 .reciter-number {
-  font-size: 80px !important;  /* يمكنك رفع القيمة أكثر إذا أحببت */
-  line-height: 1;              /* لضبط الارتفاع بعد التكبير */
+  font-size: 48px !important;  /* بدل 80px */
+  line-height: 1.1;
 }
-
+      
   </style>
 </head>
 <body>
