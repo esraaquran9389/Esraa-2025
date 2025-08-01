@@ -36,10 +36,6 @@
       font-family: 'QCF_BSML';
       src: url('QCF_BSML.ttf') format('truetype');
     }
-    @font-face {
-      font-family: 'HijriMonths';
-      src: url('Elgharib-Hijri Months.ttf') format('truetype');
-    }
     @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
     /* ---------- الأنماط العامة ---------- */
@@ -65,6 +61,16 @@
     }
     body.dark .ayah-symbol {
       color: #000 !important;
+    }
+    body.dark .progress {
+      background: #f5deb3 !important;
+    }
+    body.dark .volume-level {
+      background: #f5deb3 !important;
+    }
+    body.dark .custom-audio-player {
+      background: rgba(0, 0, 0, 0.5) !important;
+      border: 1px solid #f5deb340 !important;
     }
     
     .tabs { display: none; }
@@ -117,29 +123,15 @@
     }
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 24px;
-      color: #000; /* لون أسود */
+      font-size: 32px; /* تكبير رقم اليوم */
+      color: #000;
       display: inline-block;
       margin-right: 8px;
     }
-    .hijri-date {
-      font-family: 'Amiri', serif;
-      font-size: 14px;
-      color: #000; /* لون أسود */
-      display: inline-block;
-      direction: rtl;
-      white-space: nowrap;
-    }
+    /* إخفاء التاريخ الهجري */
+    .hijri-date,
     .month-num {
-      font-family: 'HijriMonths', serif;
-      font-size: 20px;
-      color: #000; /* لون أسود */
-      margin-right: 4px;
-    }
-    body.dark .day-num,
-    body.dark .hijri-date,
-    body.dark .month-num {
-      color: #f5deb3 !important;
+      display: none !important;
     }
 
     /* ---------- أزرار عامة ---------- */
@@ -284,7 +276,8 @@
     }
     .reciter-number {
       font-family: 'RecitersFont', serif;
-      font-size: 20px;
+      font-size: 48px; /* تكبير رقم الشيخ */
+      line-height: 1.1;
     }
 
     /* ---------- منطقة عرض الآيات ---------- */
@@ -543,12 +536,34 @@
       font-size: 20px;
       margin: 5px 0;
     }
+    
+    /* ---------- مؤشر التحميل ---------- */
+    #loader {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2000;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #14532d;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
     /* ---------- استعلامات الاستجابة ---------- */
     @media (max-width: 600px) {
       .sura-button {
-        font-size: 20px;
-        padding: 10px 16px;
+        font-size: 18px; /* حجم مناسب للجوال */
+        padding: 8px 14px; /* حجم مناسب للجوال */
       }
       .tab-btn {
         font-size: 14px;
@@ -559,7 +574,7 @@
         height: 50px;
       }
       .reciter-number {
-        font-size: 16px;
+        font-size: 36px; /* حجم مناسب للجوال */
       }
       #backButton {
         padding: 6px 12px;
@@ -585,33 +600,11 @@
         margin: 0 !important;
         padding: 0 !important;
       }
-      .day-num {
-        font-size: 20px; /* تقليل حجم رقم اليوم على الشاشات الصغيرة */
-      }
-      .hijri-date {
-        font-size: 12px; /* تقليل حجم التاريخ الهجري */
-      }
-      .month-num {
-        font-size: 16px; /* تقليل حجم الشهر */
+      .player-controls button {
+        width: 45px; /* حجم مناسب للجوال */
+        height: 45px; /* حجم مناسب للجوال */
       }
     }
-     /* إخفاء التاريخ الهجري نهائيًا */
-.hijri-date,
-.month-num {
-  display: none !important;
-}
-
-/* تكبير رقم اليوم (أسبوع) قليلًا */
-.day-num {
-  font-size: 32px !important;
-}
-
-/* تكبير رقم الشيخ بشكل كبير لكن أصغر من السابق */
-.reciter-number {
-  font-size: 48px !important;  /* بدل 80px */
-  line-height: 1.1;
-}
-      
   </style>
 </head>
 <body>
@@ -687,6 +680,11 @@
   <section id="recitersArea" class="reciters-list" style="display: none;" aria-label="الشيوخ">
     جاري تحميل الشيوخ...
   </section>
+  
+  <!-- مؤشر التحميل -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
 
   <!-- جافاسكريبت: دوال التحكم الرئيسية -->
   <script>
@@ -694,7 +692,7 @@
       return num.toString().padStart(3, "0");
     }
     function toArabicNumber(num) {
-      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','捌','玖'];
       return num.toString().split('').map(digit => arabicDigits[digit]).join('');
     }
     function formatTime(seconds) {
@@ -702,6 +700,10 @@
       const secs = Math.floor(seconds % 60);
       return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
+    function showLoader(show) {
+      document.getElementById('loader').style.display = show ? 'block' : 'none';
+    }
+    
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
@@ -732,37 +734,11 @@
       { number: "109", id: "yasser", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
       { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
     ];
-    function gregorianToHijri(date) {
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      let year = date.getFullYear();
-      let a = Math.floor((14 - month) / 12);
-      let y = year + 4800 - a;
-      let m = month + 12 * a - 3;
-      let julian = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4)
-                  - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
-      let islamic = julian - 1948440 + 10632;
-      let n = Math.floor((islamic - 1) / 10631);
-      islamic = islamic - 10631 * n + 354;
-      let j = (Math.floor((10985 - islamic) / 5316))
-              * (Math.floor((50 * islamic) / 17719))
-              + (Math.floor(islamic / 5670))
-              * (Math.floor((43 * islamic) / 15238));
-      islamic = islamic - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50)
-                - Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
-      let hijriMonth = Math.floor((24 * islamic) / 709);
-      let hijriDay = islamic - Math.floor((709 * hijriMonth) / 24);
-      let hijriYear = 30 * n + j - 30;
-      return { day: hijriDay, month: hijriMonth, year: hijriYear };
-    }
+    
     function updateCurrentDay() {
       let today = new Date();
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
-      let hijri = gregorianToHijri(today);
-      let dayArabic = toArabicNumber(hijri.day);
-      let monthEnglish = hijri.month;
-      let hijriStr = `<span style="white-space: nowrap;">${dayArabic}<span class="month-num">${monthEnglish}</span></span>`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
@@ -770,23 +746,22 @@
       let spanNum = document.createElement('span');
       spanNum.className = "day-num";
       spanNum.textContent = displayNum;
-      let hijriDiv = document.createElement('div');
-      hijriDiv.className = "hijri-date";
-      hijriDiv.innerHTML = hijriStr;
       dayDiv.appendChild(spanNum);
-      dayDiv.appendChild(hijriDiv);
       container.appendChild(dayDiv);
     }
+    
     function toggleSidebar() {
       let sidebar = document.getElementById('sidebar');
       sidebar.style.transform = (sidebar.style.transform === 'translateX(0%)')
         ? 'translateX(-100%)'
         : 'translateX(0%)';
     }
+    
     function openSection(section) {
       switchTab(section);
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
     }
+    
     function switchTab(tab) {
       currentTab = tab;
       document.getElementById('ayahsArea').style.display = 'none';
@@ -795,13 +770,14 @@
       document.getElementById('recitersArea').style.display = 'none';
       document.getElementById('prayerTimesArea').style.display = 'none';
       document.getElementById('aboutSection').style.display = 'none';
-      // التحكم في إظهار/إخفاء التاريخ
+      
       let weekDays = document.getElementById('weekDays');
       if (tab === 'text' || tab === 'audio' || tab === 'about') {
         weekDays.style.display = 'block';
       } else {
         weekDays.style.display = 'none';
       }
+      
       if (tab === 'text') {
         loadSuraList();
         document.getElementById('suraList').style.display = 'flex';
@@ -821,6 +797,7 @@
       }
       updateBackButton();
     }
+    
     function goBack() {
       if (currentView === "ayahs") {
         document.getElementById('ayahsArea').style.display = "none";
@@ -846,6 +823,7 @@
       }
       updateBackButton();
     }
+    
     function updateBackButton() {
       let btn = document.getElementById('backButton');
       if (
@@ -859,6 +837,7 @@
         btn.style.display = "none";
       }
     }
+    
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
@@ -878,20 +857,28 @@
       currentView = "suraList";
       updateBackButton();
     }
+    
     function loadSurahText(number, name) {
+      showLoader(true);
       document.getElementById('suraList').style.display = 'none';
       let ayahsArea = document.getElementById('ayahsArea');
       ayahsArea.style.display = 'block';
       document.getElementById('surahTitle').textContent = name;
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
+      
       let bismillahContainer = document.getElementById('bismillahContainer');
       bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
-      document.getElementById('ayahsContent').innerHTML = '';
+      
+      let container = document.getElementById('ayahsContent');
+      container.innerHTML = '';
+      
       fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error('فشل تحميل السورة');
+          return res.json();
+        })
         .then(data => {
-          let container = document.getElementById('ayahsContent');
           data.data.ayahs.forEach((ayah) => {
             let text = document.createElement('span');
             text.className = 'ayah-text';
@@ -906,18 +893,28 @@
             container.appendChild(text);
             container.appendChild(symbol);
           });
-        });
+        })
+        .catch(error => {
+          console.error('خطأ في تحميل السورة:', error);
+          container.innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل السورة. الرجاء المحاولة لاحقاً.</p>`;
+        })
+        .finally(() => showLoader(false));
+        
       currentView = "ayahs";
       updateBackButton();
     }
+    
     function loadSurahAudio(number, name) {
+      showLoader(true);
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
       audioArea.style.display = 'block';
       document.getElementById('surahTitleAudio').textContent = name;
       document.getElementById('audioContent').innerHTML = '';
+      
       let formatted = formatNumber(number);
       let audioUrl = "";
+      
       if (currentReciter === "minsh") {
         audioUrl = `https://server10.mp3quran.net/minsh/${formatted}.mp3`;
       } else if (currentReciter === "basit") {
@@ -939,12 +936,11 @@
       } else if (currentReciter === "tblawi") {
         audioUrl = `https://server12.mp3quran.net/tblawi/${formatted}.mp3`;
       }
-      let audioEl = document.createElement('audio');
-      audioEl.id = 'audioPlayer';
-      let sourceEl = document.createElement('source');
-      sourceEl.src = audioUrl;
-      sourceEl.type = "audio/mpeg";
-      audioEl.appendChild(sourceEl);
+      
+      let audioEl = new Audio();
+      audioEl.src = audioUrl;
+      audioEl.preload = 'metadata';
+      
       let playerContainer = document.createElement('div');
       playerContainer.className = 'custom-audio-player';
       playerContainer.innerHTML = `
@@ -970,6 +966,16 @@
       `;
       document.getElementById('audioContent').appendChild(audioEl);
       document.getElementById('audioContent').appendChild(playerContainer);
+      
+      // إعداد أحداث الصوت
+      setupAudioEvents(audioEl);
+      
+      currentView = "audio";
+      updateBackButton();
+      showLoader(false);
+    }
+    
+    function setupAudioEvents(audioEl) {
       audioEl.addEventListener('timeupdate', () => {
         const currentTime = audioEl.currentTime;
         const duration = audioEl.duration;
@@ -980,11 +986,13 @@
         document.getElementById('currentTime').textContent = formatTime(currentTime);
         document.getElementById('duration').textContent = formatTime(duration);
       });
+      
       document.getElementById('progressBar').addEventListener('click', (e) => {
         const width = document.getElementById('progressBar').clientWidth;
         const clickX = e.offsetX;
         audioEl.currentTime = (clickX / width) * audioEl.duration;
       });
+      
       document.getElementById('volumeBar').addEventListener('click', (e) => {
         const width = document.getElementById('volumeBar').clientWidth;
         const clickX = e.offsetX;
@@ -992,50 +1000,59 @@
         audioEl.volume = volume;
         document.getElementById('volumeLevel').style.width = `${volume * 100}%`;
       });
+      
       audioEl.addEventListener('volumechange', () => {
         const volumeBtn = document.querySelector('.volume-btn i');
         volumeBtn.className = (audioEl.muted || audioEl.volume === 0)
           ? 'fas fa-volume-mute'
           : 'fas fa-volume-up';
       });
+      
       audioEl.addEventListener('loadedmetadata', () => {
         if (!isNaN(audioEl.duration)) {
           document.getElementById('duration').textContent = formatTime(audioEl.duration);
         }
       });
+      
       audioEl.addEventListener('error', () => {
         document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة ${name}. الرجاء المحاولة لاحقاً.</p>`;
         console.error(`فشل تحميل التلاوة: ${audioUrl}`);
       });
-      currentView = "audio";
-      updateBackButton();
     }
+    
     function togglePlay() {
       const audio = document.getElementById('audioPlayer');
+      if (!audio) return;
+      
       const playPauseBtn = document.querySelector('.play-pause-btn i');
       if (audio.paused) {
-        audio.play();
+        audio.play().catch(e => console.error('فشل التشغيل:', e));
         playPauseBtn.className = 'fas fa-pause';
       } else {
         audio.pause();
         playPauseBtn.className = 'fas fa-play';
       }
     }
+    
     function seekForward() {
       const audio = document.getElementById('audioPlayer');
-      audio.currentTime += 10;
+      if (audio) audio.currentTime += 10;
     }
+    
     function seekBackward() {
       const audio = document.getElementById('audioPlayer');
-      audio.currentTime -= 10;
+      if (audio) audio.currentTime -= 10;
     }
+    
     function toggleMute() {
       const audio = document.getElementById('audioPlayer');
-      audio.muted = !audio.muted;
+      if (audio) audio.muted = !audio.muted;
     }
+    
     function downloadAudio(url) {
       window.open(url, '_blank');
     }
+    
     function loadRecitersList() {
       const recitersArea = document.getElementById('recitersArea');
       recitersArea.innerHTML = '';
@@ -1063,12 +1080,14 @@
       currentView = "reciters";
       updateBackButton();
     }
+    
     function convertTo12Hour(time) {
       let [hours, minutes] = time.split(':').map(Number);
       let period = hours >= 12 ? 'مساءً' : 'صباحًا';
       hours = hours % 12 || 12;
       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
+    
     function loadPrayerTimes() {
       const prayerTimesContent = document.getElementById('prayerTimesContent');
       prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
@@ -1076,8 +1095,12 @@
       const country = 'Egypt';
       const method = 5;
       const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}`;
+      
       fetch(url)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) throw new Error('فشل جلب البيانات');
+          return response.json();
+        })
         .then(data => {
           if (data.code === 200) {
             const timings = data.data.timings;
@@ -1101,14 +1124,15 @@
               prayerTimesContent.appendChild(prayerItem);
             });
           } else {
-            prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.</p>';
+            prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء المحاولة لاحقاً.</p>';
           }
         })
         .catch(error => {
-          prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.</p>';
+          prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء المحاولة لاحقاً.</p>';
           console.error('خطأ في جلب مواقيت الصلاة:', error);
         });
     }
+    
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
       document.getElementById('topBar').classList.toggle('dark');
@@ -1119,6 +1143,7 @@
         icon.className = 'fa-solid fa-moon';
       }
     }
+    
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
@@ -1128,17 +1153,18 @@
       }
       prevScroll = currentScroll;
     });
+    
     window.addEventListener('keydown', function(e) {
-      if (e.key === " " && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+      if (e.code === "Space" && document.getElementById('audioPlayer')) {
         e.preventDefault();
         togglePlay();
       }
     });
+    
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93203db4cc976773',t:'MTc0NDkzODE5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
