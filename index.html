@@ -49,11 +49,11 @@
       transition: background 0.3s ease, color 0.3s ease;
     }
     body.dark {
-      background: #000;
-      color: #f5deb3;
+      background: #0a0a14;
+      color: #e0e0ff;
     }
     body.dark * {
-      color: #f5deb3 !important;
+      color: #e0e0ff !important;
     }
     body.dark .ayah-number {
       color: #000 !important;
@@ -62,15 +62,25 @@
     body.dark .ayah-symbol {
       color: #000 !important;
     }
+    body.dark .custom-audio-player {
+      background: rgba(10, 10, 20, 0.8) !important;
+      border: 1px solid #2a2a5a;
+      box-shadow: 0 0 15px rgba(100, 150, 255, 0.3);
+    }
+    body.dark .player-controls button {
+      box-shadow: 0 0 10px rgba(100, 150, 255, 0.4);
+    }
     body.dark .progress {
-      background: #f5deb3 !important;
+      background: #5a8eff !important;
+      box-shadow: 0 0 8px rgba(90, 142, 255, 0.5);
     }
     body.dark .volume-level {
-      background: #f5deb3 !important;
+      background: #5a8eff !important;
     }
-    body.dark .custom-audio-player {
-      background: rgba(0, 0, 0, 0.5) !important;
-      border: 1px solid #f5deb340 !important;
+    body.dark .surah-title, 
+    body.dark .bismillah-text {
+      color: #8aafff !important;
+      text-shadow: 0 0 10px rgba(138, 175, 255, 0.4);
     }
     
     .tabs { display: none; }
@@ -93,7 +103,8 @@
       transition: top 0.3s, background 0.3s;
     }
     #topBar.dark {
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(10, 10, 20, 0.9);
+      box-shadow: 0 2px 10px rgba(0,0,30,0.3);
     }
     #sidebarToggle, #darkModeToggle {
       font-size: 20px;
@@ -127,6 +138,10 @@
       color: #000;
       display: inline-block;
       margin-right: 8px;
+    }
+    body.dark .day-num {
+      color: #8aafff !important;
+      text-shadow: 0 0 8px rgba(138, 175, 255, 0.5);
     }
     /* إخفاء التاريخ الهجري */
     .hijri-date,
@@ -166,11 +181,17 @@
       transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       overflow-y: auto;
     }
+    #sidebar.dark {
+      background: rgba(15, 15, 25, 0.95);
+    }
     #sidebar h2 {
       font-family: 'Amiri', serif;
       font-size: 26px;
       margin-bottom: 20px;
       color: #14532d;
+    }
+    #sidebar.dark h2 {
+      color: #8aafff;
     }
     #sidebar .tab-btn {
       background-color: #14532d;
@@ -276,7 +297,7 @@
     }
     .reciter-number {
       font-family: 'RecitersFont', serif;
-      font-size: 48px; /* تكبير رقم الشيخ */
+      font-size: 40px; /* تصغير رقم الشيخ */
       line-height: 1.1;
     }
 
@@ -305,6 +326,10 @@
       color: #333;
       margin: 0;
       padding: 0;
+    }
+    body.dark .ayah-text {
+      color: #e0e0ff !important;
+      text-shadow: 0 0 5px rgba(200, 220, 255, 0.2);
     }
     .ayah-symbol {
       display: inline;
@@ -353,76 +378,99 @@
       animation: fadeIn 0.5s ease forwards;
     }
     .custom-audio-player {
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(8px);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      border: 1px solid rgba(255,255,255,0.4);
+      gap: 20px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+    .custom-audio-player:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .player-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .player-title {
+      font-family: 'SurahFont', serif;
+      font-size: 28px;
+      color: #14532d;
+      margin: 0;
     }
     .player-controls {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
+      margin: 15px 0;
     }
     .player-controls button {
       background: linear-gradient(145deg, #14532d, #0e3e1f);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
     }
     .player-controls button:hover {
       transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     }
     .player-controls button:active {
-      transform: scale(1);
-    }
-    .play-pause-btn i, .download-btn i, .seek-btn i {
-      font-size: 22px;
+      transform: scale(0.95);
     }
     .progress-container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
+      margin: 10px 0;
     }
     .progress-bar {
       flex: 1;
-      height: 6px;
-      background: #d3d3d3;
-      border-radius: 5px;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 10px;
       position: relative;
       cursor: pointer;
       transition: background 0.3s ease;
+      overflow: hidden;
     }
     .progress-bar:hover {
-      background: #b0b0b0;
+      background: #d0d0d0;
     }
     .progress {
       height: 100%;
       background: #14532d;
-      border-radius: 5px;
+      border-radius: 10px;
       width: 0%;
       transition: width 0.1s linear;
     }
     .time-display {
-      font-size: 14px;
-      color: #333;
-      min-width: 50px;
+      font-size: 16px;
+      color: #555;
+      min-width: 60px;
       text-align: center;
+      font-family: 'Amiri', serif;
+      font-weight: bold;
     }
     .volume-container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
+      margin-top: 15px;
     }
     .volume-btn {
       background: none;
@@ -430,31 +478,58 @@
       color: #14532d;
       cursor: pointer;
       transition: color 0.3s ease;
+      font-size: 24px;
     }
     .volume-btn:hover {
       color: #1a6b3e;
     }
-    .volume-btn i {
-      font-size: 24px;
-    }
     .volume-bar {
-      width: 120px;
-      height: 6px;
-      background: #d3d3d3;
-      border-radius: 5px;
+      width: 150px;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 10px;
       position: relative;
       cursor: pointer;
       transition: background 0.3s ease;
+      overflow: hidden;
     }
     .volume-bar:hover {
-      background: #b0b0b0;
+      background: #d0d0d0;
     }
     .volume-level {
       height: 100%;
       background: #14532d;
-      border-radius: 5px;
+      border-radius: 10px;
       width: 100%;
       transition: width 0.3s ease;
+    }
+    .audio-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    .reciter-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+    .download-btn {
+      background: #14532d;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .download-btn:hover {
+      background: #1a6b3e;
     }
 
     /* ---------- مواقيت الصلاة ---------- */
@@ -562,8 +637,8 @@
     /* ---------- استعلامات الاستجابة ---------- */
     @media (max-width: 600px) {
       .sura-button {
-        font-size: 18px; /* حجم مناسب للجوال */
-        padding: 8px 14px; /* حجم مناسب للجوال */
+        font-size: 18px;
+        padding: 8px 14px;
       }
       .tab-btn {
         font-size: 14px;
@@ -574,7 +649,7 @@
         height: 50px;
       }
       .reciter-number {
-        font-size: 36px; /* حجم مناسب للجوال */
+        font-size: 36px;
       }
       #backButton {
         padding: 6px 12px;
@@ -601,8 +676,18 @@
         padding: 0 !important;
       }
       .player-controls button {
-        width: 45px; /* حجم مناسب للجوال */
-        height: 45px; /* حجم مناسب للجوال */
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      .custom-audio-player {
+        padding: 15px;
+      }
+      .player-title {
+        font-size: 24px;
+      }
+      .reciter-name {
+        font-size: 16px;
       }
     }
   </style>
@@ -692,7 +777,7 @@
       return num.toString().padStart(3, "0");
     }
     function toArabicNumber(num) {
-      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','捌','玖'];
+      const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
       return num.toString().split('').map(digit => arabicDigits[digit]).join('');
     }
     function formatTime(seconds) {
@@ -700,10 +785,6 @@
       const secs = Math.floor(seconds % 60);
       return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-    function showLoader(show) {
-      document.getElementById('loader').style.display = show ? 'block' : 'none';
-    }
-    
     let currentTab = 'text';
     let currentReciter = null;
     let currentView = "";
@@ -723,22 +804,48 @@
       "المسد", "الإخلاص", "الفلق", "الناس"
     ];
     const reciters = [
-      { number: "1", id: "minsh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
-      { number: "9", id: "basit", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
-      { number: "7", id: "husr", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
-      { number: "108", id: "ayyub", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg" },
-      { number: "107", id: "a_jbr", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg" },
-      { number: "12", id: "lhdan", image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg" },
-      { number: "48", id: "mustafa", image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg" },
-      { number: "6", id: "bna", image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg" },
-      { number: "109", id: "yasser", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
-      { number: "13", id: "tblawi", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
+      { number: "1", id: "minsh", name: "محمد صديق المنشاوي", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl5Bj0xKDpqcbi8sSuv8LGRwuCCnY_GWxluAx7uleozA&s" },
+      { number: "9", id: "basit", name: "عبد الباسط عبد الصمد", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
+      { number: "7", id: "husr", name: "محمود خليل الحصري", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
+      { number: "108", id: "ayyub", name: "سعد الغامدي", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg" },
+      { number: "107", id: "a_jbr", name: "أحمد العجمي", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg" },
+      { number: "12", id: "lhdan", name: "ناصر القطامي", image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg" },
+      { number: "48", id: "mustafa", name: "مصطفى إسماعيل", image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg" },
+      { number: "6", id: "bna", name: "محمد أيوب", image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg" },
+      { number: "109", id: "yasser", name: "ياسر الدوسري", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
+      { number: "13", id: "tblawi", name: "ماهر المعيقلي", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
     ];
-    
+    function gregorianToHijri(date) {
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      let a = Math.floor((14 - month) / 12);
+      let y = year + 4800 - a;
+      let m = month + 12 * a - 3;
+      let julian = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4)
+                  - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+      let islamic = julian - 1948440 + 10632;
+      let n = Math.floor((islamic - 1) / 10631);
+      islamic = islamic - 10631 * n + 354;
+      let j = (Math.floor((10985 - islamic) / 5316))
+              * (Math.floor((50 * islamic) / 17719))
+              + (Math.floor(islamic / 5670))
+              * (Math.floor((43 * islamic) / 15238));
+      islamic = islamic - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50)
+                - Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
+      let hijriMonth = Math.floor((24 * islamic) / 709);
+      let hijriDay = islamic - Math.floor((709 * hijriMonth) / 24);
+      let hijriYear = 30 * n + j - 30;
+      return { day: hijriDay, month: hijriMonth, year: hijriYear };
+    }
     function updateCurrentDay() {
       let today = new Date();
       let jsDay = today.getDay();
       let displayNum = (jsDay + 1) % 7;
+      let hijri = gregorianToHijri(today);
+      let dayArabic = toArabicNumber(hijri.day);
+      let monthEnglish = hijri.month;
+      let hijriStr = `<span style="white-space: nowrap;">${dayArabic}<span class="month-num">${monthEnglish}</span></span>`;
       let container = document.getElementById('weekDays');
       container.innerHTML = "";
       let dayDiv = document.createElement('div');
@@ -746,22 +853,23 @@
       let spanNum = document.createElement('span');
       spanNum.className = "day-num";
       spanNum.textContent = displayNum;
+      let hijriDiv = document.createElement('div');
+      hijriDiv.className = "hijri-date";
+      hijriDiv.innerHTML = hijriStr;
       dayDiv.appendChild(spanNum);
+      dayDiv.appendChild(hijriDiv);
       container.appendChild(dayDiv);
     }
-    
     function toggleSidebar() {
       let sidebar = document.getElementById('sidebar');
       sidebar.style.transform = (sidebar.style.transform === 'translateX(0%)')
         ? 'translateX(-100%)'
         : 'translateX(0%)';
     }
-    
     function openSection(section) {
       switchTab(section);
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
     }
-    
     function switchTab(tab) {
       currentTab = tab;
       document.getElementById('ayahsArea').style.display = 'none';
@@ -770,14 +878,13 @@
       document.getElementById('recitersArea').style.display = 'none';
       document.getElementById('prayerTimesArea').style.display = 'none';
       document.getElementById('aboutSection').style.display = 'none';
-      
+      // التحكم في إظهار/إخفاء التاريخ
       let weekDays = document.getElementById('weekDays');
       if (tab === 'text' || tab === 'audio' || tab === 'about') {
         weekDays.style.display = 'block';
       } else {
         weekDays.style.display = 'none';
       }
-      
       if (tab === 'text') {
         loadSuraList();
         document.getElementById('suraList').style.display = 'flex';
@@ -797,7 +904,6 @@
       }
       updateBackButton();
     }
-    
     function goBack() {
       if (currentView === "ayahs") {
         document.getElementById('ayahsArea').style.display = "none";
@@ -823,7 +929,6 @@
       }
       updateBackButton();
     }
-    
     function updateBackButton() {
       let btn = document.getElementById('backButton');
       if (
@@ -837,7 +942,6 @@
         btn.style.display = "none";
       }
     }
-    
     function loadSuraList() {
       const suraListEl = document.getElementById('suraList');
       suraListEl.innerHTML = '';
@@ -857,28 +961,20 @@
       currentView = "suraList";
       updateBackButton();
     }
-    
     function loadSurahText(number, name) {
-      showLoader(true);
       document.getElementById('suraList').style.display = 'none';
       let ayahsArea = document.getElementById('ayahsArea');
       ayahsArea.style.display = 'block';
       document.getElementById('surahTitle').textContent = name;
       document.getElementById('sidebar').style.transform = 'translateX(-100%)';
       document.getElementById('weekDays').style.display = 'none';
-      
       let bismillahContainer = document.getElementById('bismillahContainer');
       bismillahContainer.innerHTML = `<div class="bismillah-text">654</div>`;
-      
-      let container = document.getElementById('ayahsContent');
-      container.innerHTML = '';
-      
+      document.getElementById('ayahsContent').innerHTML = '';
       fetch(`https://api.alquran.cloud/v1/surah/${number}/ar.alquran`)
-        .then(res => {
-          if (!res.ok) throw new Error('فشل تحميل السورة');
-          return res.json();
-        })
+        .then(res => res.json())
         .then(data => {
+          let container = document.getElementById('ayahsContent');
           data.data.ayahs.forEach((ayah) => {
             let text = document.createElement('span');
             text.className = 'ayah-text';
@@ -893,63 +989,79 @@
             container.appendChild(text);
             container.appendChild(symbol);
           });
-        })
-        .catch(error => {
-          console.error('خطأ في تحميل السورة:', error);
-          container.innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل السورة. الرجاء المحاولة لاحقاً.</p>`;
-        })
-        .finally(() => showLoader(false));
-        
+        });
       currentView = "ayahs";
       updateBackButton();
     }
-    
     function loadSurahAudio(number, name) {
-      showLoader(true);
       document.getElementById('suraList').style.display = 'none';
       let audioArea = document.getElementById('audioArea');
       audioArea.style.display = 'block';
       document.getElementById('surahTitleAudio').textContent = name;
       document.getElementById('audioContent').innerHTML = '';
-      
       let formatted = formatNumber(number);
       let audioUrl = "";
+      let reciterName = "";
       
       if (currentReciter === "minsh") {
         audioUrl = `https://server10.mp3quran.net/minsh/${formatted}.mp3`;
+        reciterName = "محمد صديق المنشاوي";
       } else if (currentReciter === "basit") {
         audioUrl = `https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/${formatted}.mp3`;
+        reciterName = "عبد الباسط عبد الصمد";
       } else if (currentReciter === "husr") {
         audioUrl = `https://server13.mp3quran.net/husr/${formatted}.mp3`;
+        reciterName = "محمود خليل الحصري";
       } else if (currentReciter === "ayyub") {
         audioUrl = `https://server8.mp3quran.net/ayyub/${formatted}.mp3`;
+        reciterName = "سعد الغامدي";
       } else if (currentReciter === "a_jbr") {
         audioUrl = `https://server11.mp3quran.net/a_jbr/${formatted}.mp3`;
+        reciterName = "أحمد العجمي";
       } else if (currentReciter === "lhdan") {
         audioUrl = `https://server8.mp3quran.net/lhdan/${formatted}.mp3`;
+        reciterName = "ناصر القطامي";
       } else if (currentReciter === "mustafa") {
         audioUrl = `https://server8.mp3quran.net/mustafa/${formatted}.mp3`;
+        reciterName = "مصطفى إسماعيل";
       } else if (currentReciter === "bna") {
         audioUrl = `https://server8.mp3quran.net/bna/${formatted}.mp3`;
+        reciterName = "محمد أيوب";
       } else if (currentReciter === "yasser") {
         audioUrl = `https://server11.mp3quran.net/yasser/${formatted}.mp3`;
+        reciterName = "ياسر الدوسري";
       } else if (currentReciter === "tblawi") {
         audioUrl = `https://server12.mp3quran.net/tblawi/${formatted}.mp3`;
+        reciterName = "ماهر المعيقلي";
       }
       
-      let audioEl = new Audio();
-      audioEl.src = audioUrl;
-      audioEl.preload = 'metadata';
+      let audioEl = document.createElement('audio');
+      audioEl.id = 'audioPlayer';
+      audioEl.preload = "auto";
+      let sourceEl = document.createElement('source');
+      sourceEl.src = audioUrl;
+      sourceEl.type = "audio/mpeg";
+      audioEl.appendChild(sourceEl);
       
       let playerContainer = document.createElement('div');
       playerContainer.className = 'custom-audio-player';
       playerContainer.innerHTML = `
-        <div class="player-controls">
-          <button class="seek-btn" onclick="seekBackward()" aria-label="رجوع 10 ثواني"><i class="fas fa-backward"></i></button>
-          <button class="play-pause-btn" onclick="togglePlay()" aria-label="تشغيل / إيقاف"><i class="fas fa-play"></i></button>
-          <button class="seek-btn" onclick="seekForward()" aria-label="تقديم 10 ثواني"><i class="fas fa-forward"></i></button>
-          <button class="download-btn" onclick="downloadAudio('${audioUrl}')" aria-label="تحميل التلاوة"><i class="fas fa-download"></i></button>
+        <div class="player-header">
+          <h3 class="player-title">${name}</h3>
         </div>
+        
+        <div class="player-controls">
+          <button class="seek-btn" onclick="seekBackward()" aria-label="رجوع 10 ثواني">
+            <i class="fas fa-backward"></i>
+          </button>
+          <button class="play-pause-btn" onclick="togglePlay()" aria-label="تشغيل / إيقاف">
+            <i class="fas fa-play"></i>
+          </button>
+          <button class="seek-btn" onclick="seekForward()" aria-label="تقديم 10 ثواني">
+            <i class="fas fa-forward"></i>
+          </button>
+        </div>
+        
         <div class="progress-container">
           <span class="time-display" id="currentTime">00:00</span>
           <div class="progress-bar" id="progressBar">
@@ -957,25 +1069,27 @@
           </div>
           <span class="time-display" id="duration">00:00</span>
         </div>
+        
         <div class="volume-container">
-          <button class="volume-btn" onclick="toggleMute()" aria-label="كتم الصوت/إلغاء الكتم"><i class="fas fa-volume-up"></i></button>
+          <button class="volume-btn" onclick="toggleMute()" aria-label="كتم الصوت/إلغاء الكتم">
+            <i class="fas fa-volume-up"></i>
+          </button>
           <div class="volume-bar" id="volumeBar">
             <div class="volume-level" id="volumeLevel"></div>
           </div>
         </div>
+        
+        <div class="audio-info">
+          <span class="reciter-name">${reciterName}</span>
+          <button class="download-btn" onclick="downloadAudio('${audioUrl}')">
+            <i class="fas fa-download"></i> تحميل
+          </button>
+        </div>
       `;
+      
       document.getElementById('audioContent').appendChild(audioEl);
       document.getElementById('audioContent').appendChild(playerContainer);
       
-      // إعداد أحداث الصوت
-      setupAudioEvents(audioEl);
-      
-      currentView = "audio";
-      updateBackButton();
-      showLoader(false);
-    }
-    
-    function setupAudioEvents(audioEl) {
       audioEl.addEventListener('timeupdate', () => {
         const currentTime = audioEl.currentTime;
         const duration = audioEl.duration;
@@ -1018,41 +1132,38 @@
         document.getElementById('audioContent').innerHTML = `<p>عذراً، حدث خطأ أثناء تحميل تلاوة ${name}. الرجاء المحاولة لاحقاً.</p>`;
         console.error(`فشل تحميل التلاوة: ${audioUrl}`);
       });
+      
+      currentView = "audio";
+      updateBackButton();
     }
-    
     function togglePlay() {
       const audio = document.getElementById('audioPlayer');
       if (!audio) return;
       
       const playPauseBtn = document.querySelector('.play-pause-btn i');
       if (audio.paused) {
-        audio.play().catch(e => console.error('فشل التشغيل:', e));
+        audio.play();
         playPauseBtn.className = 'fas fa-pause';
       } else {
         audio.pause();
         playPauseBtn.className = 'fas fa-play';
       }
     }
-    
     function seekForward() {
       const audio = document.getElementById('audioPlayer');
       if (audio) audio.currentTime += 10;
     }
-    
     function seekBackward() {
       const audio = document.getElementById('audioPlayer');
       if (audio) audio.currentTime -= 10;
     }
-    
     function toggleMute() {
       const audio = document.getElementById('audioPlayer');
       if (audio) audio.muted = !audio.muted;
     }
-    
     function downloadAudio(url) {
       window.open(url, '_blank');
     }
-    
     function loadRecitersList() {
       const recitersArea = document.getElementById('recitersArea');
       recitersArea.innerHTML = '';
@@ -1080,14 +1191,12 @@
       currentView = "reciters";
       updateBackButton();
     }
-    
     function convertTo12Hour(time) {
       let [hours, minutes] = time.split(':').map(Number);
       let period = hours >= 12 ? 'مساءً' : 'صباحًا';
       hours = hours % 12 || 12;
       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
-    
     function loadPrayerTimes() {
       const prayerTimesContent = document.getElementById('prayerTimesContent');
       prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
@@ -1095,12 +1204,8 @@
       const country = 'Egypt';
       const method = 5;
       const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}`;
-      
       fetch(url)
-        .then(response => {
-          if (!response.ok) throw new Error('فشل جلب البيانات');
-          return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
           if (data.code === 200) {
             const timings = data.data.timings;
@@ -1124,18 +1229,18 @@
               prayerTimesContent.appendChild(prayerItem);
             });
           } else {
-            prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء المحاولة لاحقاً.</p>';
+            prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.</p>';
           }
         })
         .catch(error => {
-          prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء المحاولة لاحقاً.</p>';
+          prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.</p>';
           console.error('خطأ في جلب مواقيت الصلاة:', error);
         });
     }
-    
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
       document.getElementById('topBar').classList.toggle('dark');
+      document.getElementById('sidebar').classList.toggle('dark');
       let icon = document.querySelector('#darkModeToggle i');
       if (document.body.classList.contains('dark')) {
         icon.className = 'fa-solid fa-sun';
@@ -1143,7 +1248,6 @@
         icon.className = 'fa-solid fa-moon';
       }
     }
-    
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > prevScroll) {
@@ -1153,14 +1257,12 @@
       }
       prevScroll = currentScroll;
     });
-    
     window.addEventListener('keydown', function(e) {
-      if (e.code === "Space" && document.getElementById('audioPlayer')) {
+      if (e.key === " " && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
         e.preventDefault();
         togglePlay();
       }
     });
-    
     window.addEventListener('DOMContentLoaded', () => {
       updateCurrentDay();
       switchTab('text');
