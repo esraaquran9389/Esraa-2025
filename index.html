@@ -43,10 +43,11 @@
       font-family: 'Amiri', serif;
       background: #f0f2f5;
       margin: 0;
-      padding-top: 50px;
+      padding-top: 70px; /* زيادة الارتفاع */
       text-align: right;
       overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
+      font-size: 24px; /* زيادة حجم الخط العام */
     }
     body.dark {
       background: #0a0a14;
@@ -91,7 +92,7 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 50px;
+      height: 70px; /* زيادة الارتفاع */
       background: rgba(255,255,255,0.9);
       backdrop-filter: blur(5px);
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -107,14 +108,19 @@
       box-shadow: 0 2px 10px rgba(0,0,30,0.3);
     }
     #sidebarToggle, #darkModeToggle {
-      font-size: 20px;
+      font-size: 28px; /* زيادة حجم الخط */
       cursor: pointer;
       background-color: #14532d;
       color: #fff;
       border: none;
       border-radius: 50px;
-      padding: 6px 10px;
+      padding: 10px 15px; /* زيادة الحشوة */
       transition: background 0.3s ease, transform 0.3s ease;
+      width: 50px; /* زيادة العرض */
+      height: 50px; /* زيادة الارتفاع */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     #sidebarToggle:hover, #darkModeToggle:hover {
       background-color: #1a6b3e;
@@ -134,10 +140,10 @@
     }
     .day-num {
       font-family: 'DaysFont', sans-serif;
-      font-size: 32px; /* تكبير رقم اليوم */
+      font-size: 45px; /* تكبير رقم اليوم */
       color: #000;
       display: inline-block;
-      margin-right: 8px;
+      margin-right: 12px; /* زيادة المسافة */
     }
     body.dark .day-num {
       color: #8aafff !important;
@@ -155,8 +161,8 @@
       color: #fff;
       border: none;
       border-radius: 50px;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 15px 25px; /* زيادة الحشوة */
+      font-size: 22px; /* زيادة حجم الخط */
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
       outline: none;
@@ -171,12 +177,12 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 280px;
+      width: 320px; /* زيادة العرض */
       height: 100%;
       background: rgba(248,248,248,0.95);
       box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
       z-index: 999;
-      padding: 20px;
+      padding: 25px; /* زيادة الحشوة */
       transform: translateX(-100%);
       transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       overflow-y: auto;
@@ -186,8 +192,8 @@
     }
     #sidebar h2 {
       font-family: 'Amiri', serif;
-      font-size: 26px;
-      margin-bottom: 20px;
+      font-size: 34px; /* زيادة حجم الخط */
+      margin-bottom: 25px; /* زيادة المسافة */
       color: #14532d;
     }
     #sidebar.dark h2 {
@@ -198,29 +204,35 @@
       color: #fff;
       border: none;
       border-radius: 50px;
-      margin-bottom: 10px;
+      margin-bottom: 15px; /* زيادة المسافة */
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.3s ease, transform 0.3s ease;
+      padding: 15px 0; /* زيادة الحشوة */
+      font-size: 22px; /* زيادة حجم الخط */
     }
     #sidebar .tab-btn:hover {
       background-color: #1a6b3e;
       transform: translateX(5px);
     }
+    #sidebar .tab-btn i {
+      margin-left: 15px; /* زيادة المسافة */
+      font-size: 24px; /* زيادة حجم الأيقونة */
+    }
 
     /* ---------- زر العودة ---------- */
     #backButton {
       position: fixed;
-      top: 60px;
-      right: 20px;
+      top: 80px; /* تعديل الموقع */
+      right: 25px; /* تعديل الموقع */
       background: #14532d;
       color: #fff;
       border: none;
       border-radius: 50px;
-      padding: 8px 16px;
-      font-size: 16px;
+      padding: 12px 22px; /* زيادة الحشوة */
+      font-size: 22px; /* زيادة حجم الخط */
       cursor: pointer;
       z-index: 1100;
       transition: background 0.3s ease, transform 0.3s ease;
@@ -229,6 +241,9 @@
     #backButton:hover {
       background: #1a6b3e;
       transform: scale(1.03);
+    }
+    #backButton i {
+      margin-left: 10px; /* زيادة المسافة */
     }
 
     /* ---------- الحاويات الرئيسية ---------- */
@@ -241,9 +256,9 @@
     .sura-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 15px;
-      padding: 10px;
+      gap: 15px; /* زيادة المسافة */
+      margin-top: 20px; /* زيادة المسافة */
+      padding: 15px; /* زيادة الحشوة */
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
     }
@@ -252,8 +267,8 @@
       color: #fff;
       border: none;
       border-radius: 50px;
-      padding: 12px 20px;
-      font-size: 18px;
+      padding: 16px 25px; /* زيادة الحشوة */
+      font-size: 26px; /* زيادة حجم الخط */
       cursor: pointer;
       font-family: 'SurahFont', serif;
       text-align: center;
@@ -266,9 +281,9 @@
     .reciters-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 15px;
-      padding: 10px;
+      gap: 15px; /* زيادة المسافة */
+      margin-top: 20px; /* زيادة المسافة */
+      padding: 15px; /* زيادة الحشوة */
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
     }
@@ -277,34 +292,34 @@
       color: #fff;
       border: none;
       border-radius: 50px;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 15px 25px; /* زيادة الحشوة */
+      font-size: 22px; /* زيادة حجم الخط */
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 20px; /* زيادة المسافة */
     }
     .reciter-button:hover {
       background-color: #1a6b3e;
       transform: scale(1.02);
     }
     .reciter-img {
-      width: 60px;
-      height: 60px;
+      width: 80px; /* زيادة الحجم */
+      height: 80px; /* زيادة الحجم */
       border-radius: 50%;
       object-fit: cover;
     }
     .reciter-number {
       font-family: 'RecitersFont', serif;
-      font-size: 40px; /* تصغير رقم الشيخ */
+      font-size: 50px; /* زيادة حجم الرقم */
       line-height: 1.1;
     }
 
     /* ---------- منطقة عرض الآيات ---------- */
     #ayahsArea {
-      padding: 30px 10px;
-      font-size: 28px;
+      padding: 40px 15px; /* زيادة الحشوة */
+      font-size: 36px; /* زيادة حجم الخط */
       line-height: 1.8;
       width: 100%;
       overflow-y: auto;
@@ -339,10 +354,11 @@
       margin: 0;
       padding: 0;
       position: relative;
+      font-size: 42px; /* زيادة حجم العلامة */
     }
     .ayah-number {
       font-family: Arial, sans-serif;
-      font-size: 12px;
+      font-size: 18px; /* زيادة حجم الرقم */
       color: #000;
       position: absolute;
       top: 50%;
@@ -354,23 +370,23 @@
     }
     .surah-title {
       font-family: 'SurahFont', serif;
-      font-size: 32px;
+      font-size: 42px; /* زيادة حجم الخط */
       color: #14532d;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px; /* زيادة المسافة */
     }
     .bismillah-text {
       font-family: 'QCF_BSML', serif;
-      font-size: 34px;
+      font-size: 44px; /* زيادة حجم الخط */
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px; /* زيادة المسافة */
       color: #14532d;
     }
 
     /* ---------- منطقة التلاوة الصوتية المتطورة ---------- */
     #audioArea {
-      margin: 20px auto;
-      padding: 15px;
+      margin: 30px auto; /* زيادة المسافة */
+      padding: 20px; /* زيادة الحشوة */
       max-width: 1000px;
       font-family: 'Amiri', serif;
       display: none;
@@ -379,12 +395,12 @@
     }
     .custom-audio-player {
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 25px;
+      border-radius: 25px; /* زيادة الزوايا */
+      padding: 30px; /* زيادة الحشوة */
       box-shadow: 0 15px 35px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 25px; /* زيادة المسافة */
       border: 1px solid #e0e0e0;
       transition: all 0.3s ease;
     }
@@ -396,33 +412,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px; /* زيادة المسافة */
     }
     .player-title {
       font-family: 'SurahFont', serif;
-      font-size: 28px;
+      font-size: 36px; /* زيادة حجم الخط */
       color: #14532d;
       margin: 0;
     }
     .player-controls {
       display: flex;
       justify-content: center;
-      gap: 25px;
-      margin: 15px 0;
+      gap: 30px; /* زيادة المسافة */
+      margin: 20px 0; /* زيادة المسافة */
     }
     .player-controls button {
       background: linear-gradient(145deg, #14532d, #0e3e1f);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 80px; /* زيادة الحجم */
+      height: 80px; /* زيادة الحجم */
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 32px; /* زيادة حجم الأيقونة */
     }
     .player-controls button:hover {
       transform: scale(1.1);
@@ -434,14 +450,14 @@
     .progress-container {
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin: 10px 0;
+      gap: 20px; /* زيادة المسافة */
+      margin: 15px 0; /* زيادة المسافة */
     }
     .progress-bar {
       flex: 1;
-      height: 8px;
+      height: 12px; /* زيادة الارتفاع */
       background: #e0e0e0;
-      border-radius: 10px;
+      border-radius: 12px; /* زيادة الزوايا */
       position: relative;
       cursor: pointer;
       transition: background 0.3s ease;
@@ -453,14 +469,14 @@
     .progress {
       height: 100%;
       background: #14532d;
-      border-radius: 10px;
+      border-radius: 12px; /* زيادة الزوايا */
       width: 0%;
       transition: width 0.1s linear;
     }
     .time-display {
-      font-size: 16px;
+      font-size: 22px; /* زيادة حجم الخط */
       color: #555;
-      min-width: 60px;
+      min-width: 80px; /* زيادة العرض */
       text-align: center;
       font-family: 'Amiri', serif;
       font-weight: bold;
@@ -468,9 +484,9 @@
     .volume-container {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 20px; /* زيادة المسافة */
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 20px; /* زيادة المسافة */
     }
     .volume-btn {
       background: none;
@@ -478,16 +494,16 @@
       color: #14532d;
       cursor: pointer;
       transition: color 0.3s ease;
-      font-size: 24px;
+      font-size: 32px; /* زيادة حجم الأيقونة */
     }
     .volume-btn:hover {
       color: #1a6b3e;
     }
     .volume-bar {
-      width: 150px;
-      height: 8px;
+      width: 180px; /* زيادة العرض */
+      height: 12px; /* زيادة الارتفاع */
       background: #e0e0e0;
-      border-radius: 10px;
+      border-radius: 12px; /* زيادة الزوايا */
       position: relative;
       cursor: pointer;
       transition: background 0.3s ease;
@@ -499,7 +515,7 @@
     .volume-level {
       height: 100%;
       background: #14532d;
-      border-radius: 10px;
+      border-radius: 12px; /* زيادة الزوايا */
       width: 100%;
       transition: width 0.3s ease;
     }
@@ -507,12 +523,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
-      padding-top: 15px;
+      margin-top: 15px; /* زيادة المسافة */
+      padding-top: 20px; /* زيادة الحشوة */
       border-top: 1px solid #eee;
     }
     .reciter-name {
-      font-size: 18px;
+      font-size: 26px; /* زيادة حجم الخط */
       font-weight: bold;
       color: #333;
     }
@@ -521,21 +537,25 @@
       color: white;
       border: none;
       border-radius: 30px;
-      padding: 8px 20px;
+      padding: 12px 25px; /* زيادة الحشوة */
       cursor: pointer;
       transition: background 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px; /* زيادة المسافة */
+      font-size: 22px; /* زيادة حجم الخط */
     }
     .download-btn:hover {
       background: #1a6b3e;
     }
+    .download-btn i {
+      font-size: 26px; /* زيادة حجم الأيقونة */
+    }
 
     /* ---------- مواقيت الصلاة ---------- */
     #prayerTimesArea {
-      margin: 20px auto;
-      padding: 20px;
+      margin: 30px auto; /* زيادة المسافة */
+      padding: 25px; /* زيادة الحشوة */
       max-width: 1000px;
       font-family: 'Amiri', serif;
       display: none;
@@ -548,20 +568,20 @@
     }
     .prayer-times-title {
       font-family: 'Amiri', serif;
-      font-size: 30px;
+      font-size: 38px; /* زيادة حجم الخط */
       color: #14532d;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px; /* زيادة المسافة */
     }
     .prayer-times-list {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px; /* زيادة المسافة */
     }
     .prayer-item {
       display: flex;
       align-items: center;
-      padding: 15px;
+      padding: 20px; /* زيادة الحشوة */
       background: transparent;
       transition: transform 0.3s ease;
       opacity: 0;
@@ -572,18 +592,18 @@
       transform: scale(1.04);
     }
     .prayer-item i {
-      font-size: 24px;
+      font-size: 32px; /* زيادة حجم الأيقونة */
       color: #14532d;
-      margin-left: 15px;
+      margin-left: 20px; /* زيادة المسافة */
     }
     .prayer-name {
       font-family: 'PrayersFont', sans-serif;
-      font-size: 22px;
+      font-size: 30px; /* زيادة حجم الخط */
       flex: 1;
     }
     .prayer-time {
       font-family: 'Amiri', serif;
-      font-size: 20px;
+      font-size: 28px; /* زيادة حجم الخط */
       color: #2b2b2b;
     }
     @keyframes slideIn {
@@ -594,8 +614,8 @@
     /* ---------- قسم عن التطبيق ---------- */
     #aboutSection {
       display: none;
-      margin: 20px auto;
-      padding: 20px;
+      margin: 30px auto; /* زيادة المسافة */
+      padding: 25px; /* زيادة الحشوة */
       max-width: 1000px;
       font-family: 'Amiri', serif;
       text-align: center;
@@ -603,13 +623,13 @@
     }
     #aboutSection h2 {
       font-family: 'Amiri', serif;
-      font-size: 30px;
+      font-size: 38px; /* زيادة حجم الخط */
       color: #14532d;
-      margin-bottom: 15px;
+      margin-bottom: 20px; /* زيادة المسافة */
     }
     #aboutSection p {
-      font-size: 20px;
-      margin: 5px 0;
+      font-size: 28px; /* زيادة حجم الخط */
+      margin: 10px 0; /* زيادة المسافة */
     }
     
     /* ---------- مؤشر التحميل ---------- */
@@ -622,10 +642,10 @@
       z-index: 2000;
     }
     .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid #f3f3f3;
-      border-top: 5px solid #14532d;
+      width: 70px; /* زيادة الحجم */
+      height: 70px; /* زيادة الحجم */
+      border: 8px solid #f3f3f3; /* زيادة السُمك */
+      border-top: 8px solid #14532d; /* زيادة السُمك */
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
@@ -636,58 +656,81 @@
 
     /* ---------- استعلامات الاستجابة ---------- */
     @media (max-width: 600px) {
+      body {
+        font-size: 20px; /* حجم خط أصغر للأجهزة الصغيرة */
+        padding-top: 60px; /* تعديل الارتفاع */
+      }
+      
+      #topBar {
+        height: 60px; /* تعديل الارتفاع */
+      }
+      
+      #sidebarToggle, #darkModeToggle {
+        font-size: 24px; /* تعديل حجم الأيقونة */
+        padding: 8px 12px; /* تعديل الحشوة */
+        width: 45px; /* تعديل العرض */
+        height: 45px; /* تعديل الارتفاع */
+      }
+      
       .sura-button {
-        font-size: 18px;
-        padding: 8px 14px;
+        font-size: 22px; /* تعديل حجم الخط */
+        padding: 14px 20px; /* تعديل الحشوة */
       }
+      
       .tab-btn {
-        font-size: 14px;
-        padding: 6px 12px;
+        font-size: 18px; /* تعديل حجم الخط */
+        padding: 12px 0; /* تعديل الحشوة */
       }
+      
       .reciter-img {
-        width: 50px;
-        height: 50px;
+        width: 65px; /* تعديل الحجم */
+        height: 65px; /* تعديل الحجم */
       }
+      
       .reciter-number {
-        font-size: 36px;
+        font-size: 40px; /* تعديل حجم الخط */
       }
+      
       #backButton {
-        padding: 6px 12px;
-        font-size: 14px;
+        padding: 10px 16px; /* تعديل الحشوة */
+        font-size: 18px; /* تعديل حجم الخط */
+        top: 70px; /* تعديل الموقع */
+        right: 15px; /* تعديل الموقع */
       }
+      
       .prayer-item {
-        padding: 10px;
+        padding: 15px; /* تعديل الحشوة */
       }
+      
       .prayer-name, .prayer-time {
-        font-size: 16px;
+        font-size: 20px; /* تعديل حجم الخط */
       }
+      
       .prayer-item i {
-        font-size: 20px;
+        font-size: 24px; /* تعديل حجم الأيقونة */
       }
-      .progress-container, .volume-container {
-        flex-direction: column;
-      }
-      .volume-bar {
-        width: 100%;
-      }
+      
       .ayah-text,
       .ayah-symbol {
-        margin: 0 !important;
-        padding: 0 !important;
+        font-size: 28px; /* تعديل حجم الخط */
       }
+      
       .player-controls button {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        width: 65px; /* تعديل الحجم */
+        height: 65px; /* تعديل الحجم */
+        font-size: 28px; /* تعديل حجم الأيقونة */
       }
+      
       .custom-audio-player {
-        padding: 15px;
+        padding: 20px; /* تعديل الحشوة */
       }
+      
       .player-title {
-        font-size: 24px;
+        font-size: 28px; /* تعديل حجم الخط */
       }
+      
       .reciter-name {
-        font-size: 16px;
+        font-size: 20px; /* تعديل حجم الخط */
       }
     }
   </style>
@@ -771,8 +814,10 @@
     <div class="spinner"></div>
   </div>
 
-  <!-- جافاسكريبت: دوال التحكم الرئيسية -->
   <script>
+    // جميع دوال الجافاسكريبت الأصلية تبقى كما هي
+    // فقط تم تكبير العناصر المرئية في التصميم
+    // دون تغيير في المنطق البرمجي
     function formatNumber(num) {
       return num.toString().padStart(3, "0");
     }
