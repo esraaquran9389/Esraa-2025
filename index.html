@@ -16,8 +16,8 @@
             --dark-text: #e0e0ff;
             --accent-color: #8aafff;
             --gold: #d4af37;
-            --light-card: rgba(255, 255, 255, 0.92);
-            --dark-card: rgba(20, 20, 35, 0.92);
+            --light-card: rgba(255, 255, 255, 0.95);
+            --dark-card: rgba(20, 20, 35, 0.95);
             --shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             --dark-shadow: 0 5px 20px rgba(0, 0, 30, 0.2);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -34,32 +34,32 @@
         /* ---------- الخطوط الخاصة ---------- */
         @font-face {
             font-family: 'AyatFont';
-            src: url('Digital Khatt Madina @Am9li9.otf.ttf') format('truetype');
+            src: url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
         }
         
         @font-face {
             font-family: 'SurahFont';
-            src: url('Elgharib Surah Name Madina.ttf') format('truetype');
+            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/Elgharib-Surah-Name-Madina/Elgharib%20Surah%20Name%20Madina.ttf') format('truetype');
         }
         
         @font-face {
             font-family: 'RecitersFont';
-            src: url('GF-FAYED Reciters Name.ttf') format('truetype');
+            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/GF-FAYED-Reciters-Name/GF-FAYED%20Reciters%20Name.ttf') format('truetype');
         }
         
         @font-face {
             font-family: 'DaysFont';
-            src: url('Elgharib-Days Of Week.ttf') format('truetype');
+            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/Elgharib-Days-Of-Week/Elgharib-Days%20Of%20Week.ttf') format('truetype');
         }
         
         @font-face {
             font-family: 'PrayersFont';
-            src: url('Elgharib-Omar_5.Prayers.ttf') format('truetype');
+            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/Elgharib-Omar_5-Prayers/Elgharib-Omar_5.Prayers.ttf') format('truetype');
         }
         
         @font-face {
             font-family: 'QCF_BSML';
-            src: url('QCF_BSML.ttf') format('truetype');
+            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/QCF_BSML/QCF_BSML.ttf') format('truetype');
         }
 
         /* ---------- الأنماط العامة ---------- */
@@ -1177,6 +1177,258 @@
                 radial-gradient(circle at 10% 20%, rgba(138, 175, 255, 0.03) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(138, 175, 255, 0.03) 0%, transparent 20%);
         }
+        
+        /* ---------- تحسينات الشكل العام ---------- */
+        .card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        body.dark .card {
+            background: var(--dark-card);
+            box-shadow: var(--dark-shadow);
+        }
+        
+        .card-title {
+            font-family: 'SurahFont', serif;
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .card-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 30%;
+            right: 30%;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        body.dark .card-title {
+            color: var(--accent-color);
+        }
+        
+        body.dark .card-title:after {
+            background: var(--accent-color);
+        }
+        
+        .location-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(20, 83, 45, 0.05);
+            border-radius: var(--border-radius);
+        }
+        
+        body.dark .location-info {
+            background: rgba(138, 175, 255, 0.05);
+        }
+        
+        .location-info i {
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+        
+        body.dark .location-info i {
+            color: var(--accent-color);
+        }
+        
+        .location-text {
+            font-size: 22px;
+        }
+        
+        .current-prayer {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            text-align: center;
+            font-size: 26px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: pulse 3s infinite;
+        }
+        
+        body.dark .current-prayer {
+            background: linear-gradient(135deg, var(--accent-color), #5a8eff);
+        }
+        
+        .prayer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .prayer-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .prayer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark .prayer-card {
+            background: rgba(20, 20, 35, 0.9);
+            box-shadow: 0 4px 10px rgba(0,0,30,0.1);
+        }
+        
+        .prayer-card.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            box-shadow: 0 8px 20px rgba(20,83,45,0.3);
+        }
+        
+        body.dark .prayer-card.active {
+            background: linear-gradient(135deg, var(--accent-color), #5a8eff);
+            box-shadow: 0 8px 20px rgba(138,175,255,0.3);
+        }
+        
+        .prayer-card .icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        body.dark .prayer-card .icon {
+            color: var(--accent-color);
+        }
+        
+        .prayer-card.active .icon {
+            color: white;
+        }
+        
+        .prayer-card .name {
+            font-family: 'PrayersFont', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .prayer-card .time {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        
+        /* تحسينات مشغل الصوت */
+        .audio-visualizer {
+            height: 80px;
+            width: 100%;
+            background: rgba(0,0,0,0.03);
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            padding: 15px;
+        }
+        
+        body.dark .audio-visualizer {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .audio-bar {
+            width: 8px;
+            background: linear-gradient(to top, var(--primary-color), var(--primary-hover));
+            border-radius: 4px;
+            transition: height 0.2s ease;
+        }
+        
+        body.dark .audio-bar {
+            background: linear-gradient(to top, var(--accent-color), #5a8eff);
+        }
+        
+        .audio-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 22px;
+            color: #666;
+        }
+        
+        body.dark .audio-details {
+            color: #aaa;
+        }
+        
+        .audio-quality {
+            background: rgba(20,83,45,0.1);
+            padding: 5px 15px;
+            border-radius: var(--border-radius-full);
+            font-size: 18px;
+        }
+        
+        body.dark .audio-quality {
+            background: rgba(138,175,255,0.1);
+        }
+        
+        .reciter-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .reciter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        body.dark .reciter-card {
+            background: var(--dark-card);
+            box-shadow: var(--dark-shadow);
+        }
+        
+        .reciter-card .info {
+            flex: 1;
+        }
+        
+        .reciter-card .name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        body.dark .reciter-card .name {
+            color: var(--accent-color);
+        }
+        
+        .reciter-card .style {
+            font-size: 20px;
+            color: #666;
+        }
+        
+        body.dark .reciter-card .style {
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
@@ -1246,15 +1498,67 @@
         <!-- مواقيت الصلاة -->
         <div id="prayerTimesArea">
             <h2 class="prayer-times-title">مواقيت الصلاة</h2>
-            <div id="prayerTimesContent" class="prayer-times-list"></div>
+            <div id="prayerTimesContent" class="prayer-times-list">
+                <div class="card">
+                    <div class="location-info">
+                        <i class="fas fa-location-dot"></i>
+                        <div class="location-text" id="locationText">جاري تحديد موقعك...</div>
+                    </div>
+                    
+                    <div id="currentPrayerContainer" class="current-prayer">
+                        جاري تحميل مواقيت الصلاة...
+                    </div>
+                    
+                    <div class="prayer-grid" id="prayerGrid"></div>
+                </div>
+            </div>
         </div>
         
         <!-- قسم عن التطبيق -->
         <div id="aboutSection">
-            <h2>عن التطبيق</h2>
-            <p>تطبيق القرآن الكريم هو تطبيق متكامل يقدم القرآن الكريم مع تفسيره، تلاوات صوتية لعدد من القراء المشهورين، ومواقيت الصلاة حسب موقعك الجغرافي.</p>
-            <p>تم تصميم التطبيق ليكون سهل الاستخدام ومتاحًا للجميع، مع واجهة مستخدم جذابة وتجربة مستخدم ممتازة.</p>
-            <span class="gold-text">إهداء إلى روح فقيده الشباب إسراء السيد السعيد</span>
+            <div class="card">
+                <h2>عن التطبيق</h2>
+                <p>تطبيق القرآن الكريم هو تطبيق متكامل يقدم القرآن الكريم مع تفسيره، تلاوات صوتية لعدد من القراء المشهورين، ومواقيت الصلاة حسب موقعك الجغرافي.</p>
+                <p>تم تصميم التطبيق ليكون سهل الاستخدام ومتاحًا للجميع، مع واجهة مستخدم جذابة وتجربة مستخدم ممتازة.</p>
+                <span class="gold-text">إهداء إلى روح فقيده الشباب إسراء السيد السعيد</span>
+            </div>
+            
+            <div class="card" style="margin-top: 30px;">
+                <h3 class="card-title">مميزات التطبيق</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="reciter-card">
+                        <i class="fas fa-book-open" style="font-size: 40px; color: var(--primary-color);"></i>
+                        <div class="info">
+                            <div class="name">القرآن الكريم</div>
+                            <div class="style">عرض الآيات بخط جميل وتصميم أنيق</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reciter-card">
+                        <i class="fas fa-music" style="font-size: 40px; color: var(--primary-color);"></i>
+                        <div class="info">
+                            <div class="name">التلاوات الصوتية</div>
+                            <div class="style">مشغل صوتي متطور مع تحكم كامل</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reciter-card">
+                        <i class="fas fa-clock" style="font-size: 40px; color: var(--primary-color);"></i>
+                        <div class="info">
+                            <div class="name">مواقيت الصلاة</div>
+                            <div class="style">تحديد الموقع التلقائي وعرض دقيق</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reciter-card">
+                        <i class="fas fa-palette" style="font-size: 40px; color: var(--primary-color);"></i>
+                        <div class="info">
+                            <div class="name">واجهة مستخدم جميلة</div>
+                            <div class="style">تصميم عصري مع إمكانية الوضع الليلي</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1300,16 +1604,16 @@
         ];
 
         const reciters = [
-            { number: "1", id: "minsh", name: "محمد صديق المنشاوي", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
-            { number: "9", id: "basit", name: "عبد الباسط عبد الصمد", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg" },
-            { number: "7", id: "husr", name: "محمود خليل الحصري", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg" },
-            { number: "108", id: "ayyub", name: "سعد الغامدي", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg" },
-            { number: "107", id: "a_jbr", name: "أحمد العجمي", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg" },
-            { number: "12", id: "lhdan", name: "ناصر القطامي", image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg" },
-            { number: "48", id: "mustafa", name: "مصطفى إسماعيل", image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg" },
-            { number: "6", id: "bna", name: "محمد أيوب", image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg" },
-            { number: "109", id: "yasser", name: "ياسر الدوسري", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg" },
-            { number: "13", id: "tblawi", name: "ماهر المعيقلي", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg" }
+            { number: "1", id: "minsh", name: "محمد صديق المنشاوي", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg", style: "مجود" },
+            { number: "9", id: "basit", name: "عبد الباسط عبد الصمد", image: "https://i.pinimg.com/564x/c2/c5/57/c2c5579d6becfccbb4e98f6bcf008127.jpg", style: "مرتل" },
+            { number: "7", id: "husr", name: "محمود خليل الحصري", image: "https://i.pinimg.com/564x/3f/da/7e/3fda7ed5056347e700cac64d07e164c3.jpg", style: "حدر" },
+            { number: "108", id: "ayyub", name: "سعد الغامدي", image: "https://i.pinimg.com/564x/54/37/85/543785f830b99a296631ac2afdbe8f85.jpg", style: "مجود" },
+            { number: "107", id: "a_jbr", name: "أحمد العجمي", image: "https://i.pinimg.com/564x/61/a3/15/61a31568e91191aaff40e0a24492850c.jpg", style: "مرتل" },
+            { number: "12", id: "lhdan", name: "ناصر القطامي", image: "https://i.pinimg.com/564x/a4/cd/74/a4cd749ed1726e63e8a62e279e5ea564.jpg", style: "حدر" },
+            { number: "48", id: "mustafa", name: "مصطفى إسماعيل", image: "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg", style: "مجود" },
+            { number: "6", id: "bna", name: "محمد أيوب", image: "https://i.pinimg.com/564x/29/67/b3/2967b3fbc1ce1f5a70874288d34317bf.jpg", style: "مرتل" },
+            { number: "109", id: "yasser", name: "ياسر الدوسري", image: "https://i.pinimg.com/564x/28/08/6e/28086e4bac69ea06098568974847d672.jpg", style: "حدر" },
+            { number: "13", id: "tblawi", name: "ماهر المعيقلي", image: "https://i.pinimg.com/564x/c8/6b/65/c86b65fc80ab66766a662f4c3a0a4a85.jpg", style: "مجود" }
         ];
 
         function gregorianToHijri(date) {
@@ -1575,6 +1879,7 @@
                 <div class="player-header">
                     <h3 class="player-title">${name}</h3>
                 </div>
+                
                 <div class="player-controls">
                     <button class="seek-btn" onclick="seekBackward()" aria-label="رجوع 10 ثواني">
                         <i class="fas fa-backward"></i>
@@ -1586,6 +1891,7 @@
                         <i class="fas fa-forward"></i>
                     </button>
                 </div>
+                
                 <div class="progress-container">
                     <span class="time-display" id="currentTime">00:00</span>
                     <div class="progress-bar" id="progressBar">
@@ -1593,6 +1899,9 @@
                     </div>
                     <span class="time-display" id="duration">00:00</span>
                 </div>
+                
+                <div class="audio-visualizer" id="audioVisualizer"></div>
+                
                 <div class="volume-container">
                     <button class="volume-btn" onclick="toggleMute()" aria-label="كتم الصوت/إلغاء الكتم">
                         <i class="fas fa-volume-up"></i>
@@ -1601,6 +1910,12 @@
                         <div class="volume-level" id="volumeLevel"></div>
                     </div>
                 </div>
+                
+                <div class="audio-details">
+                    <span>جودة: <span class="audio-quality">عالية</span></span>
+                    <span>معدل العينة: 44.1 كيلوهرتز</span>
+                </div>
+                
                 <div class="audio-info">
                     <span class="reciter-name">${reciterName}</span>
                     <button class="download-btn" onclick="downloadAudio('${audioUrl}')">
@@ -1611,6 +1926,24 @@
             
             document.getElementById('audioContent').appendChild(audioEl);
             document.getElementById('audioContent').appendChild(playerContainer);
+            
+            // إنشاء أشرطة التصور الصوتي
+            const visualizer = document.getElementById('audioVisualizer');
+            for (let i = 0; i < 50; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'audio-bar';
+                bar.style.height = `${Math.random() * 30 + 10}px`;
+                visualizer.appendChild(bar);
+            }
+            
+            // تحريك أشرطة التصور الصوتي
+            const audioBars = document.querySelectorAll('.audio-bar');
+            setInterval(() => {
+                audioBars.forEach(bar => {
+                    const height = Math.random() * 70 + 10;
+                    bar.style.height = `${height}px`;
+                });
+            }, 200);
             
             audioEl.addEventListener('loadeddata', () => {
                 document.getElementById('loader').style.display = 'none';
@@ -1738,53 +2071,129 @@
             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
         }
 
+        function getPrayerIcon(prayerName) {
+            const icons = {
+                "الفجر": "fas fa-sun",
+                "الشروق": "fas fa-sun",
+                "الظهر": "fas fa-cloud-sun",
+                "العصر": "fas fa-cloud",
+                "المغرب": "fas fa-cloud-sun-rain",
+                "العشاء": "fas fa-moon"
+            };
+            return icons[prayerName] || "fas fa-clock";
+        }
+
         function loadPrayerTimes() {
-            const prayerTimesContent = document.getElementById('prayerTimesContent');
-            prayerTimesContent.innerHTML = 'جاري تحميل مواقيت الصلاة...';
+            const locationText = document.getElementById('locationText');
+            const currentPrayerContainer = document.getElementById('currentPrayerContainer');
+            const prayerGrid = document.getElementById('prayerGrid');
             
-            const city = 'Mansoura';
-            const country = 'Egypt';
-            const method = 5;
-            const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}`;
+            locationText.innerHTML = "جاري تحديد موقعك...";
+            currentPrayerContainer.innerHTML = "جاري تحميل مواقيت الصلاة...";
+            prayerGrid.innerHTML = "";
             
-            document.getElementById('loader').style.display = 'block';
-            
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('loader').style.display = 'none';
-                    
-                    if (data.code === 200) {
-                        const timings = data.data.timings;
-                        const prayers = [
-                            { name: 'الفجر', time: convertTo12Hour(timings.Fajr), icon: 'fas fa-sun' },
-                            { name: 'الظهر', time: convertTo12Hour(timings.Dhuhr), icon: 'fas fa-cloud-sun' },
-                            { name: 'العصر', time: convertTo12Hour(timings.Asr), icon: 'fas fa-cloud' },
-                            { name: 'المغرب', time: convertTo12Hour(timings.Maghrib), icon: 'fas fa-cloud-sun-rain' },
-                            { name: 'العشاء', time: convertTo12Hour(timings.Isha), icon: 'fas fa-moon' }
-                        ];
-                        
-                        prayerTimesContent.innerHTML = '';
-                        
-                        prayers.forEach((prayer, index) => {
-                            let prayerItem = document.createElement('div');
-                            prayerItem.className = 'prayer-item';
-                            prayerItem.style.setProperty('--i', index);
-                            prayerItem.innerHTML = `
-                                <i class="${prayer.icon}"></i>
-                                <span class="prayer-name">${prayer.name}</span>
-                                <span class="prayer-time">${prayer.time}</span>
-                            `;
-                            prayerTimesContent.appendChild(prayerItem);
-                        });
-                    } else {
-                        prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء المحاولة لاحقاً.</p>';
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('loader').style.display = 'none';
-                    prayerTimesContent.innerHTML = '<p>عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.</p>';
+            function getLocationName(latitude, longitude) {
+                return new Promise((resolve, reject) => {
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.address) {
+                                const city = data.address.city || data.address.town || data.address.village || data.address.county;
+                                const country = data.address.country;
+                                resolve(`${city}, ${country}`);
+                            } else {
+                                resolve("موقعك الحالي");
+                            }
+                        })
+                        .catch(() => resolve("موقعك الحالي"));
                 });
+            }
+            
+            function updatePrayerTimes(latitude, longitude) {
+                const method = 5; // طريقة حساب: رابطة العالم الإسلامي
+                const url = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}`;
+                
+                document.getElementById('loader').style.display = 'block';
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('loader').style.display = 'none';
+                        if (data.code === 200) {
+                            const timings = data.data.timings;
+                            const prayers = [
+                                { name: 'الفجر', time: convertTo12Hour(timings.Fajr) },
+                                { name: 'الشروق', time: convertTo12Hour(timings.Sunrise) },
+                                { name: 'الظهر', time: convertTo12Hour(timings.Dhuhr) },
+                                { name: 'العصر', time: convertTo12Hour(timings.Asr) },
+                                { name: 'المغرب', time: convertTo12Hour(timings.Maghrib) },
+                                { name: 'العشاء', time: convertTo12Hour(timings.Isha) }
+                            ];
+                            
+                            // تحديث اسم الموقع
+                            getLocationName(latitude, longitude).then(locationName => {
+                                locationText.innerHTML = locationName;
+                            });
+                            
+                            // تحديد الصلاة الحالية
+                            const now = new Date();
+                            const currentTime = now.getHours() * 60 + now.getMinutes();
+                            let currentPrayer = prayers[prayers.length - 1].name;
+                            
+                            for (let i = 0; i < prayers.length; i++) {
+                                const [hours, minutes] = prayers[i].time.split(':')[0].split(' ')[0].split(':').map(Number);
+                                const prayerTime = hours * 60 + minutes;
+                                
+                                if (currentTime < prayerTime) {
+                                    currentPrayer = prayers[i].name;
+                                    break;
+                                }
+                            }
+                            
+                            currentPrayerContainer.innerHTML = `
+                                الصلاة الحالية: <strong>${currentPrayer}</strong>
+                            `;
+                            
+                            // عرض مواقيت الصلاة في شبكة بطاقات
+                            prayerGrid.innerHTML = '';
+                            prayers.forEach(prayer => {
+                                const isActive = prayer.name === currentPrayer;
+                                const card = document.createElement('div');
+                                card.className = `prayer-card ${isActive ? 'active' : ''}`;
+                                card.innerHTML = `
+                                    <div class="icon"><i class="${getPrayerIcon(prayer.name)}"></i></div>
+                                    <div class="name">${prayer.name}</div>
+                                    <div class="time">${prayer.time}</div>
+                                `;
+                                prayerGrid.appendChild(card);
+                            });
+                        } else {
+                            currentPrayerContainer.innerHTML = 'عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء المحاولة لاحقاً.';
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('loader').style.display = 'none';
+                        currentPrayerContainer.innerHTML = 'عذراً، حدث خطأ أثناء تحميل مواقيت الصلاة. الرجاء التحقق من الاتصال بالإنترنت.';
+                    });
+            }
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        updatePrayerTimes(latitude, longitude);
+                    },
+                    error => {
+                        // في حالة رفض المستخدم أو حدوث خطأ، نستخدم مدينة افتراضية (مكة المكرمة)
+                        locationText.innerHTML = "مكة المكرمة, السعودية";
+                        updatePrayerTimes(21.4225, 39.8262);
+                    }
+                );
+            } else {
+                locationText.innerHTML = "مكة المكرمة, السعودية";
+                updatePrayerTimes(21.4225, 39.8262);
+            }
         }
 
         function toggleDarkMode() {
