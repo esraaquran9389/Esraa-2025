@@ -31,36 +31,53 @@
             box-sizing: border-box;
         }
 
-        /* ---------- الخطوط الخاصة ---------- */
-        @font-face {
-            font-family: 'AyatFont';
-            src: url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-        }
-        
-        @font-face {
-            font-family: 'SurahFont';
-            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/Elgharib-Surah-Name-Madina/Elgharib%20Surah%20Name%20Madina.ttf') format('truetype');
-        }
-        
-        @font-face {
-            font-family: 'RecitersFont';
-            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/GF-FAYED-Reciters-Name/GF-FAYED%20Reciters%20Name.ttf') format('truetype');
-        }
-        
-        @font-face {
-            font-family: 'DaysFont';
-            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/Elgharib-Days-Of-Week/Elgharib-Days%20Of%20Week.ttf') format('truetype');
-        }
-        
-        @font-face {
-            font-family: 'PrayersFont';
-            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/Elgharib-Omar_5-Prayers/Elgharib-Omar_5.Prayers.ttf') format('truetype');
-        }
-        
-        @font-face {
-            font-family: 'QCF_BSML';
-            src: url('https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-files/QCF_BSML/QCF_BSML.ttf') format('truetype');
-        }
+        /* خط الآيات */
+@font-face {
+    font-family: 'AyatFont';
+    src: url('fonts/AyatFont.ttf') format('truetype');
+}
+
+/* خط أسماء السور */
+@font-face {
+    font-family: 'SurahFont';
+    src: url('fonts/SurahFont.ttf') format('truetype');
+}
+
+/* خط أسماء القراء */
+@font-face {
+    font-family: 'RecitersFont';
+    src: url('fonts/RecitersFont.ttf') format('truetype');
+}
+
+/* خط أيام الأسبوع */
+@font-face {
+    font-family: 'DaysFont';
+    src: url('fonts/DaysFont.ttf') format('truetype');
+}
+
+/* خط مواقيت الصلاة */
+@font-face {
+    font-family: 'PrayersFont';
+    src: url('fonts/PrayersFont.ttf') format('truetype');
+}
+
+/* خط البسملة */
+@font-face {
+    font-family: 'QCF_BSML';
+    src: url('fonts/QCF_BSML.ttf') format('truetype');
+}
+
+/* الخط الأساسي Amiri */
+@font-face {
+    font-family: 'Amiri';
+    src: url('fonts/Amiri-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Amiri';
+    src: url('fonts/Amiri-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
 
         /* ---------- الأنماط العامة ---------- */
         body {
